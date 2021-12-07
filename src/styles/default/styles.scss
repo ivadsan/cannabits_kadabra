@@ -1,0 +1,52 @@
+
+@import "./variables.scss";
+
+.default{
+  background-color: whitesmoke;
+  width: 100vw;
+  height: 100vh;
+  font-family: $roboto;
+  .container{
+    width: 980px;
+    margin: auto;
+    padding: 16px;
+
+    .group{
+      background-color: #ccc;
+      padding: 16px 8px;
+      margin-top: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+      
+      &:hover{
+        background-color: #777;
+      }
+    }
+    .list{
+      margin-bottom: 16px;
+      list-style: none;
+      overflow: hidden;
+      background-color: aqua;
+      padding: 0px 8px;
+      max-height: 0px;
+      transition: 0.3s;
+      opacity: 0;
+    }
+    .active{
+      padding: 8px;
+      max-height: 150px;
+      opacity: 1;
+    }
+    
+  }
+  // @keyframes slideIn {
+  //   0% {  opacity: 0; height: 0px; }
+    
+  //   100% { opacity: 1; height: 100%;}
+  // }
+  // @keyframes slideOut {
+  //   0% { opacity: 1; height: 100%; }
+  //   90% { opacity: 0; height: 0px;}
+  //   //100%{display: none;}
+  // }
+}
