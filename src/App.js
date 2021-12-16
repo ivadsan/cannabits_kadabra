@@ -9,11 +9,10 @@ const THEME = process.env.REACT_APP_THEME
 function App() {
   return (
     <div className={THEME}>
-    <Router>
-        <Home path="/"/>
-        <Notes path="notes" />     
-    </Router>    
-
+      <Router>
+          <Home path="/"/>
+          <Notes path="notes" />     
+      </Router>
     </div>
   );
 }

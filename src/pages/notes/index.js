@@ -1,20 +1,42 @@
 import React, {useState, useEffect} from 'react'
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import { redirectTo } from "@reach/router"
+import Loading from '../../components/Loading'
 
 export default function Notes({location}) {
 
   const [content, setContent] = useState("")
+  const [loading, setLoading] = useState(true)
   
   useEffect(()=>{
-    const {state:{path}} = location
-    console.log(path)
-
-    fetch("./test.md")
-    .then((res)=>res.text())
-    .then((content)=>setContent(content))
+    let path =location.state?.path 
+    if(!path){
+      path = localStorage.getItem("path")
+    }
+    if(!path){
+      setLoading(false)
+      redirectTo(location.origin)
+    }
     
-  },[])
+    localStorage.setItem("path",path)
+    
+    fetch(path)
+    .then((res)=>res.text())
+    .then((content)=>{
+      setContent(content)
+      setLoading(false)
+    })
+  },[location])
+
   return (
-    <ReactMarkdown>{content}</ReactMarkdown>
+    <>
+      {loading && (<Loading />)}
+      <div className="container">
+        <div className="viewer">
+          <ReactMarkdown remarkPlugins={[remarkGfm]} children={content}/>
+        </div>
+      </div>        
+    </>
   )
 }

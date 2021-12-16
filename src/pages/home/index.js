@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import Section from '../../components/Section'
+import Loading from '../../components/Loading'
 
 export default function Home() {
 
   const [contents, setContents]= useState([])
   const [groups, setGroups]= useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(()=>{    
     
@@ -25,7 +27,8 @@ export default function Home() {
         }
       })
 
-      setGroups(arrayGroups.sort())      
+      setGroups(arrayGroups.sort()) 
+      setLoading(false)     
     })
   },[])
 
@@ -37,7 +40,18 @@ export default function Home() {
   
   return (
     <div className="container">
-      {groups.length > 0 && groups.map((group, index)=>(<Section key={index} group={group} contents={contents} />))}
+      {loading ? <Loading /> : (
+        <>
+          {groups.length > 0 ? (groups.map((group, index)=>(<Section key={index} group={group} contents={contents} />))):
+          (
+            <div className="empty">
+              <div className="empty__message">
+                There are no notes loaded in the application<br/> Check the documentation to get started !!!
+              </div>
+            </div>
+          )}
+        </>
+      )}
     </div>
   )
 }
