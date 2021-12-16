@@ -35,3 +35,4 @@ Puedes crear un pull request al proyecto.
 
 ## Licencia
 
+MIT © Iván Darío Sánchez Jiménez
