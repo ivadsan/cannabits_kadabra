@@ -11,10 +11,11 @@ No te preocupes por la presentación de tus apuntes, Kadabra está desarrollado 
 2. En la carpeta que acabaste de crear, carga tus apuntes usando un archivo README.md
 3. Copia las siguiente líneas al inicio de cada archivo de apuntes y modifica el grupo, título y autor 
 
-
+```
   [//]: # @param group $$ Escribe aquí el tema
   [//]: # @param title $$ Escribe aquí el título principal de tus apuntes
   [//]: # @param author $$ Escribe acá el nombre del autor
+```
 
 4. Comienza a escribir tus apuntes en formato markdown
 5. Inicia Kadabra para ver su magia
