@@ -6,6 +6,7 @@
   width: 100%;
   min-height: 100vh;
   font-family: $roboto;
+  color: rgb(36, 41, 46);
   .container{
     max-width: 980px;
     margin: auto;
@@ -39,7 +40,7 @@
         padding: 16px 32px;
         a:link, a:visited, a:hover, a:active{
           text-decoration: none;
-          color: #333;
+          color: rgb(36, 41, 46);
         }
         a:hover{
           text-decoration: underline;
@@ -67,9 +68,7 @@
     .viewer{
       background-color: white;
       padding: 32px 16px;
-      overflow: hidden;
-      overflow-wrap: break-word;
-
+      
       h1,h2,h3,h4,h5,h6{
         margin-bottom: 24px;
       }
