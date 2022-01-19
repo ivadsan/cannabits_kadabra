@@ -216,4 +216,149 @@ Para este proyecto vamos a utlizar los siguientes archivos para el enrutamiento:
 - routes/products.routes.js -> Gestion de productos
 - routes/user.js -> Gestión de usuarios
 
-Cada archivo de rutas debe importar de express el objeto *Router* y crear una instancia a partir de él para crear las rutas
+Cada archivo de rutas debe importar de express  *Router* y crear una instancia a partir de él. Exportar.
+
+**src/routes/products.routes.js**
+
+    import {Router} from "express"
+    const router = Router()
+
+    export default router
+
+~Está información se repite en cada archivo de rutas~
+
+
+Ahora empezamos por agregar una primer ruta en products
+
+
+**src/routes/products.routes.js**
+
+    import {Router} from "express"
+    const router = Router()
+
+    router.get("/products",  (req, res) => res.json("get products"))
+
+    export default router
+
+
+Importar las rutas desde *src/app.js* y con un middleware de express usarlas en el enrutamiento
+
+
+**src/app.js**
+
+
+    import express from "express"
+    import morgan from "morgan"
+    import pkg from "../package.json"
+    import productRoutes from "./routes/product.routes"
+
+    const app = express()
+
+    app.set('pkg', pkg)
+
+    app.use(morgan('dev'))
+
+    app.get("/", (req, res)=>{
+        res.json({
+            name:  app.get("pkg").name,
+            description:  app.get("pkg").description,
+            version:  app.get("pkg").version,
+            author:  app.get("pkg").author
+        })
+    })
+
+    app.use(productRoutes)
+
+    export default app
+
+
+Podemos mejorar el enrutamiento pasando por el middleware la ruta que agrupa el conjunto de rutas del archivo importado.
+
+
+**src/app.js**
+
+    ...
+
+    app.use("/products",productRoutes)
+
+    ...
+
+
+**src/routes/products.routes.js**
+
+    import {Router} from "express"
+    const router = Router()
+
+    router.get("/",  (req, res) => res.json("get products"))
+
+    export default router
+
+
+Podemos crear el enrutamiento para los diferentes tipos de métodos POST, PUT, DELETE
+
+### controllers
+
+Ahora vamos a crear las funciones que se ejecutaran desde los endpoint que estamos configurando
+
+*src/controllers/products.controllers.js*
+
+    export const createProduct = (req, res) =>{
+
+    }
+
+    export const getProducts = (req, res) =>{
+        res.json("get products")
+    }
+
+    export const getProductById = (req, res) =>{
+
+    }
+
+    export const udpateProductById = (req, res) =>{
+
+    }
+
+    export const deleteProductById = (req, res) =>{
+
+    }
+
+
+y las importamos desde nuestras rutas. Podemos importar todas las funciones en un solo controlador
+
+
+**src/routes/products.routes.js**
+
+    import {Router} from "express"
+    const router = Router()
+    import * as productsController from "../controllers/products.controller"
+
+    router.get("/",  productsController.getProducts)
+
+    export default router
+
+
+
+Creando el resto de rutas
+
+**src/routes/products.routes.js**
+
+    import {Router} from "express"
+    const router = Router()
+    import * as productsController from "../controllers/products.controller"
+
+    router.post("/",  productsController.createProduct)
+
+    router.get("/",  productsController.getProducts)
+
+    router.get("/:productId",  productsController.getProductById)
+
+    router.put("/:productId",  productsController.udpateProductById)
+
+    router.delete("/:productId",  productsController.deleteProductById)
+
+    export default router
+
+
+### Conexión a la base de datos
+
+Ahora en *src/database.js* vamos a importar el modulo de conexión a la base de datos *mongoose*
