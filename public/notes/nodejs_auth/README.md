@@ -362,3 +362,144 @@ Creando el resto de rutas
 ### Conexión a la base de datos
 
 Ahora en *src/database.js* vamos a importar el modulo de conexión a la base de datos *mongoose*
+
+Usamos la función connect de mongoose para conectarnos a la base de datos
+
+importamos el archivo de conexión desde src/index.js
+
+
+*src/database.js*
+
+    import mongoose from "mongoose";
+
+    mongoose.connect("mongodb://localhost/companydb")
+    .then((db) => console.log("DB is connected") )
+    .catch((err) => console.log(err))
+
+
+
+*src/index.js*
+
+    import app from "./app"
+    import "./database"
+
+    app.listen(5000)
+    console.log("Server listen on port", 5000)
+
+Agregamos informacion extra requerida en la conexión a mongodb
+
+
+
+*src/database.js*
+
+    import mongoose from "mongoose";
+
+    mongoose.connect("mongodb://localhost/companydb",{
+        useNewUrlParser: true,
+        useUnifiedTopology:true
+    })
+    .then((db) => console.log("DB is connected") )
+    .catch((err) => console.log(err))
+
+## Modelos de datos
+
+Vamos a crear los modelos de datos en *src/models/nombre.js*
+
+En el archivo del modelo a crear importar de moongose la clase *Schema* y la función *model*
+
+crear una instancia de Schema que recibe por parametro un objeto con el modelo de datos que consta de la key value y el tipo de dato. El segundo parametro que recibe Schema son opciones extras para el modelo en este caso agrega un timestamps y retirar el versionamiento.
+
+exportamos el schema usando la función *model* que recibe dos parámetros: un nombre y el schema
+
+
+*src/models/Product.js*
+
+    import {Schema, model} from "mongoose"
+
+    const productSchema = new Schema({
+        name: String,
+        category: String,
+        price: Number,
+        imgUrl: String
+    },{
+        timestamps: true,
+        versionKey: false
+    })
+
+    export default model("Product", productSchema)
+
+
+Ahora vamos a importar el modelo desde el controlador
+
+vamos a usar el modelo para guardar datos por el medio del método post de la ruta que ejecute el controlador.
+
+Por medio de req.body podemos acceder al objeto JSON que recibimos por la ruta. 
+
+
+*src/controllers/products.controller.js*
+
+
+    import Product from "../models/Product"
+
+    export const createProduct = (req, res) =>{
+        console.log(req.body)
+        res.json("creating products")
+    }
+
+    ...
+
+
+Para poder recibir objetos JSON debemos usar en *App.js* el método json de express.
+
+*src/App.js*
+
+    ...
+
+    import productRoutes from "./routes/product.routes"
+
+    ...
+
+    app.set('pkg', pkg)
+
+    app.use(morgan('dev'))
+    app.use(express.json())
+
+    ...
+
+Usamos POSTMAN para probar la api rest.
+
+Seleccionamos el método post con el cual enviaremos un objeto de typo json, para ello vamos a especificar en el header 
+
+    // Key
+    Content-Type
+
+    //Value
+    application/json
+
+![](/notes/nodejs_auth/assets/postman-headers.png) 
+
+y enviamos un JSON de prueba por raw
+
+![](/notes/nodejs_auth/assets/postman1.png) 
+
+Ahora vamos a guardar el *request body* en la base de datos. Para esto necesitamos crear una instancia de nuestro modelo que recibe como parametro el request body y usamos el metodo asincrono *save()*
+
+Cuando se crea un objeto nuevo en la bd esta lo retorna y nosotros podemos devolverlo en la respuesta del request así como un código de status de la operación
+
+*src/controllers/products.controller.js*
+
+    import Product from "../models/Product"
+
+    export const createProduct = async (req, res) =>{
+        const {name, category, price, imgUrl} = req.body
+        
+        const newProduct = new Product({name, category, price, imgUrl})
+        
+        const productSaved = await newProduct.save()
+        
+        res.status(201).json(productSaved)
+    }
+
+Respuesta
+
+![](/notes/nodejs_auth/assets/response1.png) 
