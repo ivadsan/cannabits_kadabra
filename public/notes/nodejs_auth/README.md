@@ -14,7 +14,8 @@ Inicializar el proyecto
 
 Instalar los módulos requeridos
 
-npm i express bcryptjs cors dotenv jsonwebtoken mongoose morgan helmet
+    npm i express bcryptjs cors dotenv jsonwebtoken mongoose morgan helmet
+
 
 - express -> framework de NodeJs
 
@@ -214,7 +215,7 @@ Para este proyecto vamos a utlizar los siguientes archivos para el enrutamiento:
 
 - routes/auth.routes.js -> Rutas para autenticación
 - routes/products.routes.js -> Gestion de productos
-- routes/user.js -> Gestión de usuarios
+- routes/user.routes.js -> Gestión de usuarios
 
 Cada archivo de rutas debe importar de express  *Router* y crear una instancia a partir de él. Exportar.
 
@@ -225,8 +226,8 @@ Cada archivo de rutas debe importar de express  *Router* y crear una instancia a
 
     export default router
 
-~Está información se repite en cada archivo de rutas~
 
+Está información se repite en cada archivo de rutas
 
 Ahora empezamos por agregar una primer ruta en products
 
@@ -466,6 +467,9 @@ Para poder recibir objetos JSON debemos usar en *App.js* el método json de expr
 
     ...
 
+
+## Crear un objeto
+
 Usamos POSTMAN para probar la api rest.
 
 Seleccionamos el método post con el cual enviaremos un objeto de typo json, para ello vamos a especificar en el header 
@@ -503,3 +507,175 @@ Cuando se crea un objeto nuevo en la bd esta lo retorna y nosotros podemos devol
 Respuesta
 
 ![](/notes/nodejs_auth/assets/response1.png) 
+
+
+## Listar objetos
+
+Ahora en el método get vamos a utilizar el modelo y su método find para consultar todos los documentos de la collection, los cuales son devueltos en un arreglo. Podemos agregar un status en la respuesta del endpoint pero si no la ponemos esta por defecto contesta 200
+
+
+*src/controllers/products.controller.js*
+
+    ...
+
+    export const getProducts = async (req, res) => {
+        const products = await Product.find()
+        res.json(products)
+    }
+
+    ...
+
+
+### Postman Tips
+
+Es posible organizar los request por collections que a su vez contengan carpetas para agrupar los endpoints como por ejemplo por el conjunto de servicios que afectan un modelo
+
+Estas collectiones de postman se pueden exportar a nuestro proyecto y almacenarse en la ruta recomendada "/postman" para efectos de documentación y backup (Importar)
+
+ 
+
+ ## request parameters
+
+ (req.params) Checks route params, ex: /user/:id
+
+(req.query) Checks query string params, ex: ?id=12 Checks urlencoded body params
+
+(req.body), ex: id=12 To utilize urlencoded request bodies, req.body should be an object. This can be done by using the _express.bodyParser middleware.
+
+### req.params
+
+Permite acceder a los parámetros pasados por url utilizando posiciones que previamente fueron configuradas en las rutas
+
+/products/:productId
+
+*src/controllers/products.controller.js*
+
+    export const getProductById = async (req, res) =>{
+        const product = await Product.findById(req.params.productId)
+        res.status(200).json(product)
+    }
+
+
+*get request*
+
+    http://localhost:5000/products/61ef768dccf030f6d3e1a807
+
+## Update
+Para realiza una actualización buscaremos el producto por su id  enviado por query params y utilizando el método put.
+
+para buscar y actualizar el documento usamos el método findByIdAndUpdate  el cual recibe tres parámetros, el id, un obj con los campos a actualizar y las opciones, en esta caso cada vez que actualizamos un documento se retorna su estado anterior, por ello indicaremos por medio de las opciones que retorne el nuevo documento actualizado.
+
+
+*src/controllers/products.controller.js*
+
+    export const udpateProductById = async (req, res) =>{
+        const {productId} = req.params
+        const product = await Product.findByIdAndUpdate(
+            productId, 
+            req.body,
+            {
+                new: true
+            })
+        res.status(200).json(product)
+    }
+
+
+
+*request*
+
+![](/notes/nodejs_auth/assets/find-by-id-update.png) 
+
+
+## delete
+
+
+*src/controllers/products.controller.js*
+
+    export const deleteProductById = async(req, res) =>{
+
+        const {productId} = req.params
+        await Product.findByIdAndDelete(productId)
+        res.status(204).json()
+
+    }
+
+
+## Autenticación
+
+Mecanismo para el control de acceso a los servicios del servidor
+
+Vamos a crear rutas  en *auth.routes.js* para que el usuario puede registrarse y loguearse
+
+
+*auth.routes.js*
+
+    import {Router} from "express"
+    const router = Router()
+
+    router.post("/signup")
+    router.post("/signin")
+
+    export default router
+
+
+ahora vamos a crear los controladores *auth.controller.js* y el modelo *User* 
+
+El modelo *User* va a estar relacionado con el modelo *Role* por medio de los ids de los documentos de esta collection,  
+
+Para crear una relación de una collection con otra indicamos por medio de un objeto cual es el nombre de referencia del modelo y en el typo de datos le indicamos que es de tipo ObjectId
+
+*src/models/User.js*
+
+    import {Schema, model} from "mongoose"
+
+    const userSchema = new Schema({
+        username: {
+            type: String,
+            unique: true
+        },
+        email: {
+            type: String,
+            unique: true
+        },
+        password: {
+            type: String,
+            required: true
+        },
+        roles: [{
+            ref: "Role",
+            type: Schema.Types.ObjectId
+        }]
+
+    },{
+        timestamps: true,
+        versionKey: false
+    })
+
+    export default model("User", userSchema)
+
+
+
+*src/models/Role.js*
+
+
+    import {Schema, model} from "mongoose"
+
+    const roleSchema = new Schema({
+        name: String
+    },
+    {
+        versionKey: false
+    })
+
+    export default model("Role", roleSchema)
+
+
+Ahora vamos a crear los controladores del usuario, para ello debemos importar el modelo de usuario que acabamos de crear.
+
+Creamos la estructura básica de dos request handlers en este controlador uno para el signup (dar de alta o inscribir el usuario en la aplicacion) y signin para autenticar a un usuario ya creado. 
+
+Luego importamos este controlador a nuestras rutas de autenticación y aplicamos los handle request a los endpoint, por ultimo para probar si todo funciona importamos nuestro auth router desde 'App.js'
+
+### Nota
+
+Por lo general las rutas a la api rest son del tipo http://localhost:5000/api/  por lo que vamos a actualizar en App.js esta parte de la URL y tambien debemos hacerlo en nuestras colecciones de Postman.

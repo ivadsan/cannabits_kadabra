@@ -8,7 +8,8 @@ let contents = []
 
 if(files.length > 0){
   for(let i = 0; i < files.length; i++){
-    let path = `./public/notes/${files[i]}/README.md`
+    if(files[i] !== ".DS_Store"){
+      let path = `./public/notes/${files[i]}/README.md`
     let file = fs.readFileSync(path, 'utf-8');
     let arrayFile = file.split("\n")
     let pathUrl = `/notes/${files[i]}/README.md`
@@ -26,6 +27,9 @@ if(files.length > 0){
       }
     }
     contents.push(content)
+
+    }
+    
   }
 }
 
