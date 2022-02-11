@@ -679,3 +679,73 @@ Luego importamos este controlador a nuestras rutas de autenticación y aplicamos
 ### Nota
 
 Por lo general las rutas a la api rest son del tipo http://localhost:5000/api/  por lo que vamos a actualizar en App.js esta parte de la URL y tambien debemos hacerlo en nuestras colecciones de Postman.
+
+
+*src/App.js* 
+
+    import express from "express"
+    import morgan from "morgan"
+    import pkg from "../package.json"
+    import productRoutes from "./routes/product.routes"
+    import authRoutes from "./routes/auth.routes"
+
+    const app = express()
+
+    app.set('pkg', pkg)
+
+    app.use(morgan('dev'))
+    app.use(express.json())
+
+    app.get("/", (req, res)=>{
+        res.json({
+            name:  app.get("pkg").name,
+            description:  app.get("pkg").description,
+            version:  app.get("pkg").version,
+            author:  app.get("pkg").author
+        })
+    })
+
+    app.use("/api/products", productRoutes)
+    app.use("/api/auth", authRoutes)
+
+    export default app
+
+También para evitar un warning por utilizar     findOneAndDelete y findOneAndUpdate debemos  configurar en *database.js* useFindAndModify en true. SOLO SI HAY WARNING
+
+
+*database.js*
+
+    import mongoose from "mongoose";
+
+    mongoose.connect("mongodb://localhost/companydb",{
+        useNewUrlParser: true,
+        useUnifiedTopology:true,
+        useFindAndModify: true
+    })
+    .then((db) => console.log("DB is connected") )
+    .catch((err) => console.log(err))
+
+
+Para el caso del signup vamos a consultar primero la base de datos si existe el usuario y sino lo creamos.
+
+Los datos del usuario los recibiremos por medio del request body
+
+Para los roles recibiremos un array, porque el usuario puede tener asingado mas de uno
+
+Para crear un usuario vamos a utilizar el modelo User. El password no lo podemos crear en texto plano para ello vamos a utilizar bcrypt que permite encryptar el password.
+
+La idea de encriptar un password no es solo codificarlo sino mantenerlo así y solo poder comparar si en el momento de autenticacion el valor ingresado coincide con el password encriptado sin tener que desencriptar.
+
+bcrypt es basado el blowfish y utliza un fragmento llamado Salt que que se incorpora al hash y generado, este no permite controlar el costo de procesado de datos haciendo mas complicado desencriptar el password por fuerza bruta o por rainbow tables ( tablas calculadas de cadenas de caracteres y su hash)
+
+Volviendo a la creacion del usuario vamos a encriptar el password antes de guardarlo y para ello vamos a importar bcrypt desde el modelo User.
+
+Pdemos crear desde el modelo métodos, en este caso para cifrar y comparar la contraseñas.
+
+Podedmos hacerlos de la forma
+
+    nombreSchema.methods.nombreMetodo
+
+o podemos crear un  método estático, que son aquellos que no requieren de crear una instancia del objeto
+    
+    nombreSchema.statics.nombreMetodo
