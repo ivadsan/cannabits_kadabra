@@ -6,25 +6,57 @@
 
 ## A
 
-alongside -> junto a
-approach -> acercarse
-avoived -> evitada
+- alongside -> junto a
+- approach -> acercarse
+- avoived -> evitada
+- Able - Poder
 
 ## B
 
-Behaviour → comportamiento
+- Behaviour → comportamiento
 
-High Throughput→ Alto Rendimitento
-Tier → Nivel
-Engagement → compromiso, contrato
-seamlessly ->sin problemas
-reliability -> fiabilidad
-lightweight -> ligero
-nested -> anidadas
-widely->extensamente
-relied->confiada
+## C
+## D
+
+## E
+
+- Engagement → compromiso, contrato
+
+## F
+
+## G
+
+## H
+
+- High Throughput→ Alto Rendimitento
+## L
+
+- lightweight -> ligero
+## N
+
+- Nested -> anidadas
+## O
+
+- Overcome - Superar
+## P
+## Q
+## R
+
+- Relied -> confiada
+- Reliability -> fiabilidad
+## S
+
+- Shift -> cambio
+- Seamlessly -> sin problemas
+
+## T 
+- Tier → Nivel
+
+## W
+- Widely -> extensamente
 
 
 ## Very
 
-![!Very](/notes/english/assets/very.jpeg) 
+
+![](/notes/english_vocabulary/assets/very.jpeg) 
