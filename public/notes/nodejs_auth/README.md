@@ -736,16 +736,396 @@ Para crear un usuario vamos a utilizar el modelo User. El password no lo podemos
 
 La idea de encriptar un password no es solo codificarlo sino mantenerlo así y solo poder comparar si en el momento de autenticacion el valor ingresado coincide con el password encriptado sin tener que desencriptar.
 
-bcrypt es basado el blowfish y utliza un fragmento llamado Salt que que se incorpora al hash y generado, este no permite controlar el costo de procesado de datos haciendo mas complicado desencriptar el password por fuerza bruta o por rainbow tables ( tablas calculadas de cadenas de caracteres y su hash)
+bcrypt es basado el blowfish y utliza un fragmento llamado Salt que que se incorpora al hash y al generado, este  permite controlar el costo de procesado de datos haciendo mas complicado desencriptar el password por fuerza bruta o por rainbow tables ( tablas calculadas de cadenas de caracteres y su hash)
 
 Volviendo a la creacion del usuario vamos a encriptar el password antes de guardarlo y para ello vamos a importar bcrypt desde el modelo User.
 
-Pdemos crear desde el modelo métodos, en este caso para cifrar y comparar la contraseñas.
+Podemos crear desde el modelo métodos, en este caso para cifrar y comparar la contraseñas.
 
-Podedmos hacerlos de la forma
+Podedmos hacerlos de la forma:
 
     nombreSchema.methods.nombreMetodo
 
-o podemos crear un  método estático, que son aquellos que no requieren de crear una instancia del objeto
+o podemos crear un  método estático, que son aquellos que no requieren crear una instancia del objeto para ser ejecutados
     
     nombreSchema.statics.nombreMetodo
+
+Importamos el módulo *bcrypt* y a través de método genSalt vamos a indicarle las veces que va a recorrer el algoritmo de encrypción. Luego el método hash y el salt generado encryptan la contraseña recibida para el caso del signUp
+
+Para el sigIn vamos a usar el métoco *compare* para cotejar si la contraseña encriptada enviada por el usuario coincide con la contraseña encriptada guardada en la bd, no se requiere desencriptar para la comparación. Si las contraseñas coinciden returna un booleano
+
+
+*src/models/User.js*
+
+
+    import {Schema, model} from "mongoose"
+    import bcrypt from "bcryptjs"
+
+    const userSchema = new Schema({
+        username: {
+            type: String,
+            unique: true
+        },
+        email: {
+            type: String,
+            unique: true
+        },
+        password: {
+            type: String,
+            required: true
+        },
+        roles: [{
+            ref: "Role",
+            type: Schema.Types.ObjectId
+        }]
+
+    },{
+        timestamps: true,
+        versionKey: false
+    })
+
+    userSchema.statics.encryptPassword = async (password)=>{
+        const salt =  await bcrypt.genSalt(10)
+        return await bcrypt.hash(password, salt)
+    }
+    userSchema.statics.comparePassword = async (password, receivedPassword)=>{
+        return await bcrypt.compare(password, receivedPassword)
+    }
+
+    export default model("User", userSchema)
+
+
+Ahora vamos a usar estos metodos desde el controllador. En caso que el usuario no exista vamos a crearlo en la bd para esto debemos crear una nueva instancia del Modelo User y para el password que envia el usuario vamos acceder al método estático para su encripción.
+
+
+y grabamos con save()
+
+
+*src/controllers/auth.controllers.js*
+
+    import User from "../models/User"
+
+    export const signUp = async (req, res)=>{
+
+        const {username, email, password} = req.body
+        const newUser =  new User({
+            username,
+            email,
+            password: await User.encryptPassword(password)
+        })
+        await newUser.save()
+        res.json("signup")
+    }
+    export const signIn = (req, res)=>{
+        res.json("sigin")
+        
+    }
+
+El método que valida si un usuario ya existe en la bd lo vamos a crear mas adelante como una librería ya que lo vamos a usar tanto en la suscripción como en la autenticación.
+
+Cuando se guarda un usuario, mongo  retorna el objeto del usuario guardado, junto con él generamos y retornamos un token el cual será guardado en el Front-end con el id de este y será utilizado en las peticiones al backend. 
+
+Si el token es valido al hacer una petición se autoriza al usuario para el consumo del servicio
+
+El token se genera con el módulo de jsonwebtoken y lo retornamos en la respuesta del servicio de singup
+
+jwt utiliza el método *sign()* para generar el token, este método recibe tres parámetros.
+
+- Primero lo que vamos a guardar en el token, por lo general el id
+- Segundo una palabra secreta
+- tercero la configuracion del token, en este caso la expiración del token que durará 24 hours === 86400 seconds
+
+
+Para el secreto vamos a exportar un objeto por default desde nuestro archivo *src/config.js*  con las constantes de nuestra configuracion
+
+*src/config.js*
+
+    export default {
+        SECRET: "products-api"
+    }
+
+*src/controllers/auth.controller.js*
+
+    import User from "../models/User"
+    import jwt from "jsonwebtoken"
+    import config from "../config"
+
+    export const signUp = async (req, res)=>{
+
+        const {username, email, password} = req.body
+        const newUser =  new User({
+            username,
+            email,
+            password: await User.encryptPassword(password)
+        })
+        const savedUser = await newUser.save()
+        const token = jwt.sign({id: savedUser._id}, config.SECRET, {
+            expiresIn: 86400
+        })
+        res.status(200).json({token})
+    }
+
+    export const signIn = (req, res)=>{
+        res.json("sigin")
+        
+    }
+
+Ahora vamos a crear una libreria que nos permita verifcar si existen roles en nuestra aplicación, sino existen se van a crear al iniciar la aplicación
+
+Con el metodo estimatedDocumentCount() identificamos si ya hay documentos en la collection
+
+en caso que no hayan documentos en la collection vamos a crear  los roles que necesitamos, para ello vamos a usar un Promise.all para ejecutar un array de promesas encargadas de la creación de cada Rol.
+
+Vamos a anidar esta estructura en un try catch para poder manejar la excepción en caso que la haya 
+
+*src/libs/initialSetup.js*
+
+    import Role from "../models/Role"
+
+    export const createRoles = async () => {
+
+        try{
+            const count = await Role.estimatedDocumentCount()
+            
+            if (count > 0) return 
+            
+            const values =  await Promise.all([
+                new Role({name: "user"}).save(),
+                new Role({name: "moderator"}).save(),
+                new Role({name: "admin"}).save()
+            ])
+            
+            console.log(values)
+        }
+        catch(error){
+            console.error(error)
+        }
+    }
+
+Vamos a ejecutar esta función desde App.js al iniciar la aplicación (después de instanciar nuestro servidor de express)
+
+*src/app.js*
+
+    import express from "express"
+    import morgan from "morgan"
+    import pkg from "../package.json"
+    import productRoutes from "./routes/product.routes"
+    import authRoutes from "./routes/auth.routes"
+    import { createRoles } from "./libs/initialSetup"
+
+    const app = express()
+    createRoles()
+
+    app.set('pkg', pkg)
+
+    app.use(morgan('dev'))
+    app.use(express.json())
+
+    app.get("/", (req, res)=>{
+        res.json({
+            name:  app.get("pkg").name,
+            description:  app.get("pkg").description,
+            version:  app.get("pkg").version,
+            author:  app.get("pkg").author
+        })
+    })
+
+    app.use("/api/products", productRoutes)
+    app.use("/api/auth", authRoutes)
+
+    export default app
+
+Cuando todavía no existen  los roles en BD, es la única oportunidad de ver por console la ejecución de este script que los crea
+
+![](/notes/nodejs_auth/assets/createRoles.png) 
+
+Ya tenemos roles en nuestra BD ahora cada vez que creemos un usuario vamos a relacionarlo con un rol por medio de su id
+
+En auth.controller.js antes de guardar el usuario vamos a confirmar si estan enviando por body request la propiedad roles
+
+Si un usuario no envia el arreglo de roles, por defecto le vamos a agregar el role user
+
+Importamos el modelo Role y con el método find() enviamos una consulta a la bd para que busque los roles enviados en un array de nombres de rol y retorne el documento de los objetos que encuentre. Si no envian la propiedad roles se busca el primer documento que coincida con el role name: "user"
+
+
+*src/controllers/auth.controller.js*
+
+    import User from "../models/User"
+    import jwt from "jsonwebtoken"
+    import config from "../config"
+    import Role from "../models/Role"
+
+    export const signUp = async (req, res)=>{
+
+        const {username, email, password, roles} = req.body
+        const newUser =  new User({
+            username,
+            email,
+            password: await User.encryptPassword(password)
+        })
+
+        if(roles){
+            const foundRoles = await Role.find({name: {$in: roles}})
+            newUser.roles = foundRoles.map((role)=> role._id)
+        }
+        else{
+            const role = await Role.findOne({name: "user"})
+            newUser.roles=[role._id]
+        }
+
+        const savedUser = await newUser.save()
+        const token = jwt.sign({id: savedUser._id}, config.SECRET, {
+            expiresIn: 86400
+        })
+        res.status(200).json({token})
+    }
+    export const signIn = (req, res)=>{
+        res.json("sigin")
+        
+    }
+
+![](/notes/nodejs_auth/assets/singup_roles.png) ![](/notes/nodejs_auth/assets/userSaved.png) 
+
+
+### signIn
+
+Par el signIn vamos a verificar el email recibido en request body y buscarlo en la bd.
+
+El atributo roles del modelo User corresponde a un array de id's que hacen referencia a documentos  en la collection roles y para obtener estos objetos debemos usar el método *populate(nameCollection)*
+
+luego validamos el resultado de la busqueda, en caso de no encontrar el email entonces devolvemos un status 400 con un mensaje de no encontrado.
+
+
+*src/controllers/auth.controller.js*
+
+    export const signIn = async (req, res)=>{
+        
+        const userFound = await User.findOne({email: req.body.email}).populate("roles")
+        if(!userFound) return res.status(400).json({message: "User not found"}) 
+        console.log(userFound)
+        
+        res.json({token: ""})
+        
+    }
+
+Ahora si el email es encontrado procedemos a comparar el password del request body con el almacenado en la bd, retorna true si coinciden o false en su debido caso.
+
+En caso que no coincidan retornamos un estatus 401, tambien podriamos devolver un token: null y  un mensaje
+
+Si los password coinciden entonces retornamos un token con el id del usuario 
+
+
+
+*src/controllers/auth.controller.js*
+
+    export const signIn = async (req, res)=>{
+        
+        const userFound = await User.findOne({email: req.body.email}).populate("roles")
+        
+        if(!userFound) return res.status(400).json({message: "User not found"}) 
+        
+        const matchPassword = await User.comparePassword(req.body.password, userFound.password)
+
+        if(!matchPassword) return res.status(401).json({token: null, message: "Invalid password"})
+        
+        const token = jwt.sign({id: userFound._id}, config.SECRET, {
+            expiresIn: 86400
+        })
+        console.log(userFound)
+        
+        res.json({token})
+        
+    }
+
+
+## Control de rutas
+
+Para proteger las rutas vamos a crear una seria de middleware para el control de acceso
+
+- middlewares/verifySingup.js -> para validar si el email ya existe, o el usuario, o si el rol que esta enviando ya fue creado. 
+- middlewares/authJwt -> para autenticar y validar el token y sus claims
+- index.js para centralizar los middleware en un solo import
+
+src/middleware/authJWT -> verifyToken() va a ser un middleware de express. 
+
+Vamos a verificar si en los headers viene el atributo "x-access-token"
+
+Si no viene retornamos un 403 e indicamos que no fue enviado el token
+
+Si este viene entonces del modulo de jsonwebtoken usamos el método verify(token, secret) para validarlo
+en caso que este bien entonces lo dejamos continuar al next() si no deberiamos tener una estructura try/ catch para atrapar el error.
+
+si el token es valido extraemos de su payload el id del usuario y lo buscamos en la BD para validarlo si existe entonces como segundo parámetro de la busqueda podemos indicarle que oculte el password en la respuesta.
+
+Si no existe el usuario retornamos un 404
+
+next() permite que el hilo de ejecución continue
+
+
+
+*Nota:* 
+
+Para importar los middlewares desde middlewares/index.js
+
+Importamos el middleware authJWT desde las rutas de productos y lo implementamos para proteger la creacion, actualizacion y eliminacion d productos. Estas rutas requieren token para su uso
+
+
+*src/middleware/index.js*
+
+    import {verifyToken} from "./authJwt"
+
+    export {verifyToken}
+
+
+
+*src/middleware/authJwt.js*
+
+    import jwt from "jsonwebtoken"
+    import config from "../config"
+    import User from "../models/User"
+
+    export const verifyToken = async (req, res, next) => {
+        try{
+            const token = req.headers["x-access-token"]
+            
+            if(!token) return res.status(403).json({message: "Not token provided"})
+        
+            const decoded  = jwt.verify(token, config.SECRET)
+            req.userId = decoded.id
+            
+            const user = await User.findById(req.userId, {password: 0})
+            if(!user) return res.status(404).json({message: "User not found"})
+            
+            console.log('user', user)
+            next()
+
+        }
+        catch(error){
+            res.status(401).json({message: "Unauthorized"})
+        }
+
+    }
+
+
+
+*src/routes/product.routes.js*
+
+    import {Router} from "express"
+    const router = Router()
+
+    import * as productsController from "../controllers/products.controller"
+    import {verifyToken} from "../middlewares"
+
+    router.post("/", verifyToken, productsController.createProduct)
+
+    router.get("/",  productsController.getProducts)
+
+    router.get("/:productId",  productsController.getProductById)
+
+    router.put("/:productId",  verifyToken, productsController.udpateProductById)
+
+    router.delete("/:productId",  verifyToken, productsController.deleteProductById)
+
+    export default router
+
+## Validacion de los roles

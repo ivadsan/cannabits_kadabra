@@ -157,6 +157,30 @@ Herramientas: Language tool for chrome
 
 **Nota**
 
-    Ahora mi nivel es intermedio B1 y el objetivo es convertime en C1, para conseguir un trabajo en inglés
+    Ahora mi nivel es intermedio B1 y el objetivo es convertime en C1, para conseguir un trabajo en inglés en menos de un año (2022-02-15)
+
+
+## Construye tu plan de aprendizaje: define tus metas
+
+Dejar la incertidumbre y desorientación con unas actividas muy claras y bien definidas en un plan
+
+
+### Los objetivos
+
+- Causa y no consecuencia: son lo primeros, dar una idea u orientacion hacia donde vamos a llegar.
+- Según tus skills
+- Concreto 
+- Medible
+
+
+objetivo por activdades:  hoy voy a hacer dos ejercicio de reading
+
+Profundizar y dominar cada objetivo, no ir de afán en el aprendizaje.
+
+Si aprendo una regla gramatical practicarla en cada una de las habilidades, speaking, writing, reading y listening
+
+### componente de tiempo
+### Recursos y actividades
+### Segumiento
 
 
