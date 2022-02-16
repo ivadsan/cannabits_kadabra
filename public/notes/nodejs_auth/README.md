@@ -1066,7 +1066,7 @@ next() permite que el hilo de ejecución continue
 
 *Nota:* 
 
-El archivo src/middlewares/index.js lo vamos a usar para exportar todos los middlewares en un solo archivo, para ello procedemos a importarlos y exportamos el archivo de la forma:
+El archivo src/middlewares/index.js lo vamos a usar para exportar todos los middlewares desde un solo objeto, para ello procedemos a importar los middlewares en este archivo y exportamos el archivo de la forma:
 
 
 *src/middleware/index.js*
