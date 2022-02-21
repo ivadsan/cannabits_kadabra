@@ -1,5 +1,5 @@
 [//]: # @param group $$ English
-[//]: # @param title $$ Vocabulary
+[//]: # @param title $$ 0 - Vocabulary
 [//]: # @param author $$ Iván D. Sánchez
 
 # Vocabulary
@@ -29,7 +29,13 @@
 ## H
 
 - High Throughput→ Alto Rendimitento
+
+## I 
+
+Improve - Mejorar
 ## L
+
+
 
 - lightweight -> ligero
 ## N
