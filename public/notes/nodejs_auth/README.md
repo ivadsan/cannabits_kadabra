@@ -1128,4 +1128,260 @@ Importamos el middleware authJWT desde las rutas de productos y lo implementamos
 
     export default router
 
-## Validacion de los roles
+## Verificación de roles
+
+Ahora en  authJwt vamos crear otro middleware, esta vez para  validar si el role corresponde a un moderador a un administrador.
+
+Para evitar importar por cada middleware que haya en el archivo lo que hacemos es importarlo todo (*) desde el index.js que agrupa los middlewares.
+
+
+*src/middlewares/index.js*
+
+
+    import * as authJwt from "./authJwt"
+
+    export {authJwt}
+
+
+Para usar varios middlewares podemos pasarlos agrupados en un array y se ejecutaran en orden segun el indice
+
+
+*src/routes/product.routes.js*
+
+    import {Router} from "express"
+    const router = Router()
+
+    import * as productsController from "../controllers/products.controller"
+    import { authJwt } from "../middlewares"
+
+    router.post("/", [authJwt.verifyToken, authJwt.isModerator], productsController.createProduct)
+
+    router.get("/",  productsController.getProducts)
+
+    router.get("/:productId",  productsController.getProductById)
+
+    router.put("/:productId",  authJwt.verifyToken, productsController.udpateProductById)
+
+    router.delete("/:productId",  authJwt.verifyToken, productsController.deleteProductById)
+
+    export default router
+
+Estos middlewares tienen acceso a req (request), por ello podemos usar los atributos que esten inicializados en este objeto a través de los middlewares.
+
+
+
+*src/middlewares/authJwt.js*
+
+    import jwt from "jsonwebtoken"
+    import config from "../config"
+    import User from "../models/User"
+
+    export const verifyToken = async (req, res, next) => {
+        try{
+            const token = req.headers["x-access-token"]
+            
+            if(!token) return res.status(403).json({message: "Not token provided"})
+        
+            const decoded  = jwt.verify(token, config.SECRET)
+            req.userId = decoded.id
+            
+            const user = await User.findById(req.userId, {password: 0})
+            if(!user) return res.status(404).json({message: "User not found"})
+            
+            next()
+
+        }
+        catch(error){
+            res.status(401).json({message: "Unauthorized"})
+        }
+    }
+
+    export const isModerator = async (req, res, next) => {
+        const user = await User.findById(req.userId).populate("roles")
+        console.log('user', user)
+    }
+
+Ahora vamos a importar el modelo Role y vamos a buscar todos los roles correspondientes a los del atributo roles del user
+
+Recorremos todos los roles y en caso de hacer match con el role que estamos validando ejecutamos el next para continuar con el middleware, en caso que no, retornamos un mensaje de no autorizado al usuario.
+
+*src/middlewares/authJwt.js*
+
+    import jwt from "jsonwebtoken"
+    import config from "../config"
+    import User from "../models/User"
+    import Role from "../models/Role"
+
+    export const verifyToken = async (req, res, next) => {
+        try{
+            const token = req.headers["x-access-token"]
+            
+            if(!token) return res.status(403).json({message: "Not token provided"})
+        
+            const decoded  = jwt.verify(token, config.SECRET)
+            req.userId = decoded.id
+            
+            const user = await User.findById(req.userId, {password: 0})
+            if(!user) return res.status(404).json({message: "User not found"})
+            
+            next()
+
+        }
+        catch(error){
+            res.status(401).json({message: "Unauthorized"})
+        }
+    }
+
+    export const isModerator = async (req, res, next) => {
+        const user = await User.findById(req.userId)
+        const roles = await Role.find({_id: { $in: user.roles }})
+
+        for (let index = 0; index < roles.length; index++) {
+            if(roles[index].name === "moderator"){
+                next()
+                return
+            }
+        }
+        return res.status(403).json({message: "Require moderator role"})
+    }
+
+    export const isAdmin = async (req, res, next) => {
+        const user = await User.findById(req.userId)
+        const roles = await Role.find({_id: { $in: user.roles }})
+
+        for (let index = 0; index < roles.length; index++) {
+            if(roles[index].name === "admin"){
+                next()
+                return
+            }
+        }
+        return res.status(403).json({message: "Require admin role"})
+        
+    }
+
+
+*src/routes/product.routes.js*
+
+
+## Gestión  de usuarios
+
+Ahora vamos a crear los controladores del usario, empezaremos por createUser el cual usará los middleware para validar si hay token y si es un administrador
+
+Vamos a crear un middleware en verifySignup.js que permita identificar si un role es valido en la BD
+
+Iniciamos por validar si en el request body viene el atributo roles y si es un arreglo vamos a recorrerlo
+
+Por cada recorrido verificamos si existen los roles, tenemos dos opciones: o hacerlo de la manera compleja como consultar cada role en la BD o en este caso que son pocos roles los podemos instanciar en un arreglo en el modelo y exportarlo para su comparación.
+
+Podriamos tambien utilizar el tipo de dato ENUM para limitar el número de opciones que tiene el usuario pero no es este el caso (Enum es un string el cual toma su valor de una lista previamente definida. Al nosotros asignar el tipo enum a un campo, este, no podrá almacenar otro valor que no se encuentre dentro de la lista.)
+
+En caso de no encontrar un Role en el arreglo entonces retornamos al usuario un status 400 y lo sacamos del flujo.
+
+*src/models/Role.js*
+
+    import {Schema, model} from "mongoose"
+
+    export const ROLES = ["user", "admin", "moderator"]
+
+    const roleSchema = new Schema({
+        name: String
+    },
+    {
+        versionKey: false
+    })
+
+    export default model("Role", roleSchema)
+
+
+
+*src/middlewares/verifySignup*
+
+    import { ROLES } from "../models/Role"
+
+    export const checkRolesExisted = (req, res, next) => {
+        if(req.body.roles){
+            for (let index = 0; index < req.body.roles.length; index++) {
+                if(!ROLES.includes(req.body.roles[index])){
+                    return res.status(400).json({message: `Role ${req.body.roles[index]} does not exist`})
+                }
+            }
+            next()
+        }
+    }
+
+
+
+Importamos el nuevo middleware para ser usado en user.routes.js
+
+*src/middlewares/index.js*
+
+    import * as authJwt from "./authJwt"
+    import * as verifySignup from "./verifySignup"
+
+    export {authJwt, verifySignup}
+
+
+*src/routes/user.routes.js*
+
+    import {Router} from "express"
+    import * as userController from "../controllers/user.controller" 
+    import {authJwt, verifySignup} from "../middlewares"
+    const router = Router()
+
+    router.post("/", [
+        authJwt.verifyToken, 
+        authJwt.isAdmin,
+        verifySignup.checkRolesExisted
+    ],userController.createUser)
+
+    export default router
+
+
+Ahora vamos a crear un nuevo middleware para el control de si un usuario o email ya existe en la BD y vamos a aplicar este middleare a la ruta de signup (pendiente agregarlo a createUser)
+
+
+*src/routes/user.routes.js*
+
+    import { ROLES } from "../models/Role"
+    import User  from "../models/User"
+
+    export const checkRolesExisted = (req, res, next) => {
+        if(req.body.roles){
+            for (let index = 0; index < req.body.roles.length; index++) {
+                if(!ROLES.includes(req.body.roles[index])){
+                    return res.status(400).json({message: `Role ${req.body.roles[index]} does not exist`})
+                }
+            }
+            next()
+        }
+    }
+
+
+    export const verifyDuplicatedUserEmail =  async (req, res, next) => {
+        
+        const user = await User.findOne({username: req.body.username})
+        if(user) return res.status(400).json({message: "The user already exist"})
+        
+        const email = await User.findOne({email: req.body.email})
+        if(email) return res.status(400).json({message: "The email already exist"})
+    
+        next()
+    }
+
+
+*src/routes/auth.routes.js*
+
+    import {Router} from "express"
+    import * as authController from "../controllers/auth.controller"
+    import {verifySignup} from "../middlewares"
+
+    const router = Router()
+
+    router.post("/signup", [
+        verifySignup.verifyDuplicatedUserEmail, 
+        verifySignup.checkRolesExisted], authController.signUp)
+
+    router.post("/signin", authController.signIn)
+
+    export default router
+
