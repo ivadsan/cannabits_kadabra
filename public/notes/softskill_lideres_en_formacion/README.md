@@ -37,15 +37,20 @@ Influencia que ejercemos desde una visión y por medio de los recursos lograr qu
 1) Competencia técnica: conocimiento y entendimiento en su área. 
 2) Habilidad conceptual: capacidad de pensamiento abstracto y estratégico. 
 3) Historial: una historia de resultados logrados. 
-4) Habilidades interpersonales: habilidad de comunicar, motivar y delegar. 
+4) Habilidades interpersonales: habilidad de comunicar, motivar y delegar. (Hacerse entender, no solo comunicamos con lo que decimos tambien se involucra la comunicación no verbal ) 
 5) Identificación de talentos: habilidad de identificar y cultivar talentos. 
 6) Criterio: tomar decisiones difíciles en un periodo de tiempo corto con información imperfecta. 
-7) Carácter: las cualidades que definen quienes somos.
+7) Carácter: las cualidades que definen quienes somos. (Parte de la entidad de la persona)
 
-- Líder de principios: El liderazgo consiste en trasmitir a las personas su valor y estas terminan viéndolos en sí mismos” 
+#### Líder de principios 
+
+El liderazgo consiste en trasmitir a las personas su valor y estas terminan viéndolos en sí mismos”  Stephen R. Covey”
 
 “Liderazgo efectivo es poner las primeras cosas, primero. Gestión efectiva es disciplina, ejecutar.” Stephen R. Covey”
 
+Gestión efectiva: planificar y ejecutar
+
+![](/notes/softskill_lideres_en_formacion/assets/lider_principios.png) 
 
 
 Líder servidor de talento, carismático y líder de cambio
