@@ -1040,10 +1040,10 @@ Si los password coinciden entonces retornamos un token con el id del usuario
 
 ## Control de rutas
 
-Para proteger las rutas vamos a crear una seria de middleware para el control de acceso
+Para proteger las rutas vamos a crear una serie de middlewares para el control de acceso
 
 - middlewares/verifySingup.js -> para validar si el email ya existe, o el usuario, o si el rol que esta enviando ya fue creado. 
-- middlewares/authJwt -> para autenticar y validar el token y sus claims
+- middlewares/authJwt -> para autenticar y validar el token y su payload
 - index.js para centralizar los middleware en un solo import
 
 src/middleware/authJWT -> verifyToken() va a ser un middleware de express. 
@@ -1052,8 +1052,9 @@ Vamos a verificar si en los headers viene el atributo "x-access-token"
 
 Si no viene retornamos un 403 e indicamos que no fue enviado el token
 
-Si este viene entonces del modulo de jsonwebtoken usamos el método verify(token, secret) para validarlo
-en caso que este bien entonces lo dejamos continuar al next() si no deberiamos tener una estructura try/ catch para atrapar el error.
+Si este viene, entonces del modulo de jsonwebtoken usamos el método verify(token, secret) para validarlo
+
+En caso que este bien entonces lo dejamos continuar al next() si no deberiamos tener una estructura try/ catch para atrapar el error.
 
 si el token es valido extraemos de su payload el id del usuario y lo buscamos en la BD para validarlo si existe entonces como segundo parámetro de la busqueda podemos indicarle que oculte el password en la respuesta.
 
@@ -1065,9 +1066,7 @@ next() permite que el hilo de ejecución continue
 
 *Nota:* 
 
-Para importar los middlewares desde middlewares/index.js
-
-Importamos el middleware authJWT desde las rutas de productos y lo implementamos para proteger la creacion, actualizacion y eliminacion d productos. Estas rutas requieren token para su uso
+El archivo src/middlewares/index.js lo vamos a usar para exportar todos los middlewares desde un solo objeto, para ello procedemos a importar los middlewares en este archivo y exportamos el archivo de la forma:
 
 
 *src/middleware/index.js*
@@ -1076,6 +1075,8 @@ Importamos el middleware authJWT desde las rutas de productos y lo implementamos
 
     export {verifyToken}
 
+
+Ahora importamos verifiToken desde los middlewares para validar si viene un token en la peticion y si esta pertenece aun token valido de un usuario  registrado. Implementamos este token en las rutas que deseamos proteger.
 
 
 *src/middleware/authJwt.js*
