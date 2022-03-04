@@ -31,11 +31,15 @@ Se ejecuta primero el render y luegos el useEffect []
 ### useContext: la fusión de React Hooks y React Context
 
 - context permite poder pasar valores entre componentes sin tener que hacerlo por props	
-- Al usar createContext el valor por defecto que le pasamos solo es usado únicamente si no hay un Provider. 
+- Al usar createContext el defaultValue es usado únicamente cuando un componente no tiene un Provider superior a él en el árbol
 
-**Nota:** pasar undefined como valor al Provider no hace que los componentes que lo consumen utilicen defaultValue
+**Nota:** pasar undefined como `value` al Provider no hace que los componentes que lo consumen utilicen `defaultValue`
 
-- Creamos nuestro contexto en una carpeta src/context/ThemeContext.js
+- Cada Context tiene un componente Provider que permite a los componentes anidados suscribirse a los cambios del contexto.
+- Un Provider puede estar conectado a muchos consumidores
+- Para evitar Re-renders innecesario en los consumidores del provider al cambiar de estado es pasar por la prop del `value` del Provider un estado o una constante `initialState` para evitar que cambie la referencia.
+
+- Creamos nuestro contexto en una carpeta `src/context/ThemeContext.js`
 
 
 	import React from 'react'
