@@ -254,3 +254,29 @@ El coverage nos permite conocer a través de un informe, la cobertura de las pru
 Luego de ejecutar este comando podemos ver en nuestra terminal nuestro coverage, también se crea en nuestro proyecto una carpeta *coverage*  en la cual tenemos disponible este informe, en un archivo de html
 
 
+## Preparación del proyecto
+
+Vamos a tener dos casos de estudio para la preparación de Jest en un proyecto; cuando la aplicación es creada usando create-react-app y el otro caso es cuando la aplicación es una instalación custom de react
+
+
+### create-react-app
+
+Cuando un proyecto es creado usando create-react-app se deben respetar las siguientes reglas:
+
+- No modificar los script por defecto  de test del package.json (“test”: “react-scripts test”)
+- El archivo de configuración debe estar en la ruta **/src** y debe tener el nombre **setupTests.js** (src/setupTests.js)
+- Los archivos de test pueden estar ubicados en cualquier ubicación del arbol de directorios a partir de "/src"
+
+
+En caso que los test no corran tener presente la siguiente advertencia:
+
+
+react-scripts (5.0.0) has a dependency on jest-watch (1.0.0) (reference https://github.com/facebook/create-react-app/blob/main/packages/react-scripts/package.json#L55)
+jest-watch (1.0.0) requires a Node version of ^12.22.0 || ^14.17.0 || >=16.0.0 (reference https://github.com/facebook/create-react-app/blob/main/packages/react-scripts/package.json#L55)
+
+If you run the app using Node 14.17.0 It worked fine.
+
+The react-scripts test command works with the following Node versions:
+
+Major version 14 and minimum minor version 17 (^14.17.0)
+Major version 16 (>=16.0.0)
