@@ -10,33 +10,37 @@ Consideraciones que debemos tener antes de iniciar un proyecto:
 - ¿Como lo llevaremos a producción?
 - ¿Es optimo el bundle?
 
-Otra gran consideración es el **Total coast of ownership** y es cuanto le vale a la empresa el tiempo que gastas en mantener el framework que tu mism@ creaste
+Otra gran consideración es el ***Total coast of ownership*** y es *"cuanto le vale a la empresa el tiempo que gastas en mantener el framework que tu mism@ creaste"*
 
 
-*Si en lo que inviertes la mayoría de tu tiempo no agrega valor  a tus usuarios, tal vez no estés enfocado en lo correcto*
+__***"Si en lo que inviertes la mayoría de tu tiempo no agrega valor  a tus usuarios, tal vez no estés enfocado en lo correcto"***__
 
 
 El enfoque al desarrollar debe estar concentrado en brindar valor a la aplicación, brindar valor al negocio
 
 
-**RESUMEN:** Next.js nos hace enfocar en el desarrollo del producto dejando de lado decisiones que no agregan este valor como ser la arquitectura de la aplicación
+**RESUMEN:** Next.js nos hace enfocar en el desarrollo del producto dejando de lado decisiones que no agregan valor a este como puede ser la arquitectura de la aplicación
 
 
 ## Instalando NextJS
 
 Existen dos formas para instalar Next en un proyecto, desde el cli con el comando
 
+
     npx create-next-app@latest
     # or
     yarn create next-app
 
+
+
 O de la forma manual
 
 
-  mkdir platzi-store-next
-  cd platzi-store-next
-  npm init -y
-  npm install next react react-dom
+
+    mkdir platzi-store-next
+    cd platzi-store-next
+    npm init -y
+    npm install next react react-dom
 
 
 Ahora configuramos los script del package.json
