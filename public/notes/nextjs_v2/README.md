@@ -569,3 +569,154 @@ Se debe volver a compilar
 
 ## Explora las soluciones de CSS en NextJS y su flexibilidad
 
+NextJs nos permite el approach o enfoque  de nuestra preferencia, sin embargo sin necesidad de configurar podemos  utilizar:
+
+Built-in CSS NextJS(defecto) 
+1. Global CSS (.css)
+2. Module CSS (.module.css)
+3. CSS-in-JS Styled JSX (Es propia de NextJS - Mantenida por Vercel)
+
+###  Global CSS (.css)
+
+Los estilos globales deben ir en el root de la aplicación, 
+Los archivos pueden tener cualquier nombre solo deben tener la extensión .css
+Importamos los estilos globales desde _app.js y ya estan listos para ser usados en cualquier parte de la aplicación
+
+*styles.css*
+
+       //estilo insertado en el body extendiendo _document.tsx 
+      .new-body-class{
+        background-color: aqua;
+      }
+
+*pages/_app.tsx*
+
+      ...
+
+      import '../style.css'
+
+      ...
+
+### Module CSS (.module.css)
+
+Los .module solo aplican para cada componente en especifico
+el archivo stylename.module.css debe estar ubicado en la carpeta del componente que queremos estilizar
+Por consistencia el stylename puede tener cualquier nombre pero preferible el del componente
+Ahora debemos importar los estilos desde el componente, pero como si se tratara de un archivo de JavaScript
+
+Lo usamos como CSS-Module que fué antes que aparecediera CSS in JSX, CSS-Module es similar a como se trabaja en postCSS
+El nombre de las clases son transformadas a modulename_classname__hash con eso se evita la colisión de estilos
+
+
+*components/Layout/Layout.module.css*
+
+
+      .container{
+        background-color: salmon;
+      }
+
+*components/Layout/Layout.tsx*
+
+
+      import Navbar from '@components/Navbar/Navbar'
+      import React from 'react'
+      import styles from './Layout.module.css'
+
+      const Layout:React.FC = ({children}) => {
+        return (
+          <div className={styles.container}>
+            <Navbar/>
+            {children}
+            <footer>Footer</footer>
+          </div>
+        )
+      }
+
+      export default Layout
+
+
+### CSS-in-JSX
+
+Styled JSX funciona pasando los estilos por medio de un componente de React llamado style con una propiedad '<style jsx>' y dentro de este componente creamos un template literal con las propiedades de CSS 
+
+
+*components/Layout/Layout.tsx*
+
+      import Navbar from '@components/Navbar/Navbar'
+      import React from 'react'
+      import styles from './Layout.module.css'
+
+      const Layout:React.FC = ({children}) => {
+        return (
+          <div className={styles.container}>
+            <Navbar/>
+            {children}
+            <footer className='footer'>Footer</footer>
+            <style jsx>
+              {`
+                .footer{
+                  background: lightblue;
+                }
+              `}
+            </style>
+          </div>
+        )
+      }
+
+      export default Layout
+
+
+CSS-in-JS agrega automáticamente nombre a las clases para evitar colisiones con otros estilos
+
+
+## Utilizando Vercel para hacer Deploy
+
+Para el despliegue en vercel desde el repo es necesario dar permisos en la configuracion de github e indicar los repos que se pueden integrar con vercel.
+
+
+## Introducción a los pre-render modes
+
+CSR (Client Side Render): el código se ejecuta en el navegador y tendremos problemas con el SEO
+SSR (Sever Side render): El contenido se ejecuta en el servidor, para contenido dinámico, y ésto permite que se pueda indexar
+SSG (Static site Generator): El contenido se genera en el deploy, ayuda al seo, pero no recomendable para contenido muy dinamico
+
+
+## UnderTheHood Server Side Rendering: getServerSideProps
+
+getServerSideProps se ejecuta en el servidor, por lo tanto no se puede usar window, en su lugar podriamos instalar el isomorphic-unfetch
+
+No usar URL relativas al usar getServerSideProps
+
+Si la petición la hacemos en ambiente de desarrollo vamos a ver que la página se renderiza con un JSON en su script como una de la estrategias de renderizado de lado del cliente, mientras que si compilamos (build) y consumimos el servicio en producción vemos que el servidor nos retorna el HTML de la página con el request ya renderizado.
+
+SSR mejora el SEO
+
+Bajo esta estructura lo que hicimos fue mover el request de lado del cliente al servidor, y dependiendo de donde esté nuestra API puede que demore un poco mas en responder al cliente con el contenido previamente renderizado
+
+## UnderTheHood Static Generation: getStaticProps
+
+Tiene la misma estructura que getServerSideProps
+
+getServerSideProps funciona on demand osea cada vez que se hace una petición al servidor mientra que getStaticProps se ejecuta una única vez y es cuando se compila (build) la solución.
+
+Si tenemos miles de usuario de manera concurrente, el servidor debe crear un nuevo render por cada petición en caso de usar SSR mientras que SSG retorna los mismos archivos estáticos.
+
+**NOTA** getServerSideProps y getStaticProps solo pueden ser usadas desde las páginas y no desde los componentes y son métodos de tipo async
+
+## #UnderTheHood Static Dynamic Static Generation: getStaticPaths
+
+getStaticProps recibe del contexto, los params para renderizar las páginas dinámicas.
+
+En el caso de las páginas dinámicas, getStaticProps debe conocer de antemano todas las páginas que va renderizar ya que esto se hace in build-time
+
+Se requiere un segundo método obligatorio para las páginas dinámicas llamado getStaticPaths que es de tipo async.
+
+getStaticPaths retorna un objeto con la propiedad path que retorna un array, en este caso con los ids de las páginas a generar. No es necesario hacer esto de manera manual, desde este método podemos hacer un request para obtener los Ids
+
+Debemos parsear la respuesta según el objeto (querys) que espera el contexto de getStaticProps {params: {id: <id>}}
+
+getStaticPaths retorna una segunda propiedad llamada fallback, por el momento lo vamos a pasar en false.
+
+Fallback hace parte del llamado incremental static generation
+
+fallback en false lo que va a hacer es que toda pagina no incluida en los paths va dar un 404
