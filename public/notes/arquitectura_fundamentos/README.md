@@ -1,4 +1,4 @@
-[//]: # @param group $$ Arquitectura de Software
+[//]: # @param group $$ Arquitectura de software
 [//]: # @param title $$ Introducción al curso de Fundamentos de Arquitectura de Software
 [//]: # @param author $$ Iván D. Sánchez
 
