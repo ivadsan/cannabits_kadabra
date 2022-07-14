@@ -496,4 +496,325 @@ También podemos combinar el uso de literal types con aliases
         console.log(`Tu medida es ${userSize}`);
     }
 
- 
+
+### Null y Undefined
+
+null y undefined son dos tipos de datos de TS.
+
+Si inicializamos una variable con null o undefined, el motor de inferencia de TS indicará que la variable es de tipo any.
+
+
+
+        //TypeScript
+        let myVar = null; //Tipo any
+        let otherVar = undefined; //Tipo any
+
+        let myNull: null = null; // Tipo null
+        let myUndefined: undefined = undefined; //Tipo undefined
+
+
+Para el caso en que una variable requiera por un momento aceptar valores null o undefined debemos aplicar union types.
+
+
+        let myNumber: number | null = null;
+        myNumber = 50;
+
+        let myString: string | undefined = undefined;
+        myString = "Hola TypeScript";
+
+
+
+
+### Funciones
+
+Con TS podemos definir el tipo de dato (o más de uno usando Union Types) de cada uno de los los parámetros que recibe una función.
+
+    function createProductJson(
+        title: string,
+        createdAt: Date,
+        stock: number,
+        size: Sizes
+    ){
+      return {
+            title,
+            createdAt,
+            stock,
+            size
+        }
+    }
+
+**Nota:** Para el caso de fechas podemos usar el objeto de JS Date para definir el tipo de dato
+
+Cuando hagamos uso de nuestra función, TypeScript comprobará que le envíes todos los parámetros en orden y con el tipo de dato que se declaró en la función:
+
+    const producto1 = createProductJson(
+        "titulo",
+        new Date('10/10/3030'),
+        30,
+        'M'
+    )
+
+En el caso que un argumento sea opcional, podemos usar optional chaining para indicarselo a la función
+
+    function createProductJson(
+        title: string,
+        createdAt: Date,
+        stock?: number,
+        size?: Sizes
+    ){
+        /*Código de la función*/
+    }
+
+
+**Nota:** Los argumentos opcionales deben estar ubicados en la ultima posición de los parámetros que recibe la función 
+
+    
+    function randomFunc(title: string, amount?: number){} //CORRECTO
+
+    function otherFunc(title?: string, amount: number){} // ERROR
+
+
+### Retorno de funciones
+
+Con TS es posible indicar el tipo de dato que retorna una función.
+
+En caso de no indicarle explicitamente el tipo de dato a retornar, el motor de inferencia puede determinar el tipo  a partir de la declaraciones y/o operaciones dentro de la función o puede determinar que es de tipo void para las situaciones en que no retorne nada
+
+    const calcTotal = (prices: number[]): string => {
+      let total = 0;
+      prices.forEach((item) => {
+        total += item;
+      });
+      return total.toString();
+    };
+
+    const printTotal = (prices: number[]): void => {
+      const rta = calcTotal(prices);
+      console.log(rta);
+    };
+
+    printTotal([1, 2, 3, 4, 5, 6]); 
+
+
+### Objetos en funciones
+
+Para enviar objetos como parámetros en funciones, indicamos el tipo de dato de cada uno de los atributos del mismo, en caso que alguno de los atributos sea opcional, lo indicamos usando optional chaining.
+
+        (()=>{
+
+        const login = (data:{email:string, password: number}) => {
+            console.log(data.email, data.password)
+        }
+
+        login({email: 'ivan@ivan.com', password: 234234})
+
+        type Size = 'S' | 'M' | 'L' | 'XL'
+
+        const products: any[] = []
+
+        const addProduct = (data: {
+            title: string,
+            createdAt: Date,
+            stock: number,
+            size?: Size
+        })=>{
+
+            products.push(data)
+
+        }
+
+        addProduct({
+            title: 'producto 1',
+            createdAt: new Date(),
+            stock: 7,
+            size: 'S'
+        })
+
+        addProduct({
+            title: 'producto 1',
+            createdAt: new Date(),
+            stock: 7
+        })
+
+
+        console.log(products)
+
+        })()
+
+
+### Objetos como tipos
+
+Por medio  de los alias podemos crear el tipado de un objeto y reusarlo en nuestro código
+
+
+        (() => {
+        type Size = 'S' | 'M' | 'L' | 'XL';
+        type Product = {
+            title: string;
+            createdAt: Date;
+            stock: number;
+            size?: Size;
+        };
+
+        const products: Product[] = [];
+
+        const addProduct = (data: Product) => {
+            products.push(data);
+        };
+
+        addProduct({
+            title: 'producto 1',
+            createdAt: new Date(),
+            stock: 7,
+            size: 'S',
+        });
+
+        addProduct({
+            title: 'producto 1',
+            createdAt: new Date(),
+            stock: 7,
+        });
+
+        // addProduct(true); // error
+        // addProduct({
+        //   other: 'producto 1',
+        // }); // error
+
+        console.log(products);
+        })();
+
+En caso de requerir destructuring se puede hacer de las siguiente manera
+
+
+    type Product = {
+        title: string;
+        createdAt: Date;
+        stock: number;
+        size?: Sizes;
+      };
+
+      const printProduct = ({ title, createdAt, stock, size }: Product) => {
+        console.log(title);
+        console.log(createdAt);
+        console.log(stock);
+        console.log(size);
+      };
+
+
+### Módulos: import y export
+
+
+Podemos modularizar nuestro proyecto, separando en archivos los tipos, servicios y consumo de los servicios por ejemplo.
+
+**Nota:** En el caso de renombrar funciones y/o variables es mas sencillo debuggear ya que nos permite identificar rápidamente los archivos que estan fallando por el cambio.
+
+**src/products/product.model.ts**
+
+    type Size = 'S' | 'M' | 'L' | 'XL';
+
+    type Product = {
+      title: string;
+      createdAt: Date;
+      stock: number;
+      size?: Size;
+    };
+
+    export {
+      Size,
+      Product
+    }
+
+
+**src/products/product.service.ts**
+
+    import { Product } from './product.model';
+
+    const products: Product[] = [];
+
+    const addProduct = (data: Product) => {
+      products.push(data);
+    };
+
+    const calcTotal = (): number => {
+      let total = 0;
+      products.forEach((item) => {
+        total += item.stock;
+      });
+      return total;
+    };
+
+    export { products, addProduct, calcTotal };
+
+
+**src/products/main.ts**
+
+    import {products,addProduct, calcTotal} from './product.service'
+
+    addProduct({
+      title: 'producto 1',
+      createdAt: new Date(),
+      stock: 7,
+      size: 'S',
+    });
+
+    addProduct({
+      title: 'producto 1',
+      createdAt: new Date(),
+      stock: 7,
+    });
+
+    console.log('products', products)
+
+    const total = calcTotal()
+
+    console.log('total', total)
+
+
+### Usando librerías que soportan TypeScript
+
+
+Las librerías que tienen soporte para TypeScript nos facilitan su uso, y más aún si usas editores de código que se integran bien con este “lenguaje”, pues brindan información muy útil como indicar:
+
+* La cantidad de parámetros esperados por una función
+* El tipo de datos de los parámetros y variables
+* El tipo de dato que retornará la función
+* Autocompletado al usar métodos de un módulo
+* Mejores prácticas
+
+Para validar si la librería soporta TS, podemos verificar en el repositorio de la librería si esta tiene un archivo tsconfig.json en su raíz
+
+Cualquier librería de JS la podemos usar en TS
+
+Usando librerias que soportan TS, el asistente del editor se convierte en una forma de documentación instantanea al implementarlas
+
+
+### Usando librerías que NO soportan TypeScript
+
+
+
+
+Algunas librerías sin soporte para TS, importan sus archivos usando commonJS. Para soportar TS empezamos por modificar la forma de importar y lo llevamos a usar ES6
+
+El ecosistema de TS se ha encargado de crear librerias de tipos para soportar aquellas dependencias que no tienen TS. 
+
+Estos tipos se instalan como dependencias de desarrollo
+
+
+Ejemplo lodash:
+
+
+    instalación
+
+        npm i lodash
+
+    Import según lodash
+
+        var _ = require('lodash');
+
+    import ES6
+
+      import _ from 'lodash
+
+    tipado
+
+        npm i --save-dev @types/lodash
