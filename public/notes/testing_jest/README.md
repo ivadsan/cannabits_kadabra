@@ -21,7 +21,7 @@ Con estas testeamos todo lo que no influye a la funcionalidad del producto, como
 
 ### Coverage
 
-Esta herramienta nos permite que tanto estamos probando de nuestro proyecto y generar un reporte que nosotros podamos analizar a detalle y ver que nos falta por probar en nuestros proyectos
+Esta herramienta nos permite conocer que tanto estamos probando de nuestro proyecto y generar un reporte para analizar a detalle y ver que falta por probar.
 
 ## Preparación del entorno con Jest
 
@@ -38,12 +38,12 @@ Instalación de Jest como dependencia de desarrollo
 
 
 Crear la carpeta src y el archivo index.js
-Crear la carpeta `__test__` para almacenar nuestras pruebas (Este nombre es un standard de la industria para identificar el folder que contiene las pruebas)
+Crear la carpeta `src/__test__` para almacenar nuestras pruebas (Este nombre es un standard de la industria para identificar el folder que contiene las pruebas)
 En este folder vamos a crear el archivo ***global.test.js***, la particula test indica que no es un archivo del proyecto sino que corresponde a pruebas
 
 En Jest vamos a trabajar con una funcion llamada **test()** la cual recibe dos parámetros, el primero es un string que describe lo que va a pasar y el segundo es una función anónima donde viene lo que vamos a probar.
 
-Dentro de la función anónima utilizamos expect que recibe una variable de entrada a evaluar y luego realiza un match si esa variable cumple con el test
+Dentro de la función anónima utilizamos **expect** que recibe una variable de entrada a evaluar y luego realiza un match si esa variable cumple con el test
 
 
 ## Basic tests using test
@@ -56,7 +56,7 @@ Nota: puede que en la version 27 la expresion /Hola/ no funcione en su caso el t
 
     const text = "Hola Mundo"
 
-    test('Debe contener un texto con la palabra mundo', () => {
+    test('Debe contener un texto con la palabra Hola', () => {
       expect(text).toMatch(/Hola/)
     })
 
@@ -280,3 +280,172 @@ The react-scripts test command works with the following Node versions:
 
 Major version 14 and minimum minor version 17 (^14.17.0)
 Major version 16 (>=16.0.0)
+
+### react custom installation
+
+Instalacion de Jest y Enzime (dependencia creada por AirBnB para testear componentes de React)
+
+    npm install jest enzyme enzyme-adapter-react-16 --save
+
+Nota: el adaptador corresponde a la versión de React, es necesario verificar el soporte para las versiones 17 y 18 de React
+
+
+- Crear los scripts en el package.json para correr las pruebas
+
+
+
+        "test": "jest",
+        "test:watch": "jest --watch"
+
+
+- Crear la carpeta para almacenar las pruebas `src/__test__` 
+- Crear el archivo de configuración de Jest `src/__test__/setupTest.js`
+
+
+**Nota** usando CRA este archivo está en la raíz de src y se llama setupTests.js
+
+    #src/__test__/setupTest.js
+
+    import { configure } from 'enzyme';
+    import Adapter from 'enzyme-adapter-react-16';
+
+    configure({ adapter: new Adapter() });
+
+
+
+Configurar el archivo de configuración en el package.json
+
+    "jest": {
+        "setupFilesAfterEnv": [
+          "<rootDir>/src/__test__/setupTest.js"
+        ]
+      }
+
+
+Ahora vamos a crear la primer prueba de un componente, para ello creamos la caperta y el archivo `src/__test__/components/Footer.test.js`
+
+
+
+    import React from 'react';
+    import { mount } from 'enzyme';
+    import Footer from '../../components/Footer';
+
+    describe('<Footer />', () => {
+      test('is Render Footer', () => {
+        const footer = mount(<Footer />);
+        expect(footer.length).toEqual(1);
+      });
+    });
+
+
+mount permite montar un componente y simular el ciclo de vida (montar y desmontar)
+
+Para este proyecto debemos usar mocks para tratar los archivos de estilos .styl y evitar conflictos
+
+
+Este primer test permite verificar si un componente renderiza correctamente
+
+
+## Crear mocks
+
+Jest no puede parsear archivos estaticos (stylesheets, fuentes, imagenes, iconos) por lo que se tienen que mockear (reemplazar) por javascript plano.
+
+se debe añadir en la configuración de Jest en el package.json el parámetro “moduleNameMapper” para que jest use una configuración diferente para el tipo de archivos especificado, en este caso por medio de la regex \.(styl|css)$
+
+creamos la carpeta y archivo `src/__mocks__/styleMock.js` el cual exporta un módulo vacio
+
+
+    module.exports = {};
+
+
+*package.json*
+
+    "jest": {
+        "setupFilesAfterEnv": [
+          "<rootDir>/src/__test__/setupTest.js"
+        ],
+        "moduleNameMapper": {
+          "\\.(styl|css)$": "<rootDir>/src/__mocks__/styleMock.js"
+        }
+      }
+
+A partir de la version >28 de Jest, ya no incluye jest-environment-jsdom y debe ser instalado por separado. Y luego se debe agregar 
+"testEnvironment": "jsdom" en la configuración de Jest en el package.json:
+
+
+    npm install --save-dev jest-environment-jsdom
+
+
+*package.json*
+
+    "jest": {
+      "setupFilesAfterEnv": [
+        "<rootDir>/src/__test__/setupTest.js"
+      ],
+      "moduleNameMapper": {
+        "\\.(styl|css)$": "<rootDir>/src/__mocks__/styleMock.js"
+      },
+      "testEnvironment": "jsdom"
+    }
+
+
+
+Como los test ahora corren correctamente con los mocks de estilos, vamos a crear otra prueba sobre Footer para ir armando un set de pruebas sobre este componente. Vamos a identificar si un titulo del footer aparece con el string correcto. 
+
+Podemos crear una sola instancia del montaje y utlizarla en todo nuesto set de pruebas encapsulando en `describe()`
+
+
+*src/__mocks__/styleMock.js*
+
+
+    import React from 'react';
+    import { mount } from 'enzyme';
+    import Footer from '../../components/Footer';
+
+    describe('<Footer />', () => {
+      const footer = mount(<Footer />);
+
+      test('is Render Footer', () => {
+        expect(footer.length).toEqual(1);
+      });
+
+      test('Render title', () => {
+        expect(footer.find('.Footer-title').text()).toEqual('Platzi Store');
+      });
+    });
+
+
+Como este proyecto utliza Redux, para poder testearlo debemos crear un mock del provider para recibir a los children components que usen el manejador de estado.
+
+Este mock tambien debe incluir el enrutamiento para que funcionen las pruebas.
+
+Creamos el archivo `src/__mocks__/ProviderMock.js`
+
+
+
+    import React from 'react';
+    import { createStore } from 'redux';
+    import { Router } from 'react-router-dom';
+    import { Provider } from 'react-redux';
+    import { createBrowserHistory } from 'history';
+    import initialState from '../initialState';
+    import reducer from '../reducers';
+
+    const store = createStore(reducer, initialState);
+    const history = createBrowserHistory();
+
+    const ProviderMock = props => (
+      <Provider store={store}>
+        <Router history={history}>
+          {props.children}
+        </Router>
+      </Provider>
+    );
+
+    export default ProviderMock;
+
+
+## Implementar provider mock
+
+Ya que tenemos el ProviderMock.js vamos a usarlo para hacer una prueba del componente Header
+
