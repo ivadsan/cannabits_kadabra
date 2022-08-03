@@ -173,7 +173,7 @@ Antes de todas las pruebas
 
 ## describe: Empaquetado de pruebas 
 
-**describe()** es una funcion que recibe dos parametros, el primero es una descripción de lo que hace el paquete de test y el segundo es una función anónimoa con los test que agrupa
+**describe()** es una funcion que recibe dos parametros, el primero es una descripción de lo que hace el paquete de test y el segundo es una función anónima con los test que agrupa
 
 
 *src/index.js*
@@ -447,5 +447,526 @@ Creamos el archivo `src/__mocks__/ProviderMock.js`
 
 ## Implementar provider mock
 
-Ya que tenemos el ProviderMock.js vamos a usarlo para hacer una prueba del componente Header
+Ya que tenemos el ProviderMock.js vamos a usarlo para hacer una prueba del componente Header.
 
+Algo que debemos tener claro es que podemos montar el componente tanto con mount como con shallow, a continuación una explicación de sus diferencias:
+
+## Shallow
+
+Real unit test (isolation, no children render)
+
+### Simple shallow
+
+Calls:
+
+- constructor
+- render
+
+### Shallow + setProps
+
+Calls:
+
+- componentWillReceiveProps
+- shouldComponentUpdate
+- componentWillUpdate
+- render
+
+### Shallow + unmount
+
+Calls:
+
+- componentWillUnmount
+
+### Mount
+
+The only way to test componentDidMount and componentDidUpdate.
+Full rendering including child components.
+Requires a DOM (jsdom, domino).
+More constly in execution time.
+If react is included before JSDOM, it can require some tricks:
+
+`require('fbjs/lib/ExecutionEnvironment').canUseDOM = true;` 
+
+### Simple mount
+
+Calls:
+
+- constructor
+- render
+- componentDidMount
+
+### Mount + setProps
+
+Calls:
+
+- componentWillReceiveProps
+- shouldComponentUpdate
+- componentWillUpdate
+- render
+- componentDidUpdate
+
+### Mount + unmount
+
+Calls:
+
+- componentWillUnmount
+
+### Render
+
+only calls render but renders all children.
+
+So my rule of thumbs is:
+
+- Always begin with shallow
+- If componentDidMount or componentDidUpdate should be tested, use mount
+- If you want to test component lifecycle and children behavior, use mount
+- If you want to test children rendering with less overhead than mount and you are not interested in lifecycle methods, use render
+
+There seems to be a very tiny use case for render. I like it because it seems snappier than requiring jsdom but as @ljharb said, we cannot really test React internals with this.
+
+I wonder if it would be possible to emulate lifecycle methods with the render method just like shallow ?
+I would really appreciate if you could give me the use cases you have for render internally or what use cases you have seen in the wild.
+
+I'm also curious to know why shallow does not call componentDidUpdate.
+
+Kudos goes to https://github.com/airbnb/enzyme/issues/465#issuecomment-227697726 this gist is basically a copy of the comment but I wanted to separate it from there as it includes a lot of general Enzyme information which is missing in the docs.
+
+https://gist.github.com/fokusferit/e4558d384e4e9cab95d04e5f35d4f913
+
+
+
+***Continuando con el test a header***
+
+    # src/__test__/Header.test.js
+
+    import React from 'react';
+    import { mount, shallow } from 'enzyme';
+    import ProviderMock from '../../__mocks__/ProviderMock';
+    import Header from '../../components/Header';
+
+    describe('<Header />', () => {
+      test('Render del componente Header', () => {
+        const header = shallow(
+          <ProviderMock>
+            <Header />
+          </ProviderMock>,
+        );
+        expect(header.length).toEqual(1);
+      });
+      test('Render del Titulo', () => {
+        const header = mount(
+          <ProviderMock>
+            <Header />
+          </ProviderMock>,
+        );
+        expect(header.find('.Header-title').text()).toEqual('Platzi Store');
+      });
+    });
+
+
+Pruebas sobre el component Product donde se vá a verificar que renderice y luego simular que un evento click funcione
+
+Como el componente Product está anidado en Products es necesario al usar shallow meterlos entre el provedor que usa el componente padre en este caso Redux o pasarle las props que requiere.
+
+Para pasarle valores por props es necesario crear un Mock que contega una estructura de datos igual a la que recibe el componente, importar el mock desde el script de los tests y pasarle los props.
+
+
+`src/__test__/components/Product.test.js`
+
+    import React from 'react';
+    import { shallow, mount } from 'enzyme';
+    import ProviderMock from '../../__mocks__/ProviderMock';
+    import ProductMock from '../../__mocks__/ProductMock';
+    import Product from '../../components/Product';
+
+    describe('<Product />', () => {
+      test('Render component', () => {
+        const product = shallow(
+          <ProviderMock>
+            <Product />
+          </ProviderMock>,
+          // <Product product={ProductMock} handleAddToCart={handleAddToCart} />
+        );
+        expect(product.length).toEqual(1);
+      });
+    });
+
+`src/__mocks__/components/ProductMock.js`
+
+
+    const ProductMock = {
+      id: '1',
+      image: 'https://arepa.s3.amazonaws.com/camiseta.png',
+      title: 'Camiseta',
+      price: 25,
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    };
+
+    export default ProductMock;
+
+
+Para probar un click podemos crear una función usando jest para simular la acción, esto lo hacemos con jest.fn()
+
+
+    import React from 'react';
+    import { shallow, mount } from 'enzyme';
+    import ProviderMock from '../../__mocks__/ProviderMock';
+    import ProductMock from '../../__mocks__/ProductMock';
+    import Product from '../../components/Product';
+
+    describe('<Product />', () => {
+      test('Render component', () => {
+        const product = shallow(
+          <ProviderMock>
+            <Product />
+          </ProviderMock>,
+          // <Product product={ProductMock} handleAddToCart={handleAddToCart} />
+        );
+        expect(product.length).toEqual(1);
+      });
+
+      test('Test button Add to cart', () => {
+        const handleAddToCart = jest.fn();
+        const wrapper = mount(
+          <ProviderMock>
+            <Product product={ProductMock} handleAddToCart={handleAddToCart} />
+          </ProviderMock>,
+        );
+        wrapper.find('button').simulate('click');
+        expect(handleAddToCart).toHaveBeenCalledTimes(1);
+      });
+    });
+
+## Snapshot
+
+Los snapshot nos permiten capturar la UI de un componente y la podemos comparar para verificar que su estructura se mantiene igual, en caso que haya un cambio, la comparación entre el snapshot y la versión actual de componente no haran match entonces no pasará el test
+
+Si el snapshot no existe se crea al correr test, pero en caso que ya exista se procede a comparar con el snapshot existente
+
+Al crear snapshot el componente se convierte en un JSON
+
+Para poder crear un snapshot debemos instalar la depedencia de desarrollo react-test-renderer
+
+
+
+    npm i -D react-test-renderer
+
+    # vesion para react 16
+    npm i react-test-renderer@16.12.0 --save-dev
+
+Vamos a crear un snapshot del footer, para ello importamos create de la dependencia react-test-renderer
+
+
+Como Footer no esta conectado con Redux entonces no requiere el ProviderMock
+
+Creamos el snapshot con create
+
+Para el expect convertimos a JSON el snapshot y verificamos si hace match con el componente actual
+
+NOTA: verficar como usar create en la version 18 de React, el curso está en la version 16 y sale un error si usa la ultima version de react-test-renderer
+
+
+
+`src/__test__/components/Footer.test.js`
+
+    import { create } from 'react-test-renderer';
+
+    ...
+
+    describe('Footer snapshot', () => {
+      test('Comprobar la UI del componente', () => {
+        const footer = create(<Footer />);
+
+        expect(footer.toJSON()).toMatchSnapshot();
+      });
+    });
+
+
+`src/__test__/components/Header.test.js`
+
+
+    describe('Header snapshot', () => {
+      test('Test UI Header', () => {
+        const footer = create(
+          <ProviderMock>
+            <Header />
+          </ProviderMock>,
+        );
+        expect(footer.toJSON()).toMatchSnapshot();
+      });
+    });
+
+
+
+En caso que necesitemos actualizar la UI de algun componente, debemos actualizar tambien su snapshot, pdemos hacerlo de manera general 
+
+
+    npx jest --udpateSnapshot
+
+o un archivo en particular
+
+    npx jest --updateSnapshot src/__test__/components/Footer.test.js
+
+
+o podemos crear un script en el package.json para actualizar todos los snapshots
+
+
+    "test:update": "jest --updateSnapshot"
+
+
+## Probar Actions
+
+Para probar los actions de Redux vamos a crear un objeto con el payload y type esperado y verificar si estos corresponden a la misma estructura que recibe el action
+
+El payload estará compuesto por el mock de la estructura de datos que recibe el action 
+
+
+    `src/__test__/actions/actions.test.js`
+
+    import actions from '../../actions';
+    import ProductMock from '../../__mocks__/ProductMock';
+
+    describe('Actions', () => {
+      test('addToCart Action', () => {
+        const payload = ProductMock;
+        const expected = {
+          type: 'ADD_TO_CART',
+          payload,
+        };
+        expect(actions.addToCart(payload)).toEqual(expected);
+      });
+    });
+
+
+Para que en el output de las pruebas veamos las descripciones de cada uno de los test ejecutados, debemos configurarlo en modo verbose, esto lo hacemos en la configuracion de JEST en el package.json
+
+
+    "jest": {
+        "verbose": true,
+        "setupFilesAfterEnv": [
+          "<rootDir>/src/__test__/setupTest.js"
+        ],
+        "moduleNameMapper": {
+          "\\.(styl|css)$": "<rootDir>/src/__mocks__/styleMock.js"
+        },
+        "testEnvironment": "jsdom"
+      }
+
+
+## Probar Reducers
+
+
+Para probar los reducer es necesario comparar el estado inicial contra el estado final luego de ejecutar la acción. 
+
+
+En este caso ademas de comparar los reducers tambien se va a comparar el retorno del estado inicial cuando no se le pasa un action
+
+`src/__test__/reducers/reducers.test.js`
+
+    import reducer from '../../reducers';
+    import ProductMock from '../../__mocks__/ProductMock';
+
+    describe('Reducers TEST', () => {
+      test('initial state', () => {
+        expect(reducer({}, '')).toEqual({});
+      });
+      test('ADD_TO_CART', () => {
+        const initialState = { cart: [] };
+        const action = { type: 'ADD_TO_CART', payload: ProductMock };
+        expect(reducer(initialState, action)).toEqual({ cart: [ProductMock] });
+      });
+      test('REMOVE_FROM_CART', () => {
+        const initialState = { cart: [ProductMock] };
+        const action = { type: 'REMOVE_FROM_CART', payload: ProductMock };
+        expect(reducer(initialState, action)).toEqual({ cart: [] });
+      });
+    });
+
+
+## Probar peticiones fetch
+
+Para este caso vamos a testear una utilidad para hacer peticiones fetch
+
+
+    src/utils/getData.js
+
+    const getData = (api) => {
+      return fetch(api)
+        .then(response => response.json())
+        .then(response => response)
+        .catch(error => error);
+    };
+
+    export default getData;
+
+
+Para poder simular un fetch debemos instalar como dependencia de desarrollo
+
+
+    npm i -D jest-fetch-mock
+
+
+Antes de generar las pruebas debemos sobre escribir la función fetch con jest-fetch-mock  en el archivo de configuración setupTest.js para efecto de hacer las pruebas.
+
+
+`src/__test__/setupTest.js`
+
+
+    import { configure } from 'enzyme';
+    import Adapter from 'enzyme-adapter-react-16';
+
+    configure({ adapter: new Adapter() });
+    global.fetch = require('jest-fetch-mock');
+
+
+Nota: En caso de tener problema al importar dependencias de desarrollo, debemos configurar una nueva regla en el .eslintrc
+
+
+    "rules": {
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+        "react/jsx-filename-extension": 0,
+    ...
+    }
+
+Nota: Si se desea no sobre escribir el fetch debemos configurar de la siguiente manera:
+
+    // setupTest.js
+    require('jest-fetch-mock').enableFetchMocks();
+
+Ahora fetch sigue como nativo y para las pruebas podemos acceder globalmente a fetchMock
+
+**Verificando la respueta de la api**
+
+
+Antes de cada ejecución del test debemos usar el método fetch.resetMocks() 
+
+Configuramos la respuesta esperada y ejecutamos el test con fetchMock
+
+Nota: se debe tener precaución al trabajar con promesas, es necesario que retorne el resultado ya que la prueba puede estar mal escrita y sin embargo parecierar ser exitosa
+
+ # src/__test__/utils/getData.test.js
+
+
+    import getData from '../../utils/getData';
+
+    describe('Fetch API', () => {
+      beforeEach(() => {
+        fetch.resetMocks();
+      });
+
+      test('call API and return data', () => {
+        fetch.mockResponseOnce(JSON.stringify({ data: '123' }));
+        return getData('cualquiera.com').then((response) => {
+          expect(response.data).toEqual('123');
+        });
+      });
+    });
+
+
+Ahora vamos a verificar que la url se recibe y se envía bien
+
+
+    import getData from '../../utils/getData';
+
+    describe('Fetch API', () => {
+      beforeEach(() => {
+        fetch.resetMocks();
+      });
+
+      test('call API and return data', () => {
+        fetch.mockResponseOnce(JSON.stringify({ data: '123' }));
+        return getData('https://cualquiera.com').then((response) => {
+          expect(response.data).toEqual('123');
+
+          expect(fetch.mock.calls[0][0]).toEqual('https://cualquiera.com');
+        });
+      });
+    });
+
+
+**mockFn.mock.calls**
+
+
+Una mock function nos permite saber cuántas veces se llamó la función y con qué argumentos fue llamada.
+Es por eso que mock.calls retorna un ‘array de arrays’ donde cada array es un llamado de la función y cada item es un argumento con el que fue llamado.
+Por ejemplo: una función que se llamó dos veces y en cada vez se le pasaron 2 argumentos.
+
+    [
+      [‘arg1’, ‘arg2’], // 1a vez
+      [‘arg3’, ‘arg4’], // 2a vez
+    ];
+
+
+## Jest + CI (Travis)
+
+Crear una cuenta en Travis, el repo debe ser publico y el proyecto open source para que sus servicios puedan ser utilizados sin costo
+
+Usar la cuenta de GitHub para loguear la cuenta y otorgar permisos a travis
+
+
+Crear el archivo .travis.yml en la raíz del proyecto
+
+
+travis trabaja con Yarn pero no hay necesidad de cambiarlo a NPM
+
+
+
+    language: node_js
+    cache:
+      directories:
+        - ~/.npm
+    node_js:
+      - '12'
+    git:
+      depth: 3
+    script:
+      - yarn test
+      - yarn build
+    deploy:
+      provider: pages
+      edge: true
+      skip-cleanup: true
+      keep-history: true
+      github-token: $GITHUB_TOKEN
+      local-dir: dist/
+      target-branch: gh-pages
+      commit_message: "Deploy release ${TRAVIS_TAG}"
+      on:
+        branch: main
+
+
+
+**Creación del GITHUB_TOKEN**
+
+
+**En GitHub**
+
+account -> settings -> developer settings -> Personal access token -> Generate new token
+
+
+habilitar los siguientes permisos
+
+Repo - full control
+
+read:repo_hook
+
+
+GENERAR TOKEN
+
+**En Travis**
+
+
+Primero que todo debemos tener elegido un plan para poder configurar otras opciones, en este plan free  (Requiere metodo de pago)
+
+Tambien debemos tener activado desde travis la app de Github y elegir si todos los directorios o solo los seleccionados tienen permiso de ser accedidos por Travis 
+
+
+Ahora en account -> settings -> <nombre repositorio> -> more options settings -> y creamos la variable de entorno GITHUB_TOKEN 
+
+
+## Probando el proyecto antes de hacer deploy
+
+
+Enviamos a la rama main los ultimos cambios del proyecto que incluyen la configuracion de Travis
+
+Ahora desde travis vamos a Account -> settings -> nombre del proyecto -> y lo habilitamos. Esto ejecuta el proceso de construccion
