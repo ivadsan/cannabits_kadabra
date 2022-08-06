@@ -1,5 +1,5 @@
 [//]: # @param group $$ TypeScript
-[//]: # @param title $$ Fundamentos de TypeScript
+[//]: # @param title $$ 01 - Fundamentos de TypeScript
 [//]: # @param author $$ Iván D. Sánchez
 
 # Fundamentos de TypeScript
@@ -417,6 +417,12 @@ También es posible hacer cast a las variables para acceder a los métodos espec
 
         let toNumberVar = (<number>myDynamicVar).toFixed(1)
         console.log(typeof toNumberVar)
+
+      
+Un array inicializado vacio va tomar por default el tipo : any[]
+
+    let empty = []; // default any[]
+    empty.push(null)
 
   ### union types
 
