@@ -11,8 +11,8 @@ export default function Loading() {
 
   return (
     <div className='overload'>
-      <div class="loadingio-spinner-spinner-ttousbtufan">
-        <div class="ldio-rncd59grdb">
+      <div className="loadingio-spinner-spinner-ttousbtufan">
+        <div className="ldio-rncd59grdb">
           <div></div>
           <div></div>
           <div></div>

@@ -10,30 +10,31 @@ Para este proyecto se va a trabajar con ts-node que permite desarrollar sin nece
 
 crear /.gitignore y /.editorconfig
 
+```
 npm init -y
-
 npm i -D typescript
 npx tsc --init
+```
 
-Modificamos del tsconfig.json, el parametro
+Modificamos del tsconfig.json, el parámetro
 
-        "outDir": "./dist",
+    "outDir": "./dist",
 
-Podemos podemos probar la transpilación a la carpeta de destino
+Probar la transpilación a la carpeta de destino
 
     npx tsc
 
-o también podemos dejas escuchando la transpilación
+También podemos dejar escuchando la transpilación
 
     npx tsc --watch
 
-Ahora vamos a instlar la libreria ts-node para ahorrarnos el paso de estar transpilando la aplicación. Corre la apicación desde un backend con NodeJS
+Ahora vamos a instalar la libreria ts-node para ahorrarnos el paso de estar transpilando la aplicación. Corre la apicación desde un backend con NodeJS
 
-        npm i -D ts-node
+    npm i -D ts-node
 
 Ahora podemos ejecutar localmente archivos sin transpilar
 
-        npx ts-node path/nombreArchivo
+    npx ts-node path/nombreArchivo
 
 Nota: se debe tener precaución al trabajar con ts-node ya que este solo está corriendo el código sin transpilar y ya para un frontend desplegado aunque hay soluciones que podrian ejecutar en el backend archivos de .ts, se recomienda por performance transpilar los archivos a .js
 
@@ -73,7 +74,7 @@ Las listas son accedidas a través del enum
 
         console.log(cosmosUser)
 
-### enum vs literal types
+#### enum vs literal types
 
 Al usar enum podemos indicarle a una función los valores posibles que recibe un parámetro, esto aumenta la precisión de los valores que recibe una función por parámetros.
 
@@ -103,7 +104,7 @@ Con literal types es mas sencillo
 
 El código transpilado es mas extenso para enum que para literal types
 
-## Otras características de enum
+#### Otras características de enum
 
 Si en un enum las keys solo se declaran y no se inicializan con valores, estas se inician automáticamente por defecto en orden númerico, empezando por el 0 y auto incrementandose.
 
@@ -136,7 +137,7 @@ console.log(ENUM_NUMBER.Z) // 3
 
 ```
 
-## Enum - Caso de uso con Capacitor
+#### Enum - Caso de uso con Capacitor
 
 Capacitor es una librería para hacer aplicaciones multiplataforma, vamos a instalar el plugin para uso de la camara
 
@@ -144,16 +145,17 @@ Capacitor es una librería para hacer aplicaciones multiplataforma, vamos a inst
 
 Probando src/camera.ts
 
+```
 import { Camera, CameraResultType } from '@capacitor/camera';
 
 const takePicture = async () => {
-const image = await Camera.getPhoto({
-quality: 90,
-allowEditing: true,
-resultType: CameraResultType.Base64
-});
-
+  const image = await Camera.getPhoto({
+    quality: 90,
+    allowEditing: true,
+    resultType: CameraResultType.Base64
+  });
 };
+```
 
 En el plugin de camera está un enum que nos permite configurar el resultado de tomar una captura con la camara, para hacer es necesario importar el typo desde la librería, el cual provee el set de opcioes del resultType (url, uri, base64) de la captura
 
@@ -161,95 +163,97 @@ Nota: puedo pararme sobre el tipo importado CameraResultType y click derecho, go
 
 Ahora podemos explorar la estructura de getPhoto(options: ImageOptions) que recibe un parámetro options de tipo ImageOptions y vemos que en su interface está el atributo direction que recibe un enum CameraDirection que debemos importar del plugin.
 
-                import { Camera, CameraResultType, CameraDirection } from '@capacitor/camera';
+```
+import { Camera, CameraResultType, CameraDirection } from '@capacitor/camera';
 
-                const takePicture = async () => {
-                const image = await Camera.getPhoto({
-                quality: 90,
-                allowEditing: true,
-                resultType: CameraResultType.Base64,
-                direction: CameraDirection.Front
-                });
-                };
+const takePicture = async () => {
+  const image = await Camera.getPhoto({
+    quality: 90,
+    allowEditing: true,
+    resultType: CameraResultType.Base64,
+    direction: CameraDirection.Front
+  });
+};
+```
 
-## Tuples
+### Tuples
 
 Correponden a Arrays fuertemente tipados
 
 En un array podemos indicar los tipos de datos que puede contener pero no podemos parametrizar el tipo de dato esperado según la posición del valor dentro del array y tampoco condicionar la longitud del mismo.
 
-        // Array
+```
+// Array
 
-        const prices: (string | number)[] = []
-        prices.push(1)
-        prices.push('muchos')
-        prices.push(0)
-        //prices.push(true) // Error
+const prices: (string | number)[] = []
+prices.push(1)
+prices.push('muchos')
+prices.push(0)
+//prices.push(true) // Error
 
-        console.log(prices)
-
-
-        // tuple
-        let user: [string, number, boolean?]
-        user = ['ivan', 38]
-        user = ['Mati', 7, true]
-        //user = ['Nata', 35, 1] //error
+console.log(prices)
 
 
-        // destructuring
-        const [username, age] = user
-        console.log(username) // Mati
-        console.log(age) // 7
-
-## Unknown type
-
-unknown es un typo any mejorado, forza a hacer una verificación de tipo antes de poder ejecutar los métodos de la variable segun el tipo de dato o una asignación de valor.
-
-                let anyVar: any
-                anyVar = true
-                anyVar = 1
-                anyVar = 'true'
-                anyVar = []
-                anyVar = {}
-
-                anyVar.doSomething() // this is not a error
+// tuple
+let user: [string, number, boolean?]
+user = ['ivan', 38]
+user = ['Mati', 7, true]
+//user = ['Nata', 35, 1] //error
 
 
-                let unknownVar: unknown
-                unknownVar = true
-                unknownVar = 1
-                unknownVar = 'true'
-                unknownVar = []
-                unknownVar = {}
+// destructuring
+const [username, age] = user
+console.log(username) // Mati
+console.log(age) // 7
+```
 
-                // unknowVar.doSomething() // Require verification type
+### Unknown type
+
+unknown es un typo any mejorado, que obliga a hacer una verificación de tipo antes de poder ejecutar los métodos o asignar el valor de una variable segun el tipo de dato .
+
+```
+    let anyVar: any
+    anyVar = true
+    anyVar = 1
+    anyVar = 'true'
+    anyVar = []
+    anyVar = {}
+
+    anyVar.doSomething() // this is not a error
+
+
+    let unknownVar: unknown
+    unknownVar = true
+    unknownVar = 1
+    unknownVar = 'true'
+    unknownVar = []
+    unknownVar = {}
+
+    // unknowVar.doSomething() // Require verification type
+```
 
 Tambien se puede usar para aquellas funciones donde desconocemos el tipo de dato que retorna
 
-                const parse = (str: string): unknown => {
-                        return JSON.parse(str)
-                }
+      const parse = (str: string): unknown => {
+        return JSON.parse(str)
+      }
 
 Tambien solicita verificacion de tipo si vamos a asignar un valor
 
-                let unknownVar: unknown;
-                unknownVar = true;
-                unknownVar = 1;
-                unknownVar = 'true';
-                unknownVar = [];
-                unknownVar = {};
+    let unknownVar: unknown;
+    unknownVar = true;
+    unknownVar = 1;
+    unknownVar = 'true';
+    unknownVar = [];
+    unknownVar = {};
 
-                if (typeof unknownVar === 'boolean') {
-                let newVar: boolean = unknownVar;
-                }
+    if (typeof unknownVar === 'boolean') {
+      let newVar: boolean = unknownVar;
+    }
 
-
-## Never type
-
+### Never type
 
 El tipo never es recurso para advertir que una función no va a llegar a ejecutarse por completo porque tiene un comportamiento infinito
-
-
 
     const withoutEnd = () => {
       while (true) {
@@ -278,8 +282,6 @@ El tipo never es recurso para advertir que una función no va a llegar a ejecuta
     console.log(example('Hola despues del fail'));
     console.log(example('Hola despues del fail'));
 
-
-
 Si bien esta bueno en caso de funciones donde este tipo de finalización de programas es clara (Como en un while true o el throw), no siempre detecta las funciones que son never.
 
 Estos casos los infiere de tipo void aunque su ejecución sea infinita y detengan la ejecución del resto del programa.
@@ -292,9 +294,7 @@ Infiere void:
       }
     }
 
-
 Infiere void:
-
 
     const badRecursion = () => {
       if(true){
@@ -303,8 +303,7 @@ Infiere void:
       }
     }
 
-Si bien TS puede inferir algunas funciones infinitas y que detengan la ejecución no lo hará siempre, por lo que tenemos que seguir haciendo testing 
-
+Si bien TS puede inferir algunas funciones infinitas y que detengan la ejecución no lo hará siempre, por lo que tenemos que seguir haciendo testing
 
 ## Functions
 
@@ -326,7 +325,6 @@ createProduct(2, 5); // { id: 2, stock: 5, isNew: undefined }
 createProduct(3); // { id: 3, stock: undefined, isNew: undefined }
 createProduct(4, 0, false); // { id: 4, stock: 0, isNew: false }
 ```
-
 
 **With Logical OR operation**
 
@@ -371,7 +369,6 @@ createProduct(3); // { id: 3, stock: 10, isNew: true }
 createProduct(4, 0, false); // { id: 4, stock: 0, isNew: false } Ok!!
 ```
 
-
 ### Parámetros por defecto
 
 ```
@@ -392,3 +389,251 @@ const createProduct = (
   createProduct(3); // { id: 3, stock: 10, isNew: true }
   createProduct(4, 0, false); // { id: 4, stock: 0, isNew: false } Ok!!
 ```
+
+### Parámetros rest
+
+Parámetros rest
+Los parámetros rest nos permiten enviar la cantidad que queramos de parámetros a una función, casi sin limite.
+
+Funciona de la siguiente manera
+
+```
+// en JS
+function sum(...args){
+  const addition = args.reduce((static, arg) => static + arg, 0)
+  return addition
+}
+```
+
+La función de arriba esta hecha en JS y esta, toma todos los parámetros que hayamos pasado a la función y los convierte en un array. En TS se vería de una manera muy similar
+
+```
+// en TS
+function sum(...args: number[]){
+  const addition = args.reduce((static, arg) => static + arg, 0)
+  return addition
+}
+
+```
+
+Lo único que cambia es el tipado en los argumentos.
+
+Ya por ultimo, el nombre que le damos a los “rest params” es costumizable, puede ser args, params, props, etc.
+Y siempre es recomendable dar estos parámetros al final. Ósea, después de parámetros obligatorios.
+
+```
+function sum(num1, num2, ...args){
+  @code
+}
+```
+
+
+### Sobrecarga de funciones: el problema
+
+La sobrecarga  sucede en aquellas funciones que pueden retornar mas de un tipo de dato, luego al intentar trabajar con el valor retornado no es posible acceder a sus métodos ya que TypeScript no puede inferir el tipo de dato retornado.
+
+La sobrecarga de funciones solo es posible en funciones del tipo function fnName(){}
+
+```
+// Nico => [N,i,c,o] => string => string[]
+// [N,i,c,o] => Nico => string[] => string
+
+
+function parseStr(input: string | string[]): string | string[] {
+  if (Array.isArray(input)) {
+    return input.join(''); // string
+  } else {
+    return input.split(''); // string[]
+  }
+}
+
+const rtaArray = parseStr('Nico');
+// rtaArray.reverse();
+if (Array.isArray(rtaArray)) {
+  rtaArray.reverse();
+}
+console.log('rtaArray', 'Nico =>' ,rtaArray);
+
+const rtaStr = parseStr(['N','i','c','o']);
+// rtaStr.toLowerCase();
+if (typeof rtaStr === 'string') {
+  rtaStr.toLowerCase();
+}
+console.log('rtaStr', "['N','i','c','o'] =>",rtaStr);
+```
+
+### Sobrecarga de funciones: la solución
+
+Para poder sobrecargar una función debemos declarar antes de la función que contiene la lógica implementada, la misma función en cada una de las posibilidades de input y output de la sobrecarga
+
+También podemos refactorizar la función que lleva la lógica e indicar que recibe un parametro de tipo unknow y retorna un valor de tipo unknow
+
+```
+
+// Nico => [N,i,c,o] => string => string[]
+// [N,i,c,o] => Nico => string[] => string
+
+export function parseStr(input: string): string[];
+export function parseStr(input: string[]): string;
+export function parseStr(input: number): boolean;
+
+
+// export function parseStr(input: string | string[]): string | string[] {
+//   if (Array.isArray(input)) {
+//     return input.join(''); // string
+//   } else {
+//     return input.split(''); // string[]
+//   }
+// }
+
+export function parseStr(input: unknown): unknown {
+  if (Array.isArray(input)) {
+    return input.join(''); // string
+  } else if (typeof input === 'string'){
+    return input.split(''); // string[]
+  } else if (typeof input === 'number'){
+    return true; // boolean
+  }
+}
+
+const rtaArray = parseStr('Nico');
+rtaArray.reverse();
+// if (Array.isArray(rtaArray)) {
+//   rtaArray.reverse();
+// }
+console.log('rtaArray', 'Nico =>' ,rtaArray);
+
+const rtaStr = parseStr(['N','i','c','o']);
+rtaStr.toLowerCase();
+// if (typeof rtaStr === 'string') {
+//   rtaStr.toLowerCase();
+// }
+console.log('rtaStr', "['N','i','c','o'] =>",rtaStr);
+
+const rtaBoolean = parseStr(12);
+
+```
+
+#### Buenas prácticas de la sobrecarga de funciones
+
+Si entre las opciones de la sobrecarga una es de tipo unknow,  está debe ir al final de las demás opciones para que funcione correctamente la aserción de tipos 
+
+
+```
+//First Case: uknnown is not at the end
+
+/* wrong */
+declare function fn(x: unknown): unknown;
+declare function fn(x: HTMLDivElement): string;
+declare function fn(x: HTMLElement): number;
+var myElement: HTMLDivElement;
+var x = fn( myElement ); // x: string
+
+
+//Sol: keep the unknown at the end
+declare function fn(x: HTMLDivElement): string;
+declare function fn(x: HTMLElement): number;
+declare function fn(x: unknown): unknown;
+var myElement: HTMLDivElement;
+var x = fn( myElement ); // x: string
+
+```
+
+
+Verificar si es necesario realizar una sobrecarga o si es posible utilizar valores opcionales
+
+```
+//Second case: create unnesesary overloads
+
+interface Example {
+  diff(one: string): number;
+  diff(one: string, two: string): number;
+  diff(one: string,  two: string, three:boolean): number;
+}
+
+// Sol: Create one with option parameters
+interface Example {
+  diff(one: string, two?: string, three?: string): number;
+}
+```
+
+Verificar si es necesario realizar una sobrecarga o si es posible utilizar union types
+
+```
+//Third case: create multiple lines, but at the end just return the same type (Moment in this case)
+interface Moment {
+  utcOffset(): number;
+  utcOffset(b: number): Moment;
+  utcOffset(b: string): Moment;
+}
+
+// solution: just use 1 union type 
+interface Moment {
+  utcOffset(): number;
+  utcOffset(b: number | string): Moment;
+}
+```
+
+
+## interfaces
+
+### interfaces
+
+* Una interfaz, es un “blueprint” ó plano que describe que propiedades debe tener el objeto.
+
+* La interfaces las podemos usar de la misma manera que los types.
+
+* Con los types es posible definir tipos primitivos o directos (declaraciones cortas y puntuales), mientras que las interfaces requieren de todo un cuerpo
+
+* Las interfaces se componen de un gurpo de atributos y valores
+
+* Las interfaces a diferencia de los types se pueden extender
+
+
+```
+interface interfaceName {
+	statements
+}
+
+```
+
+```
+type Sizes = 'S' | 'M' | 'L' | 'XL';
+type UserId = string | number;
+
+interface Product {
+    id: string | number;
+    title: string;
+    createdAt: Date;
+    stock: number;
+    size?: Sizes;
+}
+
+const products: Product[] = [];
+products.push({
+    id: '1',
+    title: 'p1',
+    createdAt: new Date(),
+    stock: 90,
+});
+
+const addProduct = (data: Product) => {
+    products.push(data);
+}
+
+```
+
+
+### Estructuras complejas
+
+Las interfaces pueden ser muy útiles para tener un código mas fácil de mantener y ordenado, teniendo en cuenta el principio de responsabilidad única, podemos crear nuestras entidades de manera que tengamos el modelo (conjunto de atributos de la entidad)  y por otra parte los servicios (métodos que permiten interactuar con la entidad) por separado.
+
+Los modelos pueden requerir a otros modelos como parte de su estructura, para este caso importamos las interfaces que necesitamos integrar como valor anidado de alguno de los atributos del modelo. 
+
+
+
+
+### Extender interfaces
+
+
+
