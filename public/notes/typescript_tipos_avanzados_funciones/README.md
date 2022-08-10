@@ -630,10 +630,105 @@ Las interfaces pueden ser muy útiles para tener un código mas fácil de manten
 
 Los modelos pueden requerir a otros modelos como parte de su estructura, para este caso importamos las interfaces que necesitamos integrar como valor anidado de alguno de los atributos del modelo. 
 
+```
+src
+- app
+- - categories
+- - - categoy.model.ts
+- - orders 
+- - - order.model.ts
+- - products
+- - - product.model.ts
+- - - product.service.ts
+- - users
+- - - user.model.ts
+- - main.ts
 
+```
+Ejemplo
 
+```
+//src/app/orders/order.model.ts
+
+import { Product } from './../products/product.model';
+import { User } from './../users/user.model';
+
+export interface Order {
+  id: string | number;
+  createdAt: Date;
+  products: Product[];
+  user: User;
+}
+```
 
 ### Extender interfaces
 
+Es posible extender interfaces de la misma forma en la que hereda una clase.
+
+Para este caso vamos a crear un modelo base que extiende a los demas modelos los atributos comunes para todos los modelos
+
+En caso que necesitemos redefenir el tipado o agregar un campo de esta interface padre, se heredará a todas las interfaces hijo,  esto tiene como ventaja identificar oportunamente si hay afectación o si las interfaces hijo requieren pasar o quitar nuevos atributos
 
 
+```
+// src/app/base.model.ts
+
+export interface BaseModel {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+```
+
+Ejemplo 
+
+```
+//src/app/products/product.model.ts
+
+import { Category } from './../categories/category.model';
+import { BaseModel } from '../base.model';
+
+export type Sizes = 'S' | 'M' | 'L' | 'XL';
+
+export interface Product extends BaseModel {
+  title: string;
+  stock: number;
+  size?: Sizes;
+  category: Category;
+}
+
+
+```
+
+Efectos de crear el campo updateAt
+
+
+```
+import { addProduct } from "./products/product.service";
+
+addProduct({
+  id: '1',
+  title: 'p1',
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  stock: 90,
+  category: {
+    id: '12',
+    name: 'c1',
+    createdAt: new Date(),
+    updatedAt: new Date ()
+  }
+})
+```
+### Propiedades de solo lectura
+
+Hay situaciones en las que debemos proteger la modificación de algunos atributos de una interfaz como lo puede ser el id y la fecha de creación, para este caso podemos agregar la propiedad readonly al atributo, el cual indicará un error en casa de intentar asignar un valor al atributo
+
+```
+export interface BaseModel {
+  readonly id: string;
+  readonly createdAt: Date;
+  updatedAt: Date;
+}
+```
