@@ -28,7 +28,7 @@ También podemos dejar escuchando la transpilación
 
     npx tsc --watch
 
-Ahora vamos a instalar la libreria ts-node para ahorrarnos el paso de estar transpilando la aplicación. Corre la apicación desde un backend con NodeJS
+Ahora vamos a instalar la libreria ts-node para ahorrarnos el paso de estar transpilando la aplicación. ts-node corre la apicación desde un backend con NodeJS
 
     npm i -D ts-node
 
@@ -585,7 +585,7 @@ interface Moment {
 
 * Con los types es posible definir tipos primitivos o directos (declaraciones cortas y puntuales), mientras que las interfaces requieren de todo un cuerpo
 
-* Las interfaces se componen de un gurpo de atributos y valores
+* Las interfaces se componen de un grupo de atributos y sus tipos
 
 * Las interfaces a diferencia de los types se pueden extender
 
@@ -701,7 +701,7 @@ export interface Product extends BaseModel {
 
 ```
 
-Efectos de crear el campo updateAt
+Al crear el atributo updateAt en el BaseModel, es necesario editar los módulos que se vean afectados.
 
 
 ```
@@ -732,3 +732,221 @@ export interface BaseModel {
   updatedAt: Date;
 }
 ```
+
+
+## Proyecto
+
+Instalamos la librería faker-js como dependencia de desarrollo, esta la ulizaremos para la creación aleatoria de data. 
+
+Ampliamos los atributos de product.model.ts y los inicializamos usando faker-js
+
+
+**src/app/products/product.service.ts**
+
+´´´
+import {faker} from '@faker-js/faker';
+import { addProduct, products } from "./products/product.service";
+
+
+for (let index = 0; index < 50; index++) {
+  addProduct({
+    id: faker.datatype.uuid(),
+    title: faker.commerce.productName(),
+    image: faker.image.imageUrl(),
+    description: faker.commerce.productDescription(),
+    stock: faker.datatype.number({min: 10, max:100}),
+    color: faker.color.human(),
+    size: faker.helpers.arrayElement(['M', 'S', 'XL', 'L']),
+    price: parseInt(faker.commerce.price(),10),
+    category: {
+      id: faker.datatype.uuid(),
+      name: faker.commerce.department(),
+      createdAt: faker.date.recent(),
+      updatedAt: faker.date.recent()
+    },
+    isNew: faker.datatype.boolean(),
+    tags: faker.helpers.arrayElement(),
+    createdAt: faker.date.past(),
+    updatedAt: faker.date.recent()
+  })
+
+}
+
+console.log(products)
+
+´´´
+
+## Utility types
+
+Son utilidades que se encuentran de manera global para facilitar la transformación entre tipos.
+
+Los DTOs (data transfer objects) tiene como finalidad de crear un objeto plano (POJO) con una serie de atributos que puedan ser enviados o recuperados del servidor en una sola invocación, de tal forma que un DTO puede contener información de una interfaz o varias y concentrarla en una única clase simple.
+### Omit y Pick Type
+
+Omit permite extender una interface omitiendo algunos atributos
+
+```
+#src/app/products/product.dto.ts
+
+
+import { Product } from "./product.model"
+
+export interface CreateProductDto extends Omit<Product, 'id' | 'createdAt' | 'updatedAt' | 'category' >{
+  categoryId: string
+}
+
+#src/app/products/product.service.ts
+
+import { Product } from './product.model';
+import { CreateProductDto } from './product.dto';
+import { faker } from '@faker-js/faker';
+
+export const products: Product[] = [];
+
+export const addProduct = (data: CreateProductDto) => {
+  const newData = {
+    ...data,
+    id: faker.datatype.uuid(),
+    createdAt: faker.date.past(),
+    updatedAt: faker.date.recent(),
+    category: {
+      id: data.categoryId,
+      name: faker.commerce.department(),
+      createdAt: faker.date.past(),
+      updatedAt: faker.date.recent(),
+    },
+  };
+
+  products.push(newData);
+};
+
+
+```
+
+
+Pick permite extender una interfacer indicando los campos que requiere.
+
+```
+type example = Pick<Product, 'color' | 'description' >
+
+```
+
+Nota: Una buena práctica es crear un archivo solo para los DTOs de un modelo.
+
+
+### Partial y Required Type
+
+Estos dos tipos de datos nos sirven para declarar que todos los campos de una interfaz son opcionales u obligatorios.
+
+```
+#src/app/products/product.dto.ts
+
+...
+
+export interface UpdateProductDto extends Partial<Product> {}
+
+type example2 = Required<Product>;
+
+
+#src/app/products/product.service.ts
+
+... 
+
+
+export const updateProduct = (id:string, changes:UpdateProductDto): Product => {
+  const index = products.findIndex((item => item.id === id))
+  const prevData = products[index]
+  products[index] = {
+    ...prevData,
+    ...changes
+  }
+  return products[index]
+}
+
+#src/app/main.ts
+
+...
+
+const product =  products[0]
+
+updateProduct(product.id, {
+  color: 'blue',
+  stock: 70
+})
+
+console.log(products[0])
+
+
+```
+
+### Readonly Type
+
+Con esta utility type indicamos que todos los campos de una interface son readonly y no pueden reasignar.
+
+```
+
+#src/app/products/product.dto.ts
+
+... 
+
+export interface FindProductDto extends Readonly<Partial<Product>>{}
+
+#src/app/products/product.service.ts
+
+export const findProducts = (dto:FindProductDto): Product[] => {
+  //dto.color = 'red' // read-only
+  return products
+}
+
+```
+
+### Acceder al tipado por indice
+
+Podemos acceder a los atributos de la interfaz por indice y retornar el tipo de dato 
+
+
+```
+export const updateProduct = (
+  id: Product['id'],
+  changes: UpdateProductDto
+): Product => {
+  const index = products.findIndex((item) => item.id === id);
+  const prevData = products[index];
+  products[index] = {
+    ...prevData,
+    ...changes,
+  };
+  return products[index];
+```
+
+
+### ReadonlyArray
+
+Cuando usamos Readonly, no podemos modificar el arrary de un atributo pero si podemos usar métodos para mutarlo
+
+
+```
+export interface FindProductDto extends Readonly<Partial<Product>>{}
+
+export const findProducts = (dto: FindProductDto): Product[] => {
+  dto.tags = [] // error
+  dto.tags?.push('test') // es permitido
+  dto.tags?.pop() // es permitido
+  dto.tags?.unshift() // es permitido
+
+
+  return products;
+};
+````
+
+Lo podemos mejorar de la forma
+
+```
+export interface FindProductDto extends Readonly<Partial<Omit<Product, 'tags'>>>{
+  readonly tags: ReadonlyArray<string>
+}
+
+```
+
+
+
