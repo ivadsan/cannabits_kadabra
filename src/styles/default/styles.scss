@@ -1,31 +1,32 @@
-
 @import "./variables.scss";
 
-.default{
+.default {
   background-color: whitesmoke;
   width: 100%;
   min-height: 100vh;
   font-family: $roboto;
   color: rgb(36, 41, 46);
-  .container{
+  z-index: 1;
+
+  .container {
     max-width: 980px;
     margin: auto;
     padding: 16px;
-    
-    .group{
+
+    .group {
       background-color: #ccc;
       padding: 16px 8px;
       cursor: pointer;
       transition: 0.3s;
-      -webkit-box-shadow: 0px 3px 5px 0px rgba(101,101,101,1);
-      -moz-box-shadow: 0px 3px 5px 0px rgba(101,101,101,1);
-      box-shadow: 0px 3px 5px 0px rgba(101,101,101,1);
-      
-      &:hover{
+      -webkit-box-shadow: 0px 3px 5px 0px rgba(101, 101, 101, 1);
+      -moz-box-shadow: 0px 3px 5px 0px rgba(101, 101, 101, 1);
+      box-shadow: 0px 3px 5px 0px rgba(101, 101, 101, 1);
+
+      &:hover {
         background-color: #a0a0a0;
       }
     }
-    .list{
+    .list {
       margin-bottom: 16px;
       list-style: none;
       overflow: auto;
@@ -36,13 +37,16 @@
       opacity: 0;
       width: 97%;
       margin: auto;
-      li{
+      li {
         padding: 16px 32px;
-        a:link, a:visited, a:hover, a:active{
+        a:link,
+        a:visited,
+        a:hover,
+        a:active {
           text-decoration: none;
           color: rgb(36, 41, 46);
         }
-        a:hover{
+        a:hover {
           text-decoration: underline;
         }
       }
@@ -56,63 +60,71 @@
         width: 97%;
       }
     }
-    .active{
+    .active {
       padding: 8px;
       max-height: 150px;
       opacity: 1;
-      -webkit-box-shadow: inset 0px 2px 3px 0px rgba(101,101,101,1);
-      -moz-box-shadow: inset 0px 2px 3px 0px rgba(101,101,101,1);
-      box-shadow: inset 0px 2px 3px 0px rgba(101,101,101,1);
+      -webkit-box-shadow: inset 0px 2px 3px 0px rgba(101, 101, 101, 1);
+      -moz-box-shadow: inset 0px 2px 3px 0px rgba(101, 101, 101, 1);
+      box-shadow: inset 0px 2px 3px 0px rgba(101, 101, 101, 1);
     }
 
-    .viewer{
+    .viewer {
       background-color: white;
       padding: 32px 16px;
-      
-      h1,h2,h3,h4,h5,h6{
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
         margin-bottom: 24px;
       }
 
-      >p:first-child{
+      > p:first-child {
         display: none;
       }
 
-      p{
+      p {
         margin-bottom: 24px;
       }
-      ul{
+      ul,
+      ol {
         margin-left: 36px;
       }
-      ul,li{
-        margin-bottom: 24px;       
+      ul,
+      li {
+        margin-bottom: 24px;
       }
-      img{
+
+      img {
         display: block;
         margin: auto;
         max-width: 100%;
       }
-      code{
+      code {
         background: #272822;
         display: block;
         color: white;
         padding: 16px;
         margin: 16px 0px;
         overflow: hidden;
-        overflow-x: scroll;        
+        overflow-x: scroll;
       }
-      strong{
+      strong {
         font-weight: 700;
         color: darkblue;
       }
     }
-    .empty{
+    .empty {
       width: 100%;
       height: 100vh;
       display: flex;
       justify-content: cn;
       justify-content: center;
       align-items: center;
-      &__message{
+      &__message {
         text-align: center;
         font-size: 24px;
         background-color: #fff;
@@ -123,7 +135,7 @@
   }
 }
 
-strong{
+strong {
   font-weight: 700;
 }
 
@@ -134,17 +146,17 @@ strong{
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 1px grey; 
+  box-shadow: inset 0 0 1px grey;
   border-radius: 10px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #ccc; 
+  background: #ccc;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #999; 
+  background: #999;
 }
