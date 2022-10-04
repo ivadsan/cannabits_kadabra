@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 
 export default function TableContents({ topics }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   function handleClick() {
     setIsOpen(!isOpen);
