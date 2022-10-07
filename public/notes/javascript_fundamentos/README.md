@@ -52,10 +52,6 @@ Lo que no sea un tipo de dato primitivo es un objeto
 
 ### Funciones declaradas VS Funciones expresadas en Javascript
 
-http://www.etnassoft.com/2011/09/02/funciones-declaradas-vs-funciones-expresadas-en-javascript/
-
-Introducción
-Durante la última reunión del Grupo MadridJS, ha surgido un tema muy interesante en el que no había reparado anteriormente: qué diferencias existen entre crear una función mediante la notación tradicional (declarativas) o a través de una expresión. Un ejemplo de cada una de estas formas sería:
 
 ```
 // FunctionDeclaration
@@ -70,7 +66,7 @@ Durante la última reunión del Grupo MadridJS, ha surgido un tema muy interesan
 
 ```
 
-Otra forma de función expresada menos obvia que las anteriores es el caso de las funciones autoejecutables:
+Otra forma de función expresada son las funciones autoejecutables:
 
 ```
 
@@ -78,18 +74,18 @@ Otra forma de función expresada menos obvia que las anteriores es el caso de la
 
 ```
 
-Esto es así porque el primer par de paréntesis crean de nuevo una expresión que luego se encarga de ejecutar el segundo.
+E l primer par de paréntesis crea una expresión que luego se encarga de ejecutar el segundo par de paréntesis.
 
-A modo de resumen, tendríamos el siguiente cuadro:
 
 ```
 function foo(){} // declaration, since it's part of a Program
+
 var bar = function foo(){}; // expression, since it's part of an AssignmentExpression
 
 new function bar(){}; // expression, since it's part of a NewExpression
-
+  
 (function(){
-function bar(){} // declaration, since it's part of a FunctionBody
+  function bar(){} // declaration, since it's part of a FunctionBody
 })();
 
 ```
@@ -102,44 +98,61 @@ La diferencia principal radica en que mientras la primera es una declaración qu
 
 Dicho esto, tenemos que las funciones declaradas son evaluadas antes que cualquier otra expresión. Incluso si la declaración se encuentra al final de todo un código fuente, ésta tendrá preferencia sobre aquellas expresiones que la precedan. El siguiente ejemplo muestra como el alert devuelve el resultado de una función declarada aunque ésta se defina más adelante:
 
+```
 alert( add( 3, 5 ) ); // 8
 
 function add( x, y ){
-return x + y;
+  return x + y;
 }
-NOTA: Por alguna razón, el código anterior no funciona si se introduce directamente en la consola de Firebug; al menos en mi versión da error. No es la primera vez que me encuentro con que la consola no acepta un código válido así que para estos casos, me paso temporalmente a Chrome o al servicio online JSFiddle.
+
+```
+
 
 Sin embargo, si tratamos con funciones expresadas, éstas solo son evaluadas cuando el flujo natural de ejecución las alcanza. El siguiente código mostrará error ya que en el momento de llamar a la función, el intérprete aún no ha llegado a ella para evaluarla:
 
+
+```
 alert( add( 3, 5 ) ); // ErrorType: add is not defined
 
 var add = function( x, y ){
-return x + y;
+  return x + y;
 }
+
+```
 No funcionaría tampoco nombrar a la función con el mismo nombre de su expresión; el resultado continúa siendo el mismo ya que no cambiamos con ello su tipología:
 
+```
 alert( add( 3, 5 ) ); // ErrorType: add is not defined
 
 var add = function add( x, y ){
-return x + y;
+  return x + y;
 }
-Declaraciones en diferentes entornos
+```
+
+**Declaraciones en diferentes entornos**
+
 A raíz de lo anterior, un factor a tener en cuenta es que, en determinados entornos, las funciones declarativas no se comportan de un modo estándar. Por ejemplo, si necesitamos crear una función en base a un condicional, nunca debemos utilizar las funciones declarativas. Veámos el siguiente código:
 
+```
 if( myVar == true){
-function foo(){ return 'TRUE'; }
+  function foo(){ return 'TRUE'; }
 }else{
-function foo(){ return 'FALSE'; }
+  function foo(){ return 'FALSE'; }
 }
+```
+
 Como la función es creada antes que se evalúe el código, en algunos navegadores podemos encontrarnos con que nos saltamos los condicionales y se asigna a la función foo siempre el valor FALSE, que correspondería con la última llamada que se hace.
 
 Para evitar esta incosistencia, debemos recurrir siempre a las funciones expresadas las cuales garantizan que su evaluación sigue el flujo lógico del programa:
 
+```
 if( myVar == true){
-var foo = function(){ return 'TRUE'; }
+  var foo = function(){ return 'TRUE'; }
 }else{
-var foo = function(){ return 'FALSE'; }
+  var foo = function(){ return 'FALSE'; }
 }
+```
+
 En este caso, el código anterior funcionaría como se espera independientemente del entorno en que se ejecute.
 
 Conclusión
@@ -153,7 +166,7 @@ Por otro lado, el hecho de que las funciones declarativas se evalúen antes que 
 
 **Scope:** Es el alcance que va a tener una variable dentro del código. En otras palabras, el Scope se encargará de decidir a que bloques de código va a acceder una variable.
 
-**Global:** Scope No están dentro de funciones o bloques, por lo tanto se puede acceder a ellas de manera global.
+**Global Scope:**  No están dentro de funciones o bloques, por lo tanto se puede acceder a ellas de manera global.
 
 - Con var podemos re-declarar una variable pero es una mala práctica.
 - Con let y const no podemos, aparecerá un error.
@@ -213,60 +226,77 @@ Hace poco dí una charla de inmutabilidad que les puede servir para conocer un p
 
 - El ambito lexico: se refiere a que una funcion puede acceder a una funcion o variable fuera de ella. Cada nivel interno puede acceder a sus niveles externos hasta poder alcanzarlas.
 
+
+```
   //Retirar la declaracion de scope desde el nivel mas interno y observar el ambito léxico
 
   const scope = "I'm global";
+  
   const func1 = () => {
-  const scope = "I'm local 1";
-  const func2 = () => {
-  const scope = "I'm local 2";
-  const func3 = () => {
-  const scope = "I'm local 3";
-  console.log(scope);
-  }
-  func3();
-  }
-  func2();
+    const scope = "I'm local 1";
+    const func2 = () => {
+      const scope = "I'm local 2";
+      const func3 = () => {
+        const scope = "I'm local 3";
+        console.log(scope);
+      }
+      func3();
+    }
+    func2();
   }
   func1();
+```
+
+
 
 ### function scope
 
+```
 // con este ejemplo estamos accediendo a una variable local dentro de una funcion
 
 const fruits = () => {
-var fruit = 'Apple';
-console.log(fruit);
+  var fruit = 'Apple';
+  console.log(fruit);
 };
 
 fruits();
 
 //desde el entorno global no podemos acceder a una variable que fue definida en el entorno local de una funcion.
-console.log(fruit);
+
+console.log(fruit); //Uncaught ReferenceError: fruit is not defined
 
 const anotherFuncion = () => {
-var x = 1;
-var x = 2;
-let y = 1;
-// las variables declaradas con let o con const, no pueden ser declaradas nuevamente.
-//dentro del mismo ambito, como es el caso de la variabl y.
-//let y = 2;
-console.log(x);
-console.log(y);
+  var x = 1;
+  var x = 2;
+  let y = 1;
+  
+  // las variables declaradas con let o con const, no pueden ser declaradas nuevamente.
+  //dentro del mismo ambito, como es el caso de la variabl y.
+
+  //let y = 2; // Uncaught SyntaxError: Identifier 'y' has already been declared
+
+  console.log(x);
+  console.log(y);
 }
 
 anotherFuncion();
 
+```
+
 ### block scope
 
-    const someFunction = () => {
 
-        //function scope
+```
 
-        if(true){
-    	//Block scope
-        }
-    }
+const someFunction = () => {
+  //function scope
+
+  if(true){
+    //Block scope
+  }
+}
+
+```    
 
 ## Closures
 
@@ -293,8 +323,8 @@ Una clausura o closure es una función que guarda referencias del estado adyacen
     const moneyBox = () => {
         let saveCoins = 0
         const countCoins = (coins) => {
-    	saveCoins += coins
-    	console.log(`$${saveCoins}`)
+    	    saveCoins += coins
+    	    console.log(`$${saveCoins}`)
         }
         return countCoins
     }
@@ -311,8 +341,8 @@ El ámbito léxico es cuando las funciones se ejecutan utilizando la cadena del 
         let count = i
 
         const displayIncrement = () => {
-    	count++
-    	console.log(count)
+    	    count++
+    	    console.log(count)
         }
          return displayIncrement
     }
@@ -340,7 +370,7 @@ Variables privadas con Closures: JS por su naturaleza no fomenta el uso de datos
         return {
           getName: () => saveName,
           setName: (name) => {
-    	saveName = name;
+    	      saveName = name;
           },
         };
       };
@@ -377,3 +407,15 @@ función: guarda un registro con la función entera(por eso la podemos llamar an
     function saludar(){
         console.log('Hello World!!!')
     }
+
+
+Las funciones se declaran antes que las variables en el hoisting
+
+
+## Coerción
+
+Coerción es la forma en la que podemos cambiar un tipo de valor a otro, existen dos tipos de coerción:
+
+**Coerción implícita** = es cuando el lenguaje nos ayuda a cambiar el tipo de valor.
+
+**Coerción explicita** = es cuando obligamos a que cambie el tipo de valor.
