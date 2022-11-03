@@ -1,5 +1,5 @@
 [//]: # @param group $$ JavaScript
-[//]: # @param title $$ Fundamentos de JavaScript
+[//]: # @param title $$ 1- Fundamentos de JavaScript
 [//]: # @param author $$ Iván D. Sánchez
 
 # Fundamentos de JavaScript
@@ -550,3 +550,124 @@ for (const property in object) {
 }
 
 ```
+
+
+## Loops: While
+
+```
+var estudiantes = [ 'Maria', 'Sergio', 'Rosa', 'Daniel' ]; 
+
+while (estudiantes.length > 0) {   
+    var estudiante = estudiantes.shift();  
+    saludarEstudiante(estudiante);
+}
+```
+## Objects
+
+### Objects: Función constructora
+
+A constructor is a special function that creates and initializes an object instance of a class. In JavaScript, a constructor gets called when an object is created using the new keyword.
+
+The purpose of a constructor is to create a new object and set values for any existing object properties.
+
+
+https://rollbar.com/blog/javascript-constructors/#:~:text=A%20constructor%20is%20a%20special,for%20any%20existing%20object%20properties.
+
+
+```
+
+function Car(price, model){
+    this.price = price
+    this.model = model
+}
+
+const car1 = new Car(1000, 1999)
+const car2 = new Car(2000, 1995)
+
+
+console.log('car1', car1)
+console.log('car2', car2)
+
+```
+
+## Métodos de recorridos de Arrays
+ 
+
+ ### map()
+
+Recorre un array de y retorna un nuevo array
+
+```
+const fruits = [
+    {name: "apple", price: 1000},
+    {name: "orange", price: 500},
+    {name: "blackberry", price: 100},
+    {name: "banana", price: 400},
+]
+
+const newFruits =  fruits.map((fruit)=> fruit.name)  
+console.log(newFruits) // [ 'apple', 'orange', 'blackberry', 'banana' ]
+
+```
+
+### filter()
+
+Retorna en un nuevo array todos los objetos que cumplan una condición
+
+
+```
+const fruits = [
+    {name: "apple", price: 1000},
+    {name: "orange", price: 500},
+    {name: "blackberry", price: 100},
+    {name: "banana", price: 400},
+]
+
+const cheapFruits =  fruits.filter((fruit)=> fruit.price < 500)  
+
+console.log(cheapFruits) // [{ name: 'blackberry', price: 100 }, { name: 'banana', price: 400 } ]
+
+```
+
+### find()
+
+Retorna el primer objeto del array que cumpla una condición
+
+
+```
+const fruits = [
+    {name: "apple", price: 1000},
+    {name: "orange", price: 500},
+    {name: "blackberry", price: 100},
+    {name: "banana", price: 400},
+]
+
+const firstCheapFruits =  fruits.find((fruit)=> fruit.price < 500)  
+console.log(firstCheapFruits) // { name: 'blackberry', price: 100 }
+```
+
+### forEach
+
+A diferencia de map no retorna un nuevo array al recorrer el array, sirve para operar cada elemento del array.
+
+```
+const testFruits =  fruits.forEach((fruit)=> fruit.name)  
+console.log(testFruits) // undefined
+
+```
+
+### some() : 
+
+Comprueba si al menos un elemento del array cumple con la condición que le damos y retorna un booleano
+
+
+const fruits = [
+    {name: "apple", price: 1000},
+    {name: "orange", price: 500},
+    {name: "blackberry", price: 100},
+    {name: "banana", price: 400},
+]
+
+const cheapFruits =  fruits.some((fruit)=> fruit.price < 500)  
+
+console.log(cheapFruits) // true
