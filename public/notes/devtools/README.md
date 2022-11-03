@@ -73,7 +73,15 @@ Desde acá podemos
 - Podemos agregar en los settings ver request largo para ver toda la url del request
 -  Cmd + shift + p -> Show network request blocking podemos bloquear archivos previamente al request para debuggear
 
+## Performance
 
+- Desde aca podemos parametrizar el tipo de conexión a la red, comportamiento del CPU, deshabilitar JS, 
+- Grabar comportamiento de la pagina para detectar areas de oportunidad
+
+##  Audits
+
+- Desde lighthouse podemos hacer pruebas de buenas prácticas, SEO, performances, PWA, simulando un dipositivo movil o de escritorio
+- El informe que resulta viene con areas de oportunidad de mejorar, para optimizar la experiencia de la aplicación.
 
 
 ## Test
