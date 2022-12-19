@@ -743,7 +743,7 @@ Ampliamos los atributos de product.model.ts y los inicializamos usando faker-js
 
 **src/app/products/product.service.ts**
 
-´´´
+```
 import {faker} from '@faker-js/faker';
 import { addProduct, products } from "./products/product.service";
 
@@ -773,8 +773,7 @@ for (let index = 0; index < 50; index++) {
 }
 
 console.log(products)
-
-´´´
+```
 
 ## Utility types
 
