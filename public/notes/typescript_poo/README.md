@@ -27,7 +27,7 @@ class MyDate{
 }
 ````
 
-Ò
+ó
 
 ```
 class MyDate {
@@ -52,12 +52,11 @@ Las instancias son del tipo de la clase con la que se crean
 
 ### Métodos
 
-Los métodos definen el comportamiendo de los objetos
+* Los métodos definen el comportamiendo de los objetos
 
-Los métodos en TS se tranta igual que las funciones
+* Los métodos en TS se comportan igual que las funciones
 
-Podemos firmar el tipo que retorna un método, también usar literal types.
-
+* Podemos firmar el tipo que retorna un método, también usar literal types.
 
 ```
 export class MyDate {
@@ -99,12 +98,11 @@ console.log(myDate.printFormat())
 
 ### Acceso público
 
-El acceso público quiere decir que podemos acceder a las propiedades y métodos del objeto desde el exterior.
+* El acceso público quiere decir que podemos acceder a las propiedades y métodos del objeto desde el exterior.
 
-Por defecto los atributos y métodos son de tipo public, aunque se puede agregar la palabra public lo que haria mas verbose el código, podemos trabajar de manera implicita el modo público sin agregar nada mas al código
+* Por defecto los atributos y métodos son de tipo public, aunque se puede  hacer de manera explicita agregando la palabra public, podemos trabajar de manera implicita el modo público sin agregar nada mas al código.
 
-
-En algunas ocasiones es necesario controlar el acceso a los atributos y no permitir ser modificados fuera de la clase, para ello podriamos agregar readonly a los atributos, sin embargo aunque no puedan ser modificados desde afuera de la clase, tampoco podrían ser modificados dentro de ella.
+* En algunas ocasiones es necesario controlar el acceso a los atributos y no permitir ser modificados fuera de la clase, para ello podriamos agregar readonly a los atributos, sin embargo aunque no puedan ser modificados desde afuera de la clase, tampoco podrían ser modificados dentro de la clase.
 
 ```
 export class MyDate {
@@ -135,14 +133,17 @@ export class MyDate {
   }
 }
 
+const newDate = new MyDate(1990,7,29)
+newDate.year = 123 // TS error. readonly attribute
+
 ```
 
 
 ### Acceso privado
 
-Con la palabra reservada private podemos controlar el acceso a los atributos y método desde fuera de la clase.
+* Con la palabra reservada private podemos controlar el acceso a los atributos y métodos desde fuera de la clase.
 
-Los atributos privados los podemos exponer por medio de un método público que los retorne
+* Los atributos privados los podemos exponer por medio de un método público que los retorne
 
 
 ```
@@ -366,9 +367,9 @@ console.log(newDate.isLeapYear)
 ### setters
 
 
-Los setters son funciones de tipo void, no retorna nada y requieren que se les pase un parámetro
-
-Es util los setters cuando tenemos reglas de modificación sobre los valores de los atributos de la clase
+* Los setters son funciones de tipo void, no retornan nada. 
+* Es requerido uno o más parámetros
+* Es util el uso de un setter cuando tenemos reglas de modificación sobre los valores de los atributos de la clase
 
 ```
 
@@ -455,11 +456,11 @@ console.log('With error handling')
 
 ### Herencia (inheritance)
 
-La clase que hereda lo hace a través de extends
+* La clase hereda a través de la palabra reservada ***extends***
 
-Podemos agregar métodos nuevos en la clase hija de la forma tradicional pero si agregamos un atributo nuevo tenemos que recibir los atributos padre por medio del  constructor de la clase hija y los pasamos por super.
+* Podemos agregar métodos nuevos en la clase hija de la forma tradicional pero si agregamos un atributo nuevo tenemos que recibir los atributos padre por medio del constructor de la clase hija y los pasamos por super(constructor del padre desde la clase hija).
 
-Los atributos nuevos, no requieren ser pasados por el constructor de la clase padre por medio de super.
+* Los atributos nuevos en la clase hija, no requieren ser pasados por el constructor de la clase padre por medio de super.
 
 ```
 export class Animal {
@@ -622,12 +623,11 @@ console.log(MyMath.max(...numbers))
 
 ### Interfaces
 
-Las interfaces en clases funcionan como contratos, nos permiten tipar tanto los atributos como los métodos.
+* Las interfaces en clases funcionan como contratos, nos permiten tipar tanto los atributos como los métodos.
 
-Aquí no podemos utilizar encapsulamiento, por defecto todos los atributos y métodos son públicos.
+* Aquí no podemos utilizar encapsulamiento, por defecto todos los atributos y métodos son públicos.
 
-Para utilizar una interface en una clase usamos **implements**
-Este contrato es tanto como para los parámetros como para los métodos.
+* Para utilizar una interface en una clase usamos la palabra reservada **implements**
 
 ```
 interface Driver {
@@ -730,9 +730,9 @@ max.woof(2)
 
 ### Singleton: constructor privado
 
-Singleton nos previene crear múltiples instancias de una clase.
+* Singleton previene crear múltiples instancias de una clase.
 
-Esto es muy usado en Arquitectura de Software, pues nos ayuda a ahorrar uso de memoria.
+* Es muy usado en Arquitectura de Software, pues ayuda a ahorrar uso de memoria.
 
 ```
 class MyService {
@@ -765,3 +765,537 @@ console.log(myService3.getName()); // service 1
 
 ## Asincronismo y consumo de APIs
 ### Promesas
+
+Instalamos axios ya que no tenemos fetch en NodeJS
+
+
+```
+npm install axios
+```
+
+Ejercicio retornando una promesa
+
+
+```
+(async () => {
+  function delay(time: number) {
+    const promise = new Promise((resolve) => {
+      setTimeout(() => resolve(true), time);
+    });
+    return promise; // Promise<unknow>
+  }
+
+  const rta = await delay(3000) //unknow
+  console.log(rta)
+
+})();
+
+
+```
+
+* En el anterior ejercicio la función delay retorna de manera implicita una **Promise<unknow>**, que corresponde a una promesa pero se desconoce el resultado de esta, luego cuando llamamos la función esta retorna la promesa resuelta por eso ahora es de tipo **unknow**
+
+* Para indicarle el tipo de dato que retorna la respuesta de la promesa usamos un genérico
+
+```
+(async () => {
+  function delay(time: number) {
+    const promise = new Promise<boolean>((resolve) => { // => generic in this line
+      setTimeout(() => resolve(true), time);
+    });
+    return promise; 
+  }
+
+  const rta = await delay(3000)
+  console.log(rta)
+
+})();
+
+```
+
+### Tipando respuestas HTTP
+
+
+_Función Original_
+
+```
+import axios from 'axios';
+
+(async () => {
+  async function getProducts() {
+    const rta = await axios.get('https://api.escuelajs.co/api/v1/products');
+    return rta.data;
+  }
+  const rta = await getProducts();
+  console.log(rta);
+})();
+
+```
+
+
+Usando Axios la funcion retorna Promise<any> lo que puede generar problemas al no tener control del tipo. En este caso vamos a esperar un array de Products, para ello vamos a construir el modelo.
+
+Nota: Para construir rápidamente una interface a modo de hack, es pegar el mock de un objeto en la siguiente herramienta  [QuickType](https://quicktype.io/), seleccionamos typescript como lenguaje y decimos que salida serán interfaces
+
+
+Primer forma de tipar nuestra funcion que retorna la respuesta de request, para este caso firmamos el retorno de la función
+
+```
+import axios from 'axios';
+import { Product } from './models/Product.model';
+
+(async () => {
+  async function getProducts(): Promise<Product[]> {
+    const rta = await axios.get('https://api.escuelajs.co/api/v1/products');
+    return rta.data;
+  }
+  const rta = await getProducts();
+  console.log(rta);
+})();
+
+```
+
+La desventaja de esta opción es que solo lo estamos tipando hacia afuera, pero no maneja un correcto control del tipado al interior de la función.
+
+
+Otra opción hacer lo siguiente, es cuando la librería lo soporta:
+
+```
+import axios from 'axios';
+import { Product } from './models/Product.model';
+
+(async () => {
+  async function getProducts(){
+    const {data} = await axios.get<Product[]>('https://api.escuelajs.co/api/v1/products');
+    return data;
+  }
+  const rta = await getProducts();
+  rta.map(item => console.log(`${item.id} - ${item.title}`))
+})();
+  
+```
+
+Con esta opción podemos tener acceso a los métodos según el tipo desde adentro de la función. En caso que la librería no soporte la sintaxis lo que podemos hacer es castear el tipo en la respuesta del request desde una instancia.
+
+```
+import axios from 'axios';
+import { Product } from './models/Product.model';
+
+(async () => {
+  async function getProducts(){
+    const rta = await axios.get('https://api.escuelajs.co/api/v1/products');
+    const data = rta.data as Product[]
+    return data;
+  }
+  const rta = await getProducts();
+  rta.map(item => console.log(`${item.id} - ${item.title}`))
+})();
+
+```
+Aplicar esta opción cuando la librería no soporte pasarle un genérico
+
+
+## Aplicando interfaces para nuestros servicios
+
+```
+
+import { CreateProductDto, UpdateProductDto } from '../dtos/product.dto';
+import { Product } from './product.model';
+
+export interface ProductService {
+  create(data: CreateProductDto): Product | Promise<Product>;
+  getAll(): Product[] | Promise<Product[]>;
+  update(
+    id: Product['id'],
+    changes: UpdateProductDto
+  ): Product | Promise<Product>;
+  findOne(
+    id: Product['id']
+  ): Product | undefined | Promise<Product | undefined>;
+}
+
+```
+
+Nuestros servicios pueden estar modelados para implementar en un método sincrono o consumiendo una Api Rest de manera sincrona por lo que cada request retorna una promesa
+
+Se recomienda en la implementación de la interface permitir inferir a la clase el retorno de cada método asincrono
+
+```
+
+import axios from 'axios';
+import { CreateProductDto, UpdateProductDto } from '../dtos/product.dto';
+import { ProductService } from '../models/product-service.model';
+import { Product } from '../models/product.model';
+
+export class ProductHttpService implements ProductService {
+  private url = 'https://api.escuelajs.co/api/v1/products';
+
+  async create(dto: CreateProductDto) {
+    const {data} = await axios.post(this.url, dto)
+    return data
+  }
+  async getAll() {
+    const {data} = await axios.get<Product[]>(this.url)
+    return data
+  }
+  async update(id: Product['id'], changes: UpdateProductDto) {
+    const {data} = await axios.post(`${this.url}/${id}`, changes)
+    return data
+  }
+  async findOne(id: Product['id']) {
+    const {data} = await axios.get(`${this.url}/${id}`)
+    return data
+  }
+}
+
+
+```
+
+## Genéricos
+
+### Genérics
+
+Los genérios es una utilidad utilidad que solo está disponible en ambiente de desarrollo, en Javascript no existe.
+
+Los genéricos actuan como plantillas donde podemos indicar en varios puntos de nuestro código el tipo de tipado que corresponde evitando duplicar código y hacer overload. También permite inferir el flujo y salida  segun el tipo del valor de entrada.
+
+```
+import { Dog } from './09-protected';
+
+function getValue<T>(value: T) {
+  return value;
+}
+
+console.log(typeof getValue<number>(12).toString());
+console.log(getValue<string>('ivan').toLocaleUpperCase());
+
+const max = new Dog('Max', 'Ivan');
+console.log(getValue<Dog>(max).greeting());
+getValue<Dog>(max).woof(3)
+getValue<Dog>(max).move();
+
+function display<T>(data: T[]) {
+  data.map((item, index) => console.log(++index, item));
+  return data;
+}
+
+display<string>(['ivan', 'nana', 'matias', 'adrian']);
+display<number>([1, 2, 3]);
+display<Dog>([max]);
+
+function getValue2<T, K extends keyof T>(obj:T, key:K){
+  console.log(obj, obj[key])
+}
+
+getValue2(max, 'name')
+
+```
+### Generics en clases
+
+Del siguiente código se infiere que service.data es de tipo string[]
+
+```
+export class BaseHttpService<TypeClass> {
+  data: TypeClass[] = []
+}
+
+const service = new BaseHttpService<string>()
+service.data
+```
+
+
+```
+import axios from 'axios';
+import { Product } from '../models/product.model';
+import { Category } from '../models/category.model';
+
+export class BaseHttpService<TypeClass> {
+  data: TypeClass[] = [];
+  constructor(private url: string) {}
+
+  async getAll() {
+    const { data } = await axios.get<TypeClass[]>(this.url);
+    return data;
+  }
+}
+
+(async () => {
+  const url1 = 'https://api.escuelajs.co/api/v1/products';
+  const productService = new BaseHttpService<Product>(url1);
+  const products = await productService.getAll();
+  console.log('products', products.length);
+
+  const url2 = 'https://api.escuelajs.co/api/v1/categories';
+  const categoryService = new BaseHttpService<Category>(url2);
+  const categories = await categoryService.getAll();
+  console.log('categories', categories.length);
+})();
+
+```
+
+
+### Generics en métodos
+
+Podemos pasarle a un método un tipo diferente al de la clase, se recomienda cambiar el nombre de los generics para no confundirse.
+
+```
+import axios from 'axios';
+import { Product } from '../models/product.model';
+import { Category } from '../models/category.model';
+import { UpdateProductDto } from '../dtos/product.dto';
+
+export class BaseHttpService<TypeClass> {
+  data: TypeClass[] = [];
+  constructor(protected url: string) {}
+
+  async getAll() {
+    const { data } = await axios.get<TypeClass[]>(this.url);
+    return data;
+  }
+
+  async update<ID, DTO>(id: ID, changes: DTO) {
+    const { data } = await axios.put(`${this.url}/${id}`, changes);
+    return data;
+  }
+}
+
+(async () => {
+  const url1 = 'https://api.escuelajs.co/api/v1/products';
+  const productService = new BaseHttpService<Product>(url1);
+  const products = await productService.getAll();
+  console.log('products', products.length);
+  productService.update<Product['id'], UpdateProductDto>(1, {
+    title: 'test',
+    description: 'test description',
+  });
+
+  const url2 = 'https://api.escuelajs.co/api/v1/categories';
+  const categoryService = new BaseHttpService<Category>(url2);
+  const categories = await categoryService.getAll();
+  console.log('categories', categories.length);
+})();
+
+```
+
+
+```
+import { BaseHttpService } from './base-http.service';
+import { Product } from '../models/product.model';
+import { UpdateProductDto } from '../dtos/product.dto';
+
+export class ProductCRUDService {
+  private url = 'https://api.escuelajs.co/api/v1/products';
+  private http = new BaseHttpService<Product>(this.url);
+
+  async update(id: Product['id'], dto: UpdateProductDto) {
+    return this.http.update(id, dto);
+  }
+}
+
+```
+
+Ahora podemos tambien extender de una clase para agregar mas métodos de la instancia base
+
+```
+import { Product } from "../models/product.model";
+import { BaseHttpService } from "./base-http.service";
+
+export class ProductService extends BaseHttpService<Product>{
+  otherFunction(){
+    console.log(this.url)
+  }
+}
+
+```
+
+```
+import { Product } from '../models/product.model';
+import { UpdateProductDto } from '../dtos/product.dto';
+import { ProductService } from './product-http2.service';
+
+export class ProductCRUDService {
+  private url = 'https://api.escuelajs.co/api/v1/products';
+  private http = new ProductService(this.url);
+
+  async update(id: Product['id'], dto: UpdateProductDto) {
+    this.http.otherFunction()
+    return this.http.update(id, dto);
+  }
+}
+
+```
+
+El tipo de la clase ya lo estamos pasando por ProductService asi que cuando se instancia ya no debemos pasarle el generic como se hacía con BaseHttpService
+
+### Decoradores
+
+Como ejercicio para trabajar con decoradores vamos a instalar class-validator, que es una librería que los implementa
+
+```
+
+  npm i class-validator --save
+
+```
+
+
+Los decoradores agregan validaciones o funcionalidades extra
+
+Los decoradores son como las anotaciones en Java
+
+Para habilitar el uso de decoradores debemos configurar el tsconfig para ellos descomentamos la línea experimentalDecorators, aun no es una funcionalidad nativa de JS
+
+Los decoradores no se ejecutan mientras desarrollamos sino en runtime, para ello es util que los agreguemos en una structura de try/catch como lo es el caso de class-validator
+
+NOTA: en el caso de un tipo enum opcional debemos indicar en el DTO a través de union types que este atributo puede ser del tipo enum o undefined para cuando no se instancie el atributo.
+
+NOTA: class-validator asi como tiene decoradores tambien tiene funciones y puede que con el mismo nombre, para identificar a las primeras es por que inician con mayúscula
+
+
+**Modelo**
+
+```
+export enum AccessType {
+  PRIVATE = 'private',
+  PUBLIC = 'public',
+}
+
+export interface Category {
+  id: number;
+  name: string;
+  image: string;
+  access?: AccessType;
+}
+
+```
+
+
+**DTO**
+
+```
+import { AccessType, Category } from '../models/category.model';
+import {
+  IsNotEmpty,
+  Length,
+  IsUrl,
+  IsEnum,
+  validateOrReject,
+  IsOptional,
+} from 'class-validator';
+
+export interface ICreateCategoryDto extends Omit<Category, 'id'> {}
+
+export class CreateCategoryDto implements ICreateCategoryDto {
+  @IsNotEmpty()
+  @Length(4, 100)
+  name!: string;
+
+  @IsNotEmpty()
+  @IsUrl()
+  image!: string;
+
+  @IsOptional()
+  @IsEnum(AccessType)
+  access?: AccessType | undefined;
+}
+
+(async () => {
+  try {
+    const dto = new CreateCategoryDto();
+    dto.name = 'abcd';
+    dto.image = 'https://api.escuelajs.co/api/v1/products';
+    await validateOrReject(dto)
+  } catch (error) {
+    console.log(error)
+  }
+
+  validateOrReject;
+})();
+
+```
+
+### Examen
+
+Estas son tus respuestas
+Puedes revisar y cambiar las respuestas. Al terminar presiona “Calificar respuestas” para enviar las preguntas y conocer tu puntuación.
+1.
+"Por defecto en TypeScript las propiedades de una clase deben estar inicializadas", esto es:
+Verdadero
+CAMBIAR
+2.
+¿Cuál de las siguientes definiciones es la más adecuada para el tipo de acceso public en TypeScript?
+
+Se puede acceder a las propiedades y métodos desde cualquier parte sin restricciones.
+CAMBIAR
+3.
+¿Cuál de las siguientes definiciones es la más adecuada para el tipo de acceso private en TypeScript?
+
+Solo se puede acceder a propiedades y métodos desde la misma clase.
+CAMBIAR
+4.
+¿Cuál de las siguientes formas es la manera de definir un getter dentro de una clase?
+get day() {
+return this._day;
+}
+
+CAMBIAR
+5.
+¿Cuál de las siguientes formas es la manera de definir un setter dentro de una clase?
+set month(newMonth: number) {
+this._month = newMonth;
+}
+
+CAMBIAR
+6.
+¿Cuál de las siguientes formas es la manera correcta de heredar de una clase?
+class Dog extends Animal{}
+
+CAMBIAR
+7.
+¿Cuál de las siguientes definiciones es la más adecuada para el tipo de acceso protected en TypeScript?
+
+Solo se puede acceder a propiedades y métodos desde la misma clase y las que lo hereden.
+CAMBIAR
+8.
+"Cuando tengo propiedades o métodos estáticos debo crear una instancia de la clase", esto es:
+Falso
+CAMBIAR
+9.
+¿Cuál de las siguientes formas es la manera correcta de implementar una interface en una class?
+PostgresDriver implements Driver {}
+CAMBIAR
+10.
+"Puedo crear una instancia de una class abstracta", esto es:
+Falso
+CAMBIAR
+11.
+"El patrón singleton es un patrón de diseño de software que restringe la creación de instancias de una clase a una instancia única", esto es:
+Verdadero
+CAMBIAR
+12.
+¿Cuál es la forma correcta de tipar el retorno de una Promise en boolean?
+
+Promise<boolean>
+
+CAMBIAR
+13.
+¿Cuál es la forma correcta de tipar el retorno de un get de Axios con un array de el tipo Product?
+axios.get<Product[]>
+CAMBIAR
+14.
+¿Cuál es la forma correcta de tipar el retorno de método para que retorne un Product como promesa o como valor directo?
+Promise<Product> | Product
+CAMBIAR
+15.
+¿Cuál es la forma correcta de definir un Genérico en una función?
+function get<T>(value: T) {
+return value;
+}
+
+CAMBIAR
+16.
+¿Cuál es la forma correcta de definir un Genérico en una clase?
+class BaseHttpService<T> {}
+
+
+### React con TS
+https://www.freecodecamp.org/news/typescript-for-react-developers/

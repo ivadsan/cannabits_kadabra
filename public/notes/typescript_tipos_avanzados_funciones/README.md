@@ -723,7 +723,7 @@ addProduct({
 ```
 ### Propiedades de solo lectura
 
-Hay situaciones en las que debemos proteger la modificación de algunos atributos de una interfaz como lo puede ser el id y la fecha de creación, para este caso podemos agregar la propiedad readonly al atributo, el cual indicará un error en casa de intentar asignar un valor al atributo
+Hay situaciones en las que debemos proteger la modificación de algunos atributos de una interfaz como lo puede ser el id y la fecha de creación, para este caso podemos agregar la propiedad readonly al atributo, el cual indicará un error en caso de intentar asignar un valor al atributo
 
 ```
 export interface BaseModel {
@@ -779,7 +779,7 @@ console.log(products)
 
 Son utilidades que se encuentran de manera global para facilitar la transformación entre tipos.
 
-Los DTOs (data transfer objects) tiene como finalidad de crear un objeto plano (POJO) con una serie de atributos que puedan ser enviados o recuperados del servidor en una sola invocación, de tal forma que un DTO puede contener información de una interfaz o varias y concentrarla en una única clase simple.
+Los DTOs (data transfer objects) tiene como finalidad de crear un objeto plano (POJO - Plain Old Java Object) con una serie de atributos que puedan ser enviados o recuperados del servidor en una sola invocación, de tal forma que un DTO puede contener información de una interfaz o varias y concentrarla en una única clase simple.
 ### Omit y Pick Type
 
 Omit permite extender una interface omitiendo algunos atributos
