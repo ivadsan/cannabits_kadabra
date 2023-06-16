@@ -71,6 +71,7 @@ export default function Notes({ location }) {
       <div className="container">
         <div className="viewer">
           <ReactMarkdown
+            unwrapDisallowed={false}
             remarkPlugins={[remarkGfm]}
             children={content}
             components={{
@@ -84,7 +85,7 @@ export default function Notes({ location }) {
                     language={match[1]} //match
                     PreTag="div"
                     {...props}
-                    wrapLines={true}
+                    wrapLines={false}
                   />
                 ) : (
                   <code className={className} {...props}>
