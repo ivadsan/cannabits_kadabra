@@ -35,7 +35,7 @@ _"Caer en deuda técnica es normal y a menudo es inevitable"_
 
 **Refactorización**
 
-Es un proceso que tiene como objetivo merjorar el código sin alterar su comportamiento para ser mas entendible y tolerante a cambios.
+Es un proceso que tiene como objetivo mejorar el código sin alterar su comportamiento para ser mas entendible y tolerante a cambios.
 
 Una refactorización fuerte requiere que el código tenga prueba automáticas, sin pruebas automáticas se cae en el _"si funciona, no lo toques"_
 
@@ -47,7 +47,7 @@ La deuda técnica siempre la termina pagando alguien, ya sea el cliente, un prov
 
 - Tiene que ser simple y directo
 
-- El código limpio esta orienta a que sea facil de leer.
+- El código limpio está orientadp a que sea facil de leer.
 
 ### Nombres pronuncialbles y expresivos
 
@@ -138,7 +138,7 @@ Al ser una colección de datos hay varias consideraciones
 
 Usualmente son dos posibles valores pero hay que considerar los valores **_undefined_** y **_null_**
 
-Los prefijos **_is_**, **_can_**, **_has_** da mas sentido semántico a la variable
+Los prefijos **_is_**, **_can_**, **_has_**, **in** da mas sentido semántico a la variable
 
 Siempre deber ser positivo y se debe evitar las negaciones en el nombre
 
@@ -348,3 +348,262 @@ const getPayAmount = ({ isDead = false, isSeparated = true, isRetired = false })
 };
 
 ```
+
+### Homework
+
+**Before**
+
+```
+(() => {
+
+
+    // Resolver sin la triple condicional dentro del if
+    // includes? arrays?
+    function isRedFruit( fruit: string ): boolean {
+
+        if ( fruit === 'manzana' || fruit === 'cereza' || fruit === 'ciruela' ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Simplificar esta función
+    // switch? Object literal? validar posibles colores
+    function getFruitsByColor( color: string ): string[] {
+
+        if ( color === 'red' ) {
+            return ['manzana','fresa'];
+        } else if ( color === 'yellow') {
+            return ['piña','banana'];
+        } else if ( color === 'purple') {
+            return ['moras','uvas']
+        } else {
+            throw Error('the color must be: red, yellow, purple');
+        }
+    }
+
+    // Simplificar esta función
+    let isFirstStepWorking  = true;
+    let isSecondStepWorking = true;
+    let isThirdStepWorking  = true;
+    let isFourthStepWorking = true;
+
+    function workingSteps() {
+        if( isFirstStepWorking === true ) {
+            if( isSecondStepWorking === true ) {
+                if( isThirdStepWorking === true ) {
+                    if( isFourthStepWorking === true ) {
+                        return 'Working properly!';
+                    }
+                    else {
+                        return 'Fourth step broken.';
+                    }
+                }
+                else {
+                    return 'Third step broken.';
+                }
+            }
+            else {
+                return 'Second step broken.';
+            }
+        }
+        else {
+            return 'First step broken.';
+        }
+    }
+
+
+    // isRedFruit
+    console.log({ isRedFruit: isRedFruit('cereza'), fruit: 'cereza' }); // true
+    console.log({ isRedFruit: isRedFruit('piña'), fruit: 'piña' }); // true
+
+    //getFruitsByColor
+    console.log({ redFruits: getFruitsByColor('red') }); // ['manzana', 'fresa']
+    console.log({ yellowFruits: getFruitsByColor('yellow') }); // ['piña', 'banana']
+    console.log({ purpleFruits: getFruitsByColor('purple') }); // ['moras', 'uvas']
+    // console.log({ pinkFruits: getFruitsByColor('pink') }); // Error: the color must be: red, yellow, purple
+
+    // workingSteps
+    console.log({ workingSteps: workingSteps() }); // Cambiar los valores de la línea 31 y esperar los resultados
+
+
+})();
+
+```
+
+**After**
+
+```
+(() => {
+  // Resolver sin la triple condicional dentro del if
+  // includes? arrays?
+  function isRedFruit(fruit: string): boolean {
+    return ["manzana", "cereza", "ciruela"].includes(fruit);
+  }
+
+  // Simplificar esta función
+  // switch? Object literal? validar posibles colores
+
+  type FruitColor = "red" | "yellow" | "purple";
+
+  function getFruitsByColor(color: FruitColor): string[] {
+    /**
+     * Solución 1
+     * Aunque es un refactor mas reducido del código anterior
+     * no es muy óptimo ya que en el caso de "purple" debe entrar a
+     * todas las validaciones anteriores
+     */
+
+    // if (color === "red") return ["manzana", "fresa"];
+    // if (color === "yellow") return ["piña", "banana"];
+    // if (color === "purple") return ["moras", "uvas"];
+    // throw Error("the color must be: red, yellow, purple");
+
+    /**
+     * Solución 2
+     * Mejora la optimización ya que al usar case el argumento va directo al caso
+     * Puede ser un poco complicado su lectura
+     */
+
+    // switch (color) {
+    //   case "red":
+    //     return ["manzana", "fresa"];
+    //   case "yellow":
+    //     return ["piña", "banana"];
+    //   case "purple":
+    //     return ["moras", "uvas"];
+    //   default:
+    //     throw Error("the color must be: red, yellow, purple");
+    // }
+
+    /**
+     * Solución 3
+     * Aplicando string literal types de TS podemos reducir el error desde el código estático
+     * Mejor lectura del código
+     * Aunque el uso de una constante hace que haya una reserva de espacio en memoria diferente al uso de switch
+     * Una línea de código no debería pasar de los 80 caracteres, en ese caso se agrega un espacio
+     */
+
+    const fruitsByColor = {
+      red: ["manzana", "fresa"],
+      yellow: ["piña", "banana"],
+      purple: ["moras", "uvas"],
+    };
+
+    if (!Object.keys(fruitsByColor).includes(color)) {
+      throw Error("the color must be: red, yellow, purple");
+    }
+
+    return fruitsByColor[color];
+  }
+
+  // Simplificar esta función
+  let isFirstStepWorking = true;
+  let isSecondStepWorking = true;
+  let isThirdStepWorking = true;
+  let isFourthStepWorking = true;
+
+  function workingSteps() {
+    if (!isFirstStepWorking) return "First step broken.";
+    if (!isSecondStepWorking) return "Second step broken.";
+    if (!isThirdStepWorking) return "Third step broken.";
+    if (!isFourthStepWorking) return "Fourth step broken.";
+    return "Working properly!";
+  }
+
+  // isRedFruit
+  console.log({ isRedFruit: isRedFruit("cereza"), fruit: "cereza" }); // true
+  console.log({ isRedFruit: isRedFruit("piña"), fruit: "piña" }); // true
+
+  //getFruitsByColor
+  console.log({ redFruits: getFruitsByColor("red") }); // ['manzana', 'fresa']
+  console.log({ yellowFruits: getFruitsByColor("yellow") }); // ['piña', 'banana']
+  console.log({ purpleFruits: getFruitsByColor("purple") }); // ['moras', 'uvas']
+  // console.log({ pinkFruits: getFruitsByColor("pink") }); // Error: the color must be: red, yellow, purple
+
+  // workingSteps
+  console.log({ workingSteps: workingSteps() }); // Cambiar los valores de la línea 31 y esperar los resultados
+})();
+
+```
+
+### Principio DRY (Don't Repeat Yourself)
+
+- Evitar tener duplicidad en nuestro código
+- Simplifica las pruebas
+- Mas facil es el mantenimiento
+- Ayuda a centralizar procesos
+- Aplicar el principio DRY, lleva a refactorizar
+- La acción de copiar y pegar código en el mismo proyecto indica que debemos aplicar el principio DRY
+
+**Sin DRY**
+Por cada nuevo atributo de la clase el método to string repite código en cada validación
+
+```
+type Size = "" | "S" | "M" | "XL";
+class Product {
+  constructor(
+    public name: string = "",
+    public price: number = 0,
+    public size: Size = ""
+  ) {}
+
+  toString() {
+    if (this.name.length <= 0) throw new Error("name is empty");
+    if (this.price <= 0) throw new Error("price is empty");
+    if (this.size.length <= 0) throw new Error("size is empty");
+    return `${this.name} ($${this.price}), ${this.size}`;
+  }
+}
+
+(() => {
+  const bluePants = new Product("Blue pants", 10, "XL");
+  console.log(bluePants.toString());
+})();
+
+```
+
+**Con Dry**
+
+```
+type Size = "" | "S" | "M" | "XL";
+class Product {
+  constructor(
+    public name: string = "",
+    public price: number = 0,
+    public size: Size = ""
+  ) {}
+
+  isProductReady(): boolean {
+    for (const key in this) {
+      switch (typeof this[key]) {
+        case "string":
+          if ((<string>(<unknown>this[key])).length <= 0)
+            throw new Error(`${key} is empty`);
+          break;
+        case "number":
+          if (<number>(<unknown>this[key]) <= 0)
+            throw new Error(`${key} is zero`);
+          break;
+        default:
+          throw new Error("Type not support");
+      }
+    }
+    return true;
+  }
+
+  toString() {
+    if (!this.isProductReady()) return;
+    return `${this.name} ($${this.price}), ${this.size}`;
+  }
+}
+
+(() => {
+  const bluePants = new Product("Blue pants", 1, "S");
+  console.log(bluePants.toString());
+})();
+
+```
+
+## Clases y comentarios
