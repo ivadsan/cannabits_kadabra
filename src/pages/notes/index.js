@@ -64,6 +64,11 @@ export default function Notes({ location }) {
       });
   }, [location]);
 
+  const createLinkName = (str) => {
+    const newStr = str.toLowerCase().replaceAll(" ", "-");
+    return newStr.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  };
+
   return (
     <>
       {loading && <Loading />}
@@ -91,6 +96,27 @@ export default function Notes({ location }) {
                   <code className={className} {...props}>
                     {children}
                   </code>
+                );
+              },
+              h1: ({ children }) => {
+                return (
+                  <>
+                    <h1 id={createLinkName(children[0])}>{children[0]}</h1>
+                  </>
+                );
+              },
+              h2: ({ children }) => {
+                return (
+                  <>
+                    <h2 id={createLinkName(children[0])}>{children[0]}</h2>
+                  </>
+                );
+              },
+              h3: ({ children }) => {
+                return (
+                  <>
+                    <h3 id={createLinkName(children[0])}>{children[0]}</h3>
+                  </>
                 );
               },
             }}

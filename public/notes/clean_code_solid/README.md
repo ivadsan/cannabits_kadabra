@@ -607,3 +607,7 @@ class Product {
 ```
 
 ## Clases y comentarios
+
+Las clases deben tener una responsabilidad especifica y no deben tener nombres genéricos ya que van a heredar bastante carga de manera involuntaria, demasiadas responsabilidades, por ende va a acumular deuda técnica ya que se vuelve dificil de mantener, de testear, de expandir etc.
+
+Priorizar la composición frente a la herencia
