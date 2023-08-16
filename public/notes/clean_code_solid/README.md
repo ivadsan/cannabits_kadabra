@@ -948,3 +948,43 @@ Priorizar la composición frente a la herencia
 ### Estructura recomendada de una clase
 
 ![](/notes/clean_code_solid/assets/classes.png)
+
+1.  Comenzar lista de propiedades
+
+- Propiedades estáticas
+- Propiedades públicas de últimas
+
+2. Métodos
+
+- Empezando por los constructores estáticos
+- Luego el constructor
+- Métodos estáticos
+- Seguido métodos privados
+- Demas métodos ordenados en orden de mayor a menor importancia
+- Getters y Setters al final
+
+### Comentario en el código
+
+Si hay comentarios en el código es porque no suficientemente auto-explicativo
+
+Se deben evitar los comentarios, sin embargo al usar librerias de terceros , APIs o Frameworks los comentarios pueden ser utiles.
+
+Para evitar comentarios es necesario refactorizado, hacer uso de nombres de variables, funciones y clases que describan lo que hacen.
+
+"no comentes el código mal escrito, reescribelo"
+
+Los comentarios deberían indicar: el porqué en lugar del qué o del cómo, estos dos ultimos deberian explicarse automáticamente con el código
+
+### Uniformidad en el proyecto
+
+problemas similares, soluciones similares
+
+- Conservar la sintaxis y estructura de las funciones controladoras o métodos de una clase
+- Mantener la uniformidad del scafolding a lo largo del proyecto
+- Identación
+
+## Acrónimo STUPID
+
+Es todo lo que no se debería hacer, hay antipatrones y CodeSmells
+
+### CodeSmells - STUPID
