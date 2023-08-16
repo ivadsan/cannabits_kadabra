@@ -611,3 +611,340 @@ class Product {
 Las clases deben tener una responsabilidad especifica y no deben tener nombres genéricos ya que van a heredar bastante carga de manera involuntaria, demasiadas responsabilidades, por ende va a acumular deuda técnica ya que se vuelve dificil de mantener, de testear, de expandir etc.
 
 Priorizar la composición frente a la herencia
+
+### Herencia problemática
+
+El no aplicar el principio de responsabilidad única en clases y el uso de herencias complejiza el instancimiento de una clase hijo ya que acumula la cantidad de atributos requeridos para la creación de una instancia
+
+```
+(() => {
+
+    // No aplicando el principio de responsabilidad única
+
+    type Gender = 'M'|'F';
+
+    class Person {
+        constructor(
+            public name: string,
+            public gender: Gender,
+            public birthdate: Date
+        ){}
+    }
+
+
+    class User extends Person {
+
+        public lastAccess: Date;
+
+        constructor(
+            public email: string,
+            public role: string,
+            name: string,
+            gender: Gender,
+            birthdate: Date,
+        ) {
+            super( name, gender, birthdate );
+            this.lastAccess = new Date();
+        }
+
+        checkCredentials() {
+            return true;
+        }
+    }
+
+
+    class UserSettings extends User {
+        constructor(
+            public workingDirectory: string,
+            public lastOpenFolder  : string,
+            email                  : string,
+            role                   : string,
+            name                   : string,
+            gender                 : Gender,
+            birthdate              : Date
+        ) {
+            super(email, role, name, gender, birthdate );
+        }
+    }
+
+
+    const userSettings = new UserSettings(
+        '/usr/home',
+        '/home',
+        'fernando@google.com',
+        'Admin',
+        'Fernando',
+        'M',
+        new Date('1985-10-21')
+    );
+
+    console.log({ userSettings });
+
+
+})();
+```
+
+### Objetos como propiedades
+
+Evitar enviar las propiedades de la clase de manera posicional al constructor
+
+```
+(() => {
+
+    // No aplicando el principio de responsabilidad única
+
+    type Gender = 'M'|'F';
+
+    interface PersonProps {
+        birthdate : Date;
+        gender    : Gender;
+        name      : string;
+    }
+
+    class Person {
+        public birthdate: Date;
+        public gender   : Gender;
+        public name     : string;
+
+        constructor({ name, gender, birthdate }: PersonProps ){
+            this.name      = name;
+            this.gender    = gender;
+            this.birthdate = birthdate;
+        }
+    }
+
+
+    interface UserProps {
+        birthdate : Date;
+        email     : string;
+        gender    : Gender;
+        name      : string;
+        role      : string;
+    }
+
+    class User extends Person {
+
+        public email: string;
+        public role : string;
+        public lastAccess: Date;
+
+        constructor({
+            birthdate,
+            email,
+            gender,
+            name,
+            role,
+        }: UserProps ) {
+            super({ name, gender, birthdate });
+            this.lastAccess = new Date();
+            this.email = email;
+            this.role  = role;
+        }
+
+        checkCredentials() {
+            return true;
+        }
+    }
+
+
+    interface UserSettingsProps {
+        birthdate        : Date;
+        email            : string;
+        gender           : Gender;
+        lastOpenFolder   : string;
+        name             : string;
+        role             : string;
+        workingDirectory : string;
+    }
+
+    class UserSettings extends User {
+
+        public workingDirectory: string;
+        public lastOpenFolder  : string;
+
+        constructor({
+            workingDirectory,
+            lastOpenFolder,
+            email,
+            role,
+            name,
+            gender,
+            birthdate,
+        }: UserSettingsProps ) {
+            super({ email, role, name, gender, birthdate });
+            this.workingDirectory = workingDirectory;
+            this.lastOpenFolder   = lastOpenFolder;
+        }
+    }
+
+
+    const userSettings = new UserSettings({
+        birthdate: new Date('1985-10-21'),
+        email: 'fernando@google.com',
+        gender: 'M',
+        lastOpenFolder: '/home',
+        name: 'Fernando',
+        role: 'Admin',
+        workingDirectory: '/usr/home',
+    });
+
+    console.log({ userSettings });
+
+
+})();
+```
+
+### Principio de responsabilidad única
+
+Tratar de evitar los extends
+Priorizar la composición frente a la herencia
+
+```
+(() => {
+  // Aplicando el principio de responsabilidad única
+
+  type Gender = "M" | "F";
+
+  interface PersonProps {
+    birthdate: Date;
+    gender: Gender;
+    name: string;
+  }
+
+  class Person {
+    public birthdate: Date;
+    public gender: Gender;
+    public name: string;
+
+    constructor({ name, gender, birthdate }: PersonProps) {
+      this.name = name;
+      this.gender = gender;
+      this.birthdate = birthdate;
+    }
+  }
+
+  interface UserProps {
+    email: string;
+    role: string;
+  }
+
+  class User {
+    public email: string;
+    public role: string;
+    public lastAccess: Date;
+
+    constructor({ email, role }: UserProps) {
+      this.lastAccess = new Date();
+      this.email = email;
+      this.role = role;
+    }
+
+    checkCredentials() {
+      return true;
+    }
+  }
+
+  interface SettingsProps {
+    lastOpenFolder: string;
+    workingDirectory: string;
+  }
+
+  class Settings {
+    public workingDirectory: string;
+    public lastOpenFolder: string;
+
+    constructor({ workingDirectory, lastOpenFolder }: SettingsProps) {
+      this.workingDirectory = workingDirectory;
+      this.lastOpenFolder = lastOpenFolder;
+    }
+  }
+
+  interface UserSettingsProps {
+    birthdate: Date;
+    email: string;
+    gender: Gender;
+    lastOpenFolder: string;
+    name: string;
+    role: string;
+    workingDirectory: string;
+  }
+
+  class UserSettings {
+    public person: Person;
+    public user: User;
+    public settings: Settings;
+
+    constructor({
+      birthdate,
+      email,
+      gender,
+      lastOpenFolder,
+      name,
+      role,
+      workingDirectory,
+    }: UserSettingsProps) {
+      this.person = new Person({ birthdate, name, gender });
+      this.user = new User({ email, role });
+      this.settings = new Settings({ lastOpenFolder, workingDirectory });
+    }
+  }
+
+  const userSettings = new UserSettings({
+    birthdate: new Date("1985-10-21"),
+    email: "fernando@google.com",
+    gender: "M",
+    lastOpenFolder: "/home",
+    name: "Fernando",
+    role: "Admin",
+    workingDirectory: "/usr/home",
+  });
+
+  console.log({ userSettings });
+})();
+```
+
+```(() => {
+  //* Aplicar el principio de responsabilidad única
+  //* Priorizar la composición frente a la herencia
+
+  type HtmlType = "input" | "select" | "textarea" | "radio";
+
+  class HtmlElement {
+    constructor(public id: string, public type: HtmlType) {}
+  }
+
+  class InputAttributes {
+    constructor(public value: string, public placeholder: string) {}
+  }
+
+  class InputEvents {
+    constructor() {}
+
+    setFocus() {}
+    getValue() {}
+    isActive() {}
+    removeValue() {}
+  }
+
+  //? Idea para la nueva clase InputElement
+
+  class InputElement {
+    public html: HtmlElement;
+    public attributes: InputAttributes;
+    public events: InputEvents;
+    constructor(value: string, placeholder: string, id: string) {
+      this.html = new HtmlElement(id, "input");
+      this.attributes = new InputAttributes(value, placeholder);
+      this.events = new InputEvents();
+    }
+  }
+
+  const nameField = new InputElement("Fernando", "Enter first name", "txtName");
+
+  console.log({ nameField });
+})();
+```
+
+### Estructura recomendada de una clase
+
+![](/notes/clean_code_solid/assets/classes.png)
