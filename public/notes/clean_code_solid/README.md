@@ -988,3 +988,430 @@ problemas similares, soluciones similares
 Es todo lo que no se debería hacer, hay antipatrones y CodeSmells
 
 ### CodeSmells - STUPID
+
+S -> Singleton: patrón singleton
+T -> Tight Coupling: Alto acomplamiento
+U -> Untestability: Código no probable (Unit Test)
+P -> Premature Optimization: Optimizaciones prematuras
+I -> Indescriptive Naming: Nombres pocos descriptivos
+D -> Duplication: Duplicidad de código, no aplicación del principio DRY
+
+#### Singleton
+
+Son dificiles de probar, es dificil rastrear de donde vienen los cambios estando en un ambito global puede ser afectado desde diferentes partes de la aplicación
+
+```
+const Singleton = (function () {
+  let instance;
+
+  function createInstance() {
+    return new Object("I am the instance");
+  }
+
+  return {
+    getInstance() {
+      if (!instance) {
+        instance = createInstance();
+      }
+      return instance;
+    },
+  };
+})();
+
+function main() {
+  const instance1 = Singleton.getInstance();
+  const instance2 = Singleton.getInstance();
+
+  console.log("Misma instancia? ", instance1 === instance2);
+}
+
+main();
+
+```
+
+#### Acoplamiento y cohesión
+
+Lo ideal es tener bajo acoplamiento y alta cohesión
+
+**Acoplamiento**
+
+El acomplamiento se refiere a cuán relacionadas estas dos clases o módulos entre sí
+
+Bajo acomplamiento significa que cambiar algo importante en una clase no debería afectar a la otra
+
+Alto acomplamiento significa que es dificil cambiar algo, el mantenimiento es complejo dado a que estas muy unidas las clases.
+
+**Cohesión**
+
+La cohesion se refiere a lo que una clase o módulo debe hacer
+
+una baja cohesion significa que la clase no se enfoca en lo que debe hacer y hace mas acciones de lo que debería
+
+una alta cohesión significa que la clase se enfoca en lo que debe hacer y sus métodos estan relacionados con la intención de la clase
+
+**Ejemplo de alto acoplamiento**
+
+```
+(() => {
+  // No aplicando el principio de responsabilidad única
+  type Gender = "M" | "F";
+
+  // Alto Acoplamiento
+
+  class Person {
+    constructor(
+      public firstName: string,
+      public lastName: string,
+      public gender: Gender,
+      public birthdate: Date
+    ) {}
+  }
+
+  class User extends Person {
+    constructor(
+      public email: string,
+      public role: string,
+      private lastAccess: Date,
+      firstName: string,
+      lastName: string,
+      gender: Gender,
+      birthdate: Date
+    ) {
+      super(firstName, lastName, gender, birthdate);
+      this.lastAccess = new Date();
+    }
+
+    checkCredentials() {
+      return true;
+    }
+  }
+
+  class UserSettings extends User {
+    constructor(
+      public workingDirectory: string,
+      public lastFolderOpen: string,
+      email: string,
+      role: string,
+      firstName: string,
+      lastName: string,
+      gender: Gender,
+      birthdate: Date
+    ) {
+      super(email, role, new Date(), firstName, lastName, gender, birthdate);
+    }
+  }
+
+  const userSettings = new UserSettings(
+    "/urs/home",
+    "/development",
+    "fernando@google.com",
+    "F",
+    "Fernando",
+    "Herrera",
+    "M",
+    new Date("1985-10-21")
+  );
+
+  console.log({ userSettings, credentials: userSettings.checkCredentials() });
+})();
+
+```
+
+**Ejemplo bajo acomplamiento**
+
+```
+(() => {
+  // Aplicando el principio de responsabilidad única
+  // Prioriza la composición frente a la herencia
+
+  type Gender = "M" | "F";
+
+  interface PersonProps {
+    firstName: string;
+    lastName: string;
+    gender: Gender;
+    birthdate: Date;
+  }
+
+  class Person {
+    public firstName: string;
+    public lastName: string;
+    public gender: Gender;
+    public birthdate: Date;
+
+    constructor({ firstName, lastName, gender, birthdate }: PersonProps) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.gender = gender;
+      this.birthdate = birthdate;
+    }
+  }
+
+  interface UserProps {
+    email: string;
+    role: string;
+  }
+  class User {
+    public email: string;
+    public role: string;
+    private lastAccess: Date;
+
+    constructor({ email, role }: UserProps) {
+      this.lastAccess = new Date();
+      this.email = email;
+      this.role = role;
+    }
+
+    checkCredentials() {
+      return true;
+    }
+  }
+
+  interface SettingsProps {
+    lastFolderOpen: string;
+    workingDirectory: string;
+  }
+
+  class Settings {
+    public workingDirectory: string;
+    public lastFolderOpen: string;
+
+    constructor({ workingDirectory, lastFolderOpen }: SettingsProps) {
+      this.workingDirectory = workingDirectory;
+      this.lastFolderOpen = lastFolderOpen;
+    }
+  }
+
+  // Nuevo User Settings
+  interface UserSettingsProps {
+    birthdate: Date;
+    email: string;
+    gender: Gender;
+    lastFolderOpen: string;
+    firstName: string;
+    lastName: string;
+    role: string;
+    workingDirectory: string;
+  }
+
+  class UserSettings {
+    // constructor(
+    //     public person: Person,
+    //     public user  : User,
+    //     public settings: Settings,
+    // ){}
+    public person: Person;
+    public user: User;
+    public settings: Settings;
+
+    constructor({
+      firstName,
+      lastName,
+      gender,
+      birthdate,
+      email,
+      role,
+      workingDirectory,
+      lastFolderOpen,
+    }: UserSettingsProps) {
+      this.person = new Person({ firstName, lastName, gender, birthdate });
+      this.user = new User({ email, role });
+      this.settings = new Settings({ workingDirectory, lastFolderOpen });
+    }
+  }
+
+  const userSettings = new UserSettings({
+    birthdate: new Date("1985-10-21"),
+    email: "fernando@google.com",
+    gender: "M",
+    lastFolderOpen: "/home",
+    firstName: "Fernando",
+    lastName: "Herrera",
+    role: "Admin",
+    workingDirectory: "/usr/home",
+  });
+
+  console.log({
+    userSettings,
+    credentials: userSettings.user.checkCredentials(),
+  });
+})();
+
+```
+
+#### Código no probable
+
+Código dificilmente testeable
+
+- Código con alto acoplamiento
+- Código con muchas dependencias no inyectadas:
+
+_La inyección de dependencias deriva del principio de inversión de dependencias en donde la entidad depende de una abstracción y no de una implementación concreta_
+
+- Dependencias en el contexto global (tipo singleton)
+
+Debemos tener en mente las pruebas desde la creación del código
+
+#### Optimizaciones prematuras
+
+Mantener abiertas las opciones retrasando la toma de decisiones, nos permite darle mayor relevancia a lo que es mas importante a una aplicación.
+
+No debemos anticiparnos a los requisitos y desarrollar abstracciones innecesarias que puedan añadir complejidad accidental.
+
+Complejidad Accidental: Cuando implementamos una solución compleja a la mínima indispensable.
+
+Complejidad esencial: la complejidad es inherente al problema
+
+Tiene que haber un balance entre los dos tipos de complejidad
+
+#### Nombres pocos descriptivos
+
+- Nombres de variables mal nombradas
+- Nombres de clases genéricas
+- Nombres de funciones mal nombradas
+- Ser muy específico (puede resultar en nombres muy largos) o ser muy genérico (la clase o función puede terminar haciendo muchas cosas)
+
+#### Duplicidad de código
+
+Duplicidad Real:
+
+- Código es identico y cumple la misma función
+- Un cambio implicaría cambiar todo el código idéntico en varios lugares
+- Incrementa las posibilidades de error humano al olvidar una parte para actualizar.
+- Mayor cantidad de pruebas innecesarias.
+
+Duplicidad Accidental:
+
+- Código luce similar pero cumple funciones distintas
+- Cuando hay un cambio, solo hay que modificar en un solo lugar
+- Este tipo de duplicidad se puede trabajar con parámetros u optimizaciones
+
+### Otros code smells
+
+#### Inflación
+
+**Métodos muy extensos**
+
+Se refiera a cuando un método crece mucho (mas de 10 lineas), esto se puede solucionar fragmentando el método en varios submétodos y luego llamándolos desde uno solo. En consecuencia esto puede traer algunos problemas de rendimiento pero el impacto es insignificante
+
+**Clases super grandes**
+
+A lo largo del tiempo se le van sumando acciones a la clase lo que hace que crezca
+
+Cuando una clase hace muchas cosas se recomienda separarla en pequeñas subclases o módulos los cuales separen las tareas de la clases grandes, esto nos ayuda a mejorar su mantenimiento, reutilizacion y son mas faciles de probar.
+
+**Obseción primitiva**
+
+La obseción primitiva radica en el uso de tipos de datos primitivos para representar entidades mas complejas.
+
+Por ejemplo:
+
+- Usar una cadena para representar una fecha o hora.
+
+```
+const date = "2023-08-23T12:00:00";
+```
+
+Este código usa una cadena para representar una fecha y hora. Esto es problemático porque las cadenas no tienen ningún significado semántico. Por ejemplo, no es posible realizar operaciones matemáticas con una cadena.
+
+Una forma de resolver este problema es usar una clase o estructura para representar una fecha y hora. Por ejemplo, la siguiente clase representa una fecha y hora en formato ISO 8601:
+
+```
+class Date {
+  constructor(year, month, day, hour, minute, second) {
+    this.year = year;
+    this.month = month;
+    this.day = day;
+    this.hour = hour;
+    this.minute = minute;
+    this.second = second;
+  }
+
+  toString() {
+    return `${this.year}-${this.month}-${this.day}T${this.hour}:${this.minute}:${this.second}`;
+  }
+}
+```
+
+Podemos usar esta clase para representar la fecha y hora anterior de la siguiente manera:
+
+```
+const date = new Date(2023, 8, 23, 12, 0, 0);
+
+```
+
+Esta versión del código es más clara y eficiente que la versión original. También es más fácil de entender y mantener, ya que la clase Date proporciona una estructura clara para representar la fecha y hora.
+
+- Usar un número de coma flotante para representar una moneda.
+
+```
+const price = 100.00;
+```
+
+Una forma de resolver este problema es usar un objeto para representar una moneda. Por ejemplo, el siguiente objeto representa una moneda:
+
+```
+const price = {
+  amount: 100,
+  currency: "USD",
+};
+```
+
+Algunos consejos para evitar la obsesión primitiva:
+
+- Piense en los datos que está tratando de representar. ¿Son datos simples o complejos?
+- Si los datos son complejos, considere crear una clase o estructura para representarlos.
+- Separar estos modelos de datos agrupados en clases, objetos o módulos y permitir una reutilizacion de los mismos.
+
+**Lista larga de parámetros**
+
+Sintomas: Mas de 3 o 4 argumentos en un método.
+
+Las listas largas de argumentos suelen aparecer por tratar de hacer que métodos con multiples algoritmos se ejecuten segun los parámetros.
+
+Se recomienda
+
+- Un objeto como único argumento
+- Verificar si los argumentos realmente requeridos
+
+### Acopladores
+
+Acomplamiento excesivo o si el acomplamiento se reemplaza por una delegación excesiva
+
+**Feature Envy**
+
+Un objeto accede a los datos de otro objeto mas que a sus propios datos
+
+Puede suceder luego de una refactorizacion no exitosa donde se mueven los atributos o métodos de una clase a otra.
+
+**Intimidad inapropiada**
+
+Una clase usa campos y metodos internos de otra clase.
+
+Las buenas clases deben saber lo menos posible de otras clases
+
+**Cadena de mensajes**
+
+Radica cuando una función, clase o módulo requiere algo de otra a travéz de una cadena de comunicación sucesiva entre funciones, clases o módulos.
+
+Tratar de romper la cadena y buscar una alternativa para comunicarse directamente entre funciones,clases o módulos
+
+**The middle man**
+
+Sucede cuando una clase intermedia solo tiene como funcion delegar el trabajo a otra clase, esto puede suceder como producto de una refactorizacion para evitar las cadenas de mensaje.
+
+## Principios SOLID
+
+Son principios y no reglas: son recomendaciones para escribir mejor código
+
+Los 5 principios S.O.L.I.D. de diseño de software son:
+
+S – Single Responsibility Principle (SRP)
+
+O – Open/Closed Principle (OCP)
+
+L – Liskov Substitution Principle (LSP)
+
+I – Interface Segregation Principle (ISP)
+
+D – Dependency Inversion Principle (DIP)
