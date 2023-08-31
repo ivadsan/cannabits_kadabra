@@ -1897,3 +1897,98 @@ Aplica el principio de sustitución de Liskov porque ahora la función tolera cu
 Este principio establece que los clientes no deberían verse forzados a depender de interfaces que no usan.
 
 El principio de segregación de interfaz se viola cuando se tiene que implementar métodos que la clase no usa solo para cumplir el contrato.
+
+Por ejemplo:
+
+```
+interface Bird {
+  fly(): void;
+  eat(): void;
+  swim(): void;
+  run(): void;
+}
+
+class Tucan implements Bird {
+  public fly() {}
+  public eat() {}
+  public swim() {}
+  public run() {}
+}
+
+class Hummingbird implements Bird {
+  public fly() {}
+  public eat() {}
+  public swim() {}
+  public run() {}
+}
+
+class Ostrich implements Bird {
+  public fly() {throw new Error("this bird can't fly");}
+  public eat() {}
+  public swim() {
+    throw new Error("this bird can't swim");
+  }
+  public run() {}
+}
+
+class Penguin implements Bird {
+  public fly() {throw new Error("this bird can't fly");}
+  public eat() {}
+  public swim() {}
+  public run() {}
+}
+
+```
+
+Ahora aplicando el principio de segregación de interfaz
+
+```
+interface Bird {
+  eat(): void;
+}
+
+interface FlyingBird {
+  fly(): number;
+}
+
+interface RunningBird {
+  run(): void;
+}
+interface SwimmerBird {
+  swim(): void;
+}
+
+class Tucan implements Bird, FlyingBird {
+  public fly() {
+    return 200;
+  }
+  public eat() {}
+  public swim() {}
+}
+
+class Hummingbird implements Bird, FlyingBird {
+  public fly() {
+    return 500;
+  }
+  public eat() {}
+}
+
+class Ostrich implements Bird, RunningBird {
+  public eat() {}
+  public run() {}
+}
+
+class Penguin implements Bird, SwimmerBird {
+  public eat() {}
+  public swim() {}
+}
+
+```
+
+Ahora el código es mas tolerante al cambio
+
+Para detectar violaciones del ISP:
+
+- Si las interfaces que diseñamos nos obligan a violentar el principio de responsabilidad unica y el de substitución de Liskov, muchas veces las solución corresponde a segregar mucho y pueden llegar a ser refactorizaciones muy grandes pero con un código resultante con mayor tolerancia al cambio.
+
+### Principio de inversión de dependencias
