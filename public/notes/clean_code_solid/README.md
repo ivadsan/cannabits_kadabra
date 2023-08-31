@@ -1402,6 +1402,8 @@ Sucede cuando una clase intermedia solo tiene como funcion delegar el trabajo a 
 
 ## Principios SOLID
 
+Los principios de SOLID indican como organizar nuestras funciones y estructuras de datos en componentes y como dichos componentes deben estar interconectados.
+
 Son principios y no reglas: son recomendaciones para escribir mejor código
 
 Los 5 principios S.O.L.I.D. de diseño de software son:
@@ -1415,3 +1417,483 @@ L – Liskov Substitution Principle (LSP)
 I – Interface Segregation Principle (ISP)
 
 D – Dependency Inversion Principle (DIP)
+
+### Single Responsibility Principle (SRP)
+
+Una clase o módulo debe tener una única responsabilidad, mas de una responsabilidad hace que el código sea menos flexible, mas dificil de mantener, mas rigido y menos tolerante al cambio.
+
+#### Detectar incumplimiento de SRP
+
+- Nombres de clases y módulos demasiados genéricos. (Clase llamada Repository, Service)
+- Cambios en el código que suelen afectar a la clase o módulo
+- La clase involucra múltiples capas (Hace muchas interacciones con diferentes capas de la aplicación desde la misma clase o módulo)
+- Número elevado de importaciones
+- Cantidad elevada de métodos públicos (Relativo)
+- Excesivo número de líneas de código (Relativo)
+
+**Before**
+
+```
+(() => {
+
+    interface Product {
+        id:   number;
+        name: string;
+    }
+
+    // Usualmente, esto es una clase para controlar la vista que es desplegada al usuario
+    // Recuerden que podemos tener muchas vistas que realicen este mismo trabajo.
+    class ProductBloc {
+
+        loadProduct( id: number ) {
+            // Realiza un proceso para obtener el producto y retornarlo
+            console.log('Producto: ',{ id, name: 'OLED Tv' });
+        }
+
+        saveProduct( product: Product ) {
+            // Realiza una petición para salvar en base de datos
+            console.log('Guardando en base de datos', product );
+        }
+
+        notifyClients() {
+            console.log('Enviando correo a los clientes');
+        }
+
+        onAddToCart( productId: number ) {
+            // Agregar al carrito de compras
+            console.log('Agregando al carrito ', productId );
+        }
+
+    }
+
+
+
+    const productBloc = new ProductBloc();
+
+    productBloc.loadProduct(10);
+    productBloc.saveProduct({ id: 10, name: 'OLED TV' });
+    productBloc.notifyClients();
+    productBloc.onAddToCart(10);
+
+
+})();
+```
+
+**After**
+
+```
+(() => {
+  interface Product {
+    id: number;
+    name: string;
+  }
+
+  class ProductService {
+    getProduct(id: number) {
+      console.log("Producto: ", { id, name: "OLED Tv" });
+    }
+    saveProduct(product: Product) {
+      console.log("Guardando en base de datos", product);
+    }
+  }
+
+  class Mailer {
+    sendEmail(emailList: string[], template: "to-clients" | "to-admins") {
+      console.log("Enviando correo a los clientes", template);
+    }
+  }
+
+  // Usualmente, esto es una clase para controlar la vista que es desplegada al usuario
+  // Recuerden que podemos tener muchas vistas que realicen este mismo trabajo.
+  class ProductBloc {
+    private productService: ProductService;
+    private mailer: Mailer;
+
+    constructor(productService: ProductService, mailer: Mailer) {
+      this.productService = productService;
+      this.mailer = mailer;
+    }
+
+    loadProduct(id: number) {
+      // Realiza un proceso para obtener el producto y retornarlo
+      productService.getProduct(id);
+    }
+
+    saveProduct(product: Product) {
+      // Realiza una petición para salvar en base de datos
+      productService.saveProduct(product);
+    }
+
+    notifyClients() {
+      mailer.sendEmail(["ivan@google.com"], "to-clients");
+    }
+  }
+
+  class CartBloc {
+    addToCart(productId: number) {
+      console.log("Agregando al carrito ", productId);
+    }
+  }
+
+  const productService = new ProductService();
+  const mailer = new Mailer();
+
+  const productBloc = new ProductBloc(productService, mailer);
+  const cartBloc = new CartBloc();
+
+  productBloc.loadProduct(10);
+  productBloc.saveProduct({ id: 10, name: "OLED TV" });
+  productBloc.notifyClients();
+  cartBloc.addToCart(10);
+})();
+
+```
+
+### Open/Closed Principle (OCP)
+
+Es un principio que depende del contexto (Manera en las que estemos corriendo nuestra aplicación, diferentes frameworks, ambientes)
+
+Establece que las entidades de software (clases, módulos, métodos, etc) deben estar abiertas para la extensión y cerradas para la modificación.
+
+Las clases, métodos y funciones debe desarrollarse para poder escalar sobre su misma responsabilidad sin tener que hacerle cambios a su estructura.
+
+Cuando se tenga una alta dependencia de terceros se recomienda crear una dependencia apdatadora (patrón adpatador), que permita mas facilmente modificar, mejorar o mantener esta dependencia.
+
+**Ejemplo**
+
+**a**
+
+```
+import { PhotosService, PostService, TodoService } from "./02-open-close-b";
+
+(async () => {
+  const todoService = new TodoService();
+  const postService = new PostService();
+  const photosService = new PhotosService();
+
+  const todos = await todoService.getTodoItems();
+  const posts = await postService.getPosts();
+  const photos = await photosService.getPhotos();
+
+  console.log({ todos, posts, photos });
+})();
+
+```
+
+**b**
+
+````
+// Hay que agregar la dependencia de axios ```yarn add axios```
+import axios from "axios";
+
+export class TodoService {
+  async getTodoItems() {
+    const { data } = await axios.get(
+      "https://jsonplaceholder.typicode.com/todos/"
+    );
+    return data;
+  }
+}
+
+export class PostService {
+  async getPosts() {
+    const { data } = await axios.get(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
+    return data;
+  }
+}
+
+export class PhotosService {
+  async getPhotos() {
+    const { data } = await axios.get(
+      "https://jsonplaceholder.typicode.com/photos"
+    );
+    return data;
+  }
+}
+
+````
+
+El anterior ejemplo muesta que hay una alta dependendecia con axios, Empezamos por dasacoplar el llamadaro directo a Axios por parte de las clases
+
+**c**
+
+```
+import axios from "axios";
+
+export class HttpClient {
+  async get(url: string) {
+    const { data, status } = await axios.get(url);
+    console.log(status);
+    return { data, status };
+  }
+}
+
+```
+
+**b**
+
+````
+// Hay que agregar la dependencia de axios ```yarn add axios```
+// import axios from "axios";
+import { HttpClient } from "./02-open-close-c";
+
+export class TodoService {
+  constructor(private http: HttpClient) {}
+
+  async getTodoItems() {
+    const { data } = await this.http.get(
+      "https://jsonplaceholder.typicode.com/todos/"
+    );
+    return data;
+  }
+}
+
+export class PostService {
+  constructor(private http: HttpClient) {}
+
+  async getPosts() {
+    const { data } = await this.http.get(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
+    return data;
+  }
+}
+
+export class PhotosService {
+  constructor(private http: HttpClient) {}
+
+  async getPhotos() {
+    const { data } = await this.http.get(
+      "https://jsonplaceholder.typicode.com/photos"
+    );
+    return data;
+  }
+}
+
+````
+
+**a**
+
+```
+import { PhotosService, PostService, TodoService } from "./02-open-close-b";
+import { HttpClient } from "./02-open-close-c";
+
+(async () => {
+  const httpClient = new HttpClient();
+  const todoService = new TodoService(httpClient);
+  const postService = new PostService(httpClient);
+  const photosService = new PhotosService(httpClient);
+
+  const todos = await todoService.getTodoItems();
+  const posts = await postService.getPosts();
+  const photos = await photosService.getPhotos();
+
+  console.log({ todos, posts, photos });
+})();
+
+```
+
+Ahora siguiendo el OCP y el patrón adaptador vamos a reemplazar el uso de axios por fecth y esto lo haríamos solo desde la clase adaptadora sin afectar el acoplamiento que teniamos para hacer call apis
+
+```
+// import axios from "axios";
+
+export class HttpClient {
+  //   async get(url: string) {
+  //     const { data, status } = await axios.get(url);
+  //     console.log(status);
+  //     return { data, status };
+  //   }
+
+  async get(url: string) {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(response.status);
+    return { data, status: response.status };
+  }
+}
+
+```
+
+#### Detectar violaciones de OPC
+
+- Los cambios normalmente afectan la clase o módulo constantemente
+
+- Cuando una clase o módulo afecta muchas capas (presentación, almacenamiento, etc)
+
+### Liskov Substitution Principle (LSP)
+
+Las funciones que utilicen punteros o referencias a clases base deben ser capaces de usar objetos de clases derivadas sin saberlo
+
+Siendo U un subtipo de T, cualquier instancia de T debería poder ser sustituida por cualquier instancia de U sin alterar las propiedades del sistema
+
+**a**
+
+```
+import { Tesla, Audi, Toyota, Honda } from "./03-liskov-b";
+
+(() => {
+  const printCarSeats = (cars: (Tesla | Audi | Toyota | Honda)[]) => {
+    for (const car of cars) {
+      if (car instanceof Tesla) {
+        console.log("Tesla", car.getNumberOfTeslaSeats());
+        continue;
+      }
+      if (car instanceof Audi) {
+        console.log("Audi", car.getNumberOfAudiSeats());
+        continue;
+      }
+      if (car instanceof Toyota) {
+        console.log("Toyota", car.getNumberOfToyotaSeats());
+        continue;
+      }
+      if (car instanceof Honda) {
+        console.log("Honda", car.getNumberOfHondaSeats());
+        continue;
+      }
+    }
+  };
+
+  const cars = [new Tesla(7), new Audi(2), new Toyota(5), new Honda(5)];
+
+  printCarSeats(cars);
+})();
+
+```
+
+**b**
+
+```
+export class Tesla {
+  constructor(private numberOfSeats: number) {}
+
+  getNumberOfTeslaSeats() {
+    return this.numberOfSeats;
+  }
+}
+
+export class Audi {
+  constructor(private numberOfSeats: number) {}
+
+  getNumberOfAudiSeats() {
+    return this.numberOfSeats;
+  }
+}
+
+export class Toyota {
+  constructor(private numberOfSeats: number) {}
+
+  getNumberOfToyotaSeats() {
+    return this.numberOfSeats;
+  }
+}
+
+export class Honda {
+  constructor(private numberOfSeats: number) {}
+
+  getNumberOfHondaSeats() {
+    return this.numberOfSeats;
+  }
+}
+
+```
+
+Violenta el principio de sustitución de liskov porque no podemos agregar una nueva clase sin alterar la interfaz que recibe la función.
+
+Se viola el princio de open and close porque cada vez que tengamos un nuevo tipo de vehiculo debemos entrar y modificar la función para agregar la nueva clase.
+
+Aplicando los principios...
+
+**a**
+
+```
+import { Tesla, Audi, Toyota, Honda, Vehicle, Volvo } from "./03-liskov-b";
+
+(() => {
+  const printCarSeats = (cars: Vehicle[]) => {
+    cars.forEach((car) => {
+      console.log(car.constructor.name, car.getNumberOfSeats());
+    });
+  };
+
+  const cars = [
+    new Tesla(7),
+    new Audi(2),
+    new Toyota(5),
+    new Honda(5),
+    new Volvo(2),
+  ];
+
+  printCarSeats(cars);
+})();
+
+```
+
+**b**
+
+```
+export abstract class Vehicle {
+  abstract getNumberOfSeats(): number;
+}
+
+export class Tesla extends Vehicle {
+  constructor(private numberOfSeats: number) {
+    super();
+  }
+
+  getNumberOfSeats() {
+    return this.numberOfSeats;
+  }
+}
+
+export class Audi extends Vehicle {
+  constructor(private numberOfSeats: number) {
+    super();
+  }
+
+  getNumberOfSeats() {
+    return this.numberOfSeats;
+  }
+}
+
+export class Toyota extends Vehicle {
+  constructor(private numberOfSeats: number) {
+    super();
+  }
+
+  getNumberOfSeats() {
+    return this.numberOfSeats;
+  }
+}
+
+export class Honda extends Vehicle {
+  constructor(private numberOfSeats: number) {
+    super();
+  }
+
+  getNumberOfSeats() {
+    return this.numberOfSeats;
+  }
+}
+
+export class Volvo extends Vehicle {
+  constructor(private numberOfSeats: number) {
+    super();
+  }
+
+  getNumberOfSeats() {
+    return this.numberOfSeats;
+  }
+}
+
+```
+
+Aplica el principio de sustitución de Liskov porque ahora la función tolera cualquier clase que sea subclase de la clase abstracta y aplica el princio de Open / Close porque no es necesario modificar el interior de la función para acceder a los métodos de las diferentes subclases que reciba.
+
+### Interface Segregation Principle (ISP)
+
+Este principio establece que los clientes no deberían verse forzados a depender de interfaces que no usan.
+
+El principio de segregación de interfaz se viola cuando se tiene que implementar métodos que la clase no usa solo para cumplir el contrato.

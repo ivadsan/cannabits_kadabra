@@ -23,3 +23,7 @@ Reglas de compilacion errores fatales
 creacion de dependencia kadabra cambio de arquitectura
 
 TypeScript
+
+Nuevo Kadabra para organización de ejercicios de entrenamiento JS, busca entre carpetas los ejercicios segun un filtro alimentado por un scrapping de archivos que contiene un array con tags que clasifican el ejercicio segun los topics que maneje
+
+Se puede crear un script en el package.json para determinar si kadabra se carga accediendo a archivos estáticos o en su nueva version haciendo scrapping basado en un array de direcciones a repos publicos accediendo a sus readme.md
