@@ -1992,3 +1992,186 @@ Para detectar violaciones del ISP:
 - Si las interfaces que diseñamos nos obligan a violentar el principio de responsabilidad unica y el de substitución de Liskov, muchas veces las solución corresponde a segregar mucho y pueden llegar a ser refactorizaciones muy grandes pero con un código resultante con mayor tolerancia al cambio.
 
 ### Principio de inversión de dependencias
+
+Los módulos de alto nivel no deben depender de módulos de bajo nivel. Ambos deben depender de abstracciones.
+
+Las abstracciones no deben depender de los detalles. Los detalles deben depender de las abstracciones.
+
+En resumen, esto significa que en lugar de que los componentes de alto nivel dependan directamente de los componentes de bajo nivel, ambos deben depender de interfaces o abstracciones comunes. Esto permite una mayor flexibilidad y extensibilidad en el diseño del software, ya que los detalles de implementación pueden cambiar sin afectar a los componentes de alto nivel.
+
+**05-dependency-a**
+
+```
+import { PostService } from './05-dependency-b';
+
+
+// Main
+(async () => {
+
+    const postService = new PostService();
+
+    const posts = await postService.getPosts();
+
+    console.log({ posts })
+
+
+})();
+```
+
+**05-dependency-b**
+
+```
+import { LocalDataBaseService } from "./05-dependency-c";
+
+interface Post {
+    body:   string;
+    id:     number;
+    title:  string;
+    userId: number;
+}
+
+
+export class PostService {
+
+    private posts: Post[] = [];
+
+    constructor() {}
+
+    async getPosts() {
+        const jsonDB = new LocalDataBaseService();
+        this.posts = await jsonDB.getFakePosts();
+
+        return this.posts;
+    }
+}
+
+```
+
+**05-dependency-c**
+
+```
+
+export class LocalDataBaseService {
+
+    constructor() {}
+
+    async getFakePosts() {
+        return [
+            {
+                'userId': 1,
+                'id': 1,
+                'title': 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
+                'body': 'quia et suscipit suscipit recusandae consequuntur expedita et cum reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto'
+            },
+            {
+                'userId': 1,
+                'id': 2,
+                'title': 'qui est esse',
+                'body': 'est rerum tempore vitae sequi sint nihil reprehenderit dolor beatae ea dolores neque fugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis qui aperiam non debitis possimus qui neque nisi nulla'
+            }]
+    }
+
+}
+
+
+```
+
+El problema del ejercicio anterior es que 05-dependency-b tiene una alta dependencia con 05-dependency-c ya que no permite al código cambiar el origen de los datos sin necesidad de alterar el código tanto en la instancia de la base de datos como en la obtención de los datos (Tendriamos que violentar el principio Open & Close)
+
+Nuestro código se debe basar en abstracciones y no en implementaciones
+
+Para mejorar el código vamos aplicar el patrón de inyección de dependencias, inversión de dependencias y sustitución de Liskov
+
+**05-dependency-a**
+
+```
+import { PostService } from "./05-dependency-b";
+import {
+  LocalDataBaseService,
+  JsonDataBaseService,
+  WebApiPostService,
+} from "./05-dependency-c";
+
+// Main
+(async () => {
+  const provider = new WebApiPostService();
+  const postService = new PostService(provider);
+
+  const posts = await postService.getPosts();
+
+  console.log({ posts });
+})();
+
+```
+
+**05-dependency-b**
+
+```
+import { PostProvider } from "./05-dependency-c";
+
+export interface Post {
+  body: string;
+  id: number;
+  title: string;
+  userId: number;
+}
+
+export class PostService {
+  private posts: Post[] = [];
+
+  constructor(private postProvider: PostProvider) {}
+
+  async getPosts() {
+    this.posts = await this.postProvider.getPosts();
+
+    return this.posts;
+  }
+}
+
+```
+
+**05-dependency-c**
+
+```
+import LocalPosts from "../data/local-database.json";
+import { Post } from "./05-dependency-b";
+
+export abstract class PostProvider {
+  abstract getPosts(): Promise<Post[]>;
+}
+
+export class LocalDataBaseService extends PostProvider {
+  async getPosts() {
+    return [
+      {
+        userId: 1,
+        id: 1,
+        title:
+          "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        body: "quia et suscipit suscipit recusandae consequuntur expedita et cum reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto",
+      },
+      {
+        userId: 1,
+        id: 2,
+        title: "qui est esse",
+        body: "est rerum tempore vitae sequi sint nihil reprehenderit dolor beatae ea dolores neque fugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis qui aperiam non debitis possimus qui neque nisi nulla",
+      },
+    ];
+  }
+}
+
+export class JsonDataBaseService extends PostProvider {
+  async getPosts() {
+    return LocalPosts;
+  }
+}
+
+export class WebApiPostService extends PostProvider {
+  async getPosts(): Promise<Post[]> {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const data = await response.json();
+    return data;
+  }
+}
+
+```
