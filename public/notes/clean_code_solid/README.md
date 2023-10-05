@@ -39,7 +39,7 @@ Es un proceso que tiene como objetivo mejorar el código sin alterar su comporta
 
 Una refactorización fuerte requiere que el código tenga prueba automáticas, sin pruebas automáticas se cae en el _"si funciona, no lo toques"_
 
-La deuda técnica siempre la termina pagando alguien, ya sea el cliente, un proveedor o el desarrolllador, mal gastando tiempo en un sistema frágil
+La deuda técnica siempre la termina pagando alguien, ya sea el cliente, un proveedor o el desarrollador, mal gastando tiempo en un sistema frágil
 
 ### Clean Code
 
@@ -47,15 +47,15 @@ La deuda técnica siempre la termina pagando alguien, ya sea el cliente, un prov
 
 - Tiene que ser simple y directo
 
-- El código limpio está orientadp a que sea facil de leer.
+- El código limpio está orientado a que sea facil de leer.
 
-### Nombres pronuncialbles y expresivos
+### Nombres pronunciables y expresivos
 
 - Las variables deben ser en inglés y deben ser pronunciables
 
 - Se recomienda continuar con las convenciones de los lenguajes, python usan snake case y js camel case, las interfaces son pascal case
 
-- Intenta no ahorrar caracteres en nombres y estos deben ser expresivos
+- Intenta no ahorrar caracteres en nombres, estos deben ser expresivos
 
 - Ausencia de información técnica en los nombres: no se recomienda algo como UserInterface, AbstractUser
 
@@ -416,7 +416,7 @@ const getPayAmount = ({ isDead = false, isSeparated = true, isRetired = false })
 
     // isRedFruit
     console.log({ isRedFruit: isRedFruit('cereza'), fruit: 'cereza' }); // true
-    console.log({ isRedFruit: isRedFruit('piña'), fruit: 'piña' }); // true
+    console.log({ isRedFruit: isRedFruit('piña'), fruit: 'piña' }); // false
 
     //getFruitsByColor
     console.log({ redFruits: getFruitsByColor('red') }); // ['manzana', 'fresa']
@@ -969,7 +969,7 @@ Si hay comentarios en el código es porque no suficientemente auto-explicativo
 
 Se deben evitar los comentarios, sin embargo al usar librerias de terceros , APIs o Frameworks los comentarios pueden ser utiles.
 
-Para evitar comentarios es necesario refactorizado, hacer uso de nombres de variables, funciones y clases que describan lo que hacen.
+Para evitar comentarios es necesario refactorizar, hacer uso de nombres de variables, funciones y clases que describan lo que hacen.
 
 "no comentes el código mal escrito, reescribelo"
 
@@ -990,10 +990,15 @@ Es todo lo que no se debería hacer, hay antipatrones y CodeSmells
 ### CodeSmells - STUPID
 
 S -> Singleton: patrón singleton
+
 T -> Tight Coupling: Alto acomplamiento
+
 U -> Untestability: Código no probable (Unit Test)
+
 P -> Premature Optimization: Optimizaciones prematuras
+
 I -> Indescriptive Naming: Nombres pocos descriptivos
+
 D -> Duplication: Duplicidad de código, no aplicación del principio DRY
 
 #### Singleton
@@ -1372,7 +1377,7 @@ Las listas largas de argumentos suelen aparecer por tratar de hacer que métodos
 Se recomienda
 
 - Un objeto como único argumento
-- Verificar si los argumentos realmente requeridos
+- Verificar si los argumentos son realmente requeridos
 
 ### Acopladores
 
@@ -1963,7 +1968,6 @@ class Tucan implements Bird, FlyingBird {
     return 200;
   }
   public eat() {}
-  public swim() {}
 }
 
 class Hummingbird implements Bird, FlyingBird {
