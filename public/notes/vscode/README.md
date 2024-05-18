@@ -100,3 +100,19 @@ Tab + Shift
 Copy line up / down (en paleta de comandos)
 
 option + shift + (up / down)
+
+### Multicursor básico
+
+cmd + option + shift + (up / down)
+
+Genera múltiples cursores
+
+### Multicurso copiar, formato y uppercase a lowercase
+
+⌥ ⌘ ↑ / ↓ -> option + shift + right para seleccionar hasta el final
+
+Las opciones de transformar uppercase y lowercase están en la paleta de comandos si no tienen un shortcut configurado.
+
+Para posiciones espeficas podemos generar multiples cursores manteniendo oprimido option + doble click en caso de que algo se salga del patron se puede seleccionar sin soltar option y click sostenido para seleccionar.
+
+Se pueden crear multiples cursores buscando el próximo match (find next match) cmd + d
