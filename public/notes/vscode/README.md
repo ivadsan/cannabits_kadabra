@@ -73,3 +73,22 @@ cmd + shift + t abre
 Pararse sobre palabra común en líneas a borrar cmd + shift + L para seleccionar
 
 Borrar cmd + shift + k
+
+### open terminal
+
+ctrl + ` backtick
+
+### Emmet wrap
+
+No tiene un shortcut por default, se puede acceder mediante la paleta de comandos -> seleccionar Emmet wrap abbreviation y se puede agregar selectores de css para construir un wrap.
+
+### Manejo de tabs
+
+- ⌘ W Cerrar tab / Cerrar aplicación
+- ⌘ K ⌘ W Cerrar todas
+- ⇧ ⌘ T Reabrir anterior
+
+### Tabulaciones
+
+Tab
+Tab + Shift
