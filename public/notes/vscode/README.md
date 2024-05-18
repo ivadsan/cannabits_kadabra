@@ -92,3 +92,11 @@ No tiene un shortcut por default, se puede acceder mediante la paleta de comando
 
 Tab
 Tab + Shift
+
+## Múltiples cursores y edición rápida
+
+### Clonar líneas
+
+Copy line up / down (en paleta de comandos)
+
+option + shift + (up / down)
