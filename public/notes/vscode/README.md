@@ -50,6 +50,26 @@ Si las líneas tiene un patron es posible seleccionarlas todas + paleta de coman
 
 ### Comentar código
 
-cmd + /
+cmd + / -> comenta una línea completa o bloque de código
 
 o seleccionar -> paleta de comandos -> toggle line comment
+
+option + shift + A -> comenta un trozo de código
+
+### Crear Archivo
+
+cmd + click en una ruta si esta no existe crear el scafolding y el archivo.
+
+### Definiciones
+
+Si pasamos el cursor sobre un método o función podemos ver la definición pero si lo hacemos oprimiendo cmd podemos ver su declaración y si hacemos click vamos al archivo donde esta definido.
+
+cmd + w cierra archivo
+
+cmd + shift + t abre
+
+### Borrar línea con multicursor
+
+Pararse sobre palabra común en líneas a borrar cmd + shift + L para seleccionar
+
+Borrar cmd + shift + k
