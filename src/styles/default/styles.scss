@@ -116,6 +116,15 @@
         font-weight: 700;
         color: darkblue;
       }
+      blockquote {
+        border-left: 3px solid #272822;
+        background-color: #eee;
+        padding: 8px 16px;
+        p {
+          margin: 0;
+        }
+        margin-bottom: 24px;
+      }
     }
     .empty {
       width: 100%;

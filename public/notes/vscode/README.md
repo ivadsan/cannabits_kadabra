@@ -60,7 +60,7 @@ cmd + click en una ruta si esta no existe crear el scafolding y el archivo.
 
 ### Definiciones
 
-Si pasamos el cursor sobre un método o función podemos ver la definición pero si lo hacemos oprimiendo cmd podemos ver su declaración y si hacemos click vamos al archivo donde esta definido.
+> Si pasamos el cursor sobre un método o función podemos ver la definición pero si lo hacemos oprimiendo cmd podemos ver su declaración y si hacemos click vamos al archivo donde esta definido.
 
 ### Borrar línea con multicursor
 
@@ -109,4 +109,59 @@ No tiene un shortcut por default, se puede acceder mediante la paleta de comando
 
 - Se pueden crear multiples cursores buscando el próximo match (find next match) cmd + d
 
-## Definiciones y snipets
+## Definiciones y snippets
+
+### Definiciones en un archivo
+
+cmd + p y luego agregar @ arroba para acceder a los atributos, metodos y demás.
+
+### Ir a una línea
+
+cmd + P -> y luego agregar : seguido del número de la línea
+
+### Replace symbol
+
+- En el caso de querer renombrar una clase y los lugares donde ha sido instanciada basta con pararse sobre el nombre de la clase y f2 -> renombrar, esto cambiara el nombre de la clase, los imports nombrados y donde se instancia.
+
+- En caso de solo requerir un cambio en un archivo donde se usa la clase con un alias realizar la misma acción, esta solo tendrá efecto sobre el archivo que importa la clase.
+
+### Snippets
+
+- clg -> consol.log
+
+### Snippets personalizados
+
+Paleta de comandos -> Configure user snippets -> Elegir lenguaje
+
+```
+// Example output
+
+class Hero {
+
+    constructor() {
+        console.log('Hero initialized');
+    }
+
+    showHero() {
+        return this;
+    }
+}
+
+// Snippet using multiple cursors and placeholders
+
+"Create Hero Key": {
+		"prefix": "hero",
+		"body": [
+			"class ${1:Hero} {",
+			"constructor() {",
+			"console.log('${1:Hero} initialized');",
+			"}",
+			"",
+			"show${1:Hero}() {",
+			"return this;",
+			"}",
+			"}"
+		],
+		"description": "Create Hero Desc"
+	}
+```
