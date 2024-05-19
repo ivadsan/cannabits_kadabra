@@ -8,8 +8,8 @@
 
 ### Configurando el espacio de trabajo
 
-Es posible ocultar el Minimap y volverlo a traer con CMD + Shift + P -> view: Toggle Minimap
-Es posible ocultar el Activity Bar (Explorer, Search, Source control .... ) y volverlo a traer con CMD + Shift + P -> view: Focus Activity Bar
+- Es posible ocultar el Minimap y volverlo a traer con CMD + Shift + P -> view: Toggle Minimap
+- Es posible ocultar el Activity Bar (Explorer, Search, Source control .... ) y volverlo a traer con CMD + Shift + P -> view: Focus Activity Bar
 
 ### Extensiones recomendadas
 
@@ -23,9 +23,9 @@ Es posible ocultar el Activity Bar (Explorer, Search, Source control .... ) y vo
 
 ### Sincronización de las configuraciones en otros equipos
 
-Para sincronizar basta con activar en Account en la Acitivity Bar, la opción **Backup and Sync settings** e iniciar sesión ya sea con una cuenta Microsoft o de Github
+Para sincronizar basta con activar en Account de la Acitivity Bar, la opción **Backup and Sync settings** e iniciar sesión ya sea con una cuenta Microsoft o de Github
 
-### Configurar el comando _code_
+### Configurar el comando 'code'
 
 cmd + shift + p -> Shell command: install 'code' command in PATH
 
@@ -50,11 +50,9 @@ Si las líneas tiene un patron es posible seleccionarlas todas + paleta de coman
 
 ### Comentar código
 
-cmd + / -> comenta una línea completa o bloque de código
+- cmd + / -> comenta una línea completa o bloque de código o seleccionar -> paleta de comandos -> toggle line comment
 
-o seleccionar -> paleta de comandos -> toggle line comment
-
-option + shift + A -> comenta un trozo de código
+- option + shift + A -> comenta un trozo de código
 
 ### Crear Archivo
 
@@ -63,10 +61,6 @@ cmd + click en una ruta si esta no existe crear el scafolding y el archivo.
 ### Definiciones
 
 Si pasamos el cursor sobre un método o función podemos ver la definición pero si lo hacemos oprimiendo cmd podemos ver su declaración y si hacemos click vamos al archivo donde esta definido.
-
-cmd + w cierra archivo
-
-cmd + shift + t abre
 
 ### Borrar línea con multicursor
 
@@ -90,29 +84,29 @@ No tiene un shortcut por default, se puede acceder mediante la paleta de comando
 
 ### Tabulaciones
 
-Tab
-Tab + Shift
+- Tab
+- Tab + Shift
 
 ## Múltiples cursores y edición rápida
 
 ### Clonar líneas
 
-Copy line up / down (en paleta de comandos)
+- Copy line up / down (en paleta de comandos)
 
-option + shift + (up / down)
+- option + shift + (up / down)
 
 ### Multicursor básico
 
-cmd + option + shift + (up / down)
-
-Genera múltiples cursores
+- cmd + option (up / down) Genera múltiples cursores
 
 ### Multicurso copiar, formato y uppercase a lowercase
 
-⌥ ⌘ ↑ / ↓ -> option + shift + right para seleccionar hasta el final
+- ⌥ ⌘ ↑ / ↓ -> option + shift + right para seleccionar hasta el final
 
-Las opciones de transformar uppercase y lowercase están en la paleta de comandos si no tienen un shortcut configurado.
+- Las opciones de transformar uppercase y lowercase están en la paleta de comandos si no tienen un shortcut configurado.
 
-Para posiciones espeficas podemos generar multiples cursores manteniendo oprimido option + doble click en caso de que algo se salga del patron se puede seleccionar sin soltar option y click sostenido para seleccionar.
+- Para posiciones espeficas podemos generar multiples cursores manteniendo oprimido option + doble click en caso de que algo se salga del patron se puede seleccionar sin soltar option y click sostenido para seleccionar.
 
-Se pueden crear multiples cursores buscando el próximo match (find next match) cmd + d
+- Se pueden crear multiples cursores buscando el próximo match (find next match) cmd + d
+
+## Definiciones y snipets
