@@ -56,7 +56,7 @@ Si las líneas tiene un patron es posible seleccionarlas todas + paleta de coman
 
 ### Crear Archivo
 
-cmd + click en una ruta si esta no existe crear el scafolding y el archivo.
+cmd + click en una ruta de import o que referencia a un archivo del proyecto, si este no existe crea el scafolding y el archivo.
 
 ### Definiciones
 
@@ -84,8 +84,8 @@ No tiene un shortcut por default, se puede acceder mediante la paleta de comando
 
 ### Tabulaciones
 
-- Tab
-- Tab + Shift
+- Tab -> Tabulación hacia adelante
+- Tab + Shift -> Tabulación hacia atrás
 
 ## Múltiples cursores y edición rápida
 
@@ -101,29 +101,31 @@ No tiene un shortcut por default, se puede acceder mediante la paleta de comando
 
 ### Multicurso copiar, formato y uppercase a lowercase
 
-- ⌥ ⌘ ↑ / ↓ -> option + shift + right para seleccionar hasta el final
+- ⌥ ⌘ ↑ / ↓ Para crear múltiples cursores
 
-- Las opciones de transformar uppercase y lowercase están en la paleta de comandos si no tienen un shortcut configurado.
+- En caso de tener que seleccionar contenido con los multiples cursores y este no tenga la misma longitud en cada línea podemos seleccionar de principio a fin usando -> option + shift + right para seleccionar hasta el final
 
-- Para posiciones espeficas podemos generar multiples cursores manteniendo oprimido option + doble click en caso de que algo se salga del patron se puede seleccionar sin soltar option y click sostenido para seleccionar.
+- Las opciones de transformar uppercase y lowercase están en la paleta de comandos en caso de no tener un shorcut configurado
 
-- Se pueden crear multiples cursores buscando el próximo match (find next match) cmd + d
+- Otra opción para seleccionar multiple contenido de longitud irregular en diferentes líneas es manteniendo oprimido option + doble click, en caso de que algo del contenido se salga del patrón se puede seleccionar sin soltar option y click sostenido.
+
+- Se pueden crear múltiples cursores buscando el próximo match (find next match) cmd + D
 
 ## Definiciones y snippets
 
 ### Definiciones en un archivo
 
-cmd + p y luego agregar @ arroba para acceder a los atributos, metodos y demás.
+- cmd + p y luego agregar @ arroba para acceder a los atributos, metodos y demás.
 
 ### Ir a una línea
 
-cmd + P -> y luego agregar : seguido del número de la línea
+- cmd + P -> y luego agregar : seguido del número de la línea
 
 ### Replace symbol
 
-- En el caso de querer renombrar una clase y los lugares donde ha sido instanciada basta con pararse sobre el nombre de la clase y f2 -> renombrar, esto cambiara el nombre de la clase, los imports nombrados y donde se instancia.
+- En el caso de querer renombrar una clase y los lugares donde ha sido instanciada basta con pararse sobre el nombre de la clase y f2 -> renombrar, esto cambiará el nombre de la clase, los imports nombrados y todo lugar donde se usa la clase para crear instancias.
 
-- En caso de solo requerir un cambio en un archivo donde se usa la clase con un alias realizar la misma acción, esta solo tendrá efecto sobre el archivo que importa la clase.
+- En caso de solo requerir un cambio de nombre de la clase por un alias en un archivo, realizamos la acción anterior con f2 y esto modificará solo el archivo donde se importa la clase.
 
 ### Snippets
 
@@ -371,9 +373,9 @@ export interface Type {
 
 ### TODO Highlight
 
-Además de resaltar los comentarios de tipo TODO: y FIXME: (se pueden agregar otros keywords), permite listar en la termina todos los archivos que contienen estos comentarios.
+Además de resaltar los comentarios de tipo TODO: y FIXME: (se pueden agregar otros keywords), permite listar en la terminal todos los archivos que contienen estos comentarios.
 
-Ingresar por lo paleta de comandos - TODO list highlighted annotations y seleccionar cualquiera de las opciones ALL, TODO, FIXME
+Ingresar a la paleta de comandos - TODO list highlighted annotations y seleccionar cualquiera de las opciones ALL, TODO, FIXME.
 
 ### CodeSnap
 
@@ -381,7 +383,7 @@ Sirve para crear imágenes de código para compartir.
 
 - Abri CodeSnap por medio de la paleta de comandos
 - Se abre una ventana donde mostrará la imagen
-- Seleccionar el código que vamos a llevar a la imagen y listo.
+- Seleccionar el código que vamos a llevar a la imagen y listo toma la captura o guardar la imagen.
 
 ### LiveServer
 
