@@ -50,7 +50,7 @@ Nota: No significa que no se deba usar y que su código sea de mala calidad, es 
 - Se construye alrededor del model de datos
 - Se obtiene una arquitectura altamente dependiente del modelo de datos
 
-### DDD
+### Intro: Domain Driver Design
 
 Es un enfoque de diseño y desarrollo de software que pone énfasis en la complejidad del dominio del negocio y en el lenguaje común entre los desarrolladores y los expertos del dominio. Su objetivo principal es crear software que refleje con precisión las realidades del dominio empresarial y permita una colaboración efectiva entre los desarrolladores y los expertos del negocio.
 
@@ -60,7 +60,35 @@ Es un enfoque de diseño y desarrollo de software que pone énfasis en la comple
 - Se implementan los casos de uso que se requieren resolver.
 - Por una parte esta el dominio (Se mantiene en el tiempo) y por otra los casos de uso (Varian en el tiempo)
 
-#### Tiempo de desarrollo
+### Tiempo de desarrollo
 
 - El dominio es invariable
 - Los casos de usos son muchos mas inestables, tienden a cambiar en el tiempo
+
+### Lenguaje Ubicuo
+
+Toda la comunicación entre los diferentes roles del proyecto (PMs, desarrolladores, POs, clientes) debe ser en un lenguaje común y preciso, conocido como lenguaje ubicuo. Este lenguaje evita ambigüedades y establece claramente los conceptos y términos con los cuales se deben referir a las entidades y acciones del dominio. Su objetivo es garantizar una comprensión compartida y coherente del dominio, facilitando la colaboración y minimizando errores de interpretación.
+
+### Bounded context (Contextos acotados)
+
+- Los contextos acotados son areas del dominio en la un modelo específico es aplicable.
+
+- Es una forma de organizar el modelo y la lógica de negocio de la aplicación guiado por dominio.
+
+- Los contextos acotados tiene un sentido especial dentro del dominio
+
+- Pueden tener su propio lenguaje ubicuo
+
+- Las entidades fuera del dominio puede tener características ligeremente diferentes
+
+Pueden tener entidades compartidas y dependientes entre los contexto, las cuales deben ser separadas para evitar poner en riesgo la integridad del model.
+
+#### Características de los Contextos Acotados
+
+- **Independencia:** Cada contexto acotado es independiente de los demás y puede tener sus propias reglas de negocio, entidades y modelos.
+
+- **Claridad de Límites:** Los límites del contexto están claramente definidos, lo que evita confusiones y ambigüedades en el uso de términos y conceptos.
+
+- **Consistencia Interna:** Dentro de un contexto acotado, los términos y conceptos son coherentes y se usan de manera consistente.
+
+- **Interacciones Controladas:** La comunicación entre contextos acotados debe ser bien definida y controlada para evitar dependencias innecesarias y para mantener la integridad de cada contexto.
