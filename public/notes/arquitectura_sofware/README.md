@@ -77,11 +77,17 @@ Toda la comunicación entre los diferentes roles del proyecto (PMs, desarrollado
 
 - Los contextos acotados tiene un sentido especial dentro del dominio
 
+- Es un subdominio del dominio del problema
+
 - Pueden tener su propio lenguaje ubicuo
 
 - Las entidades fuera del dominio puede tener características ligeremente diferentes
 
-Pueden tener entidades compartidas y dependientes entre los contexto, las cuales deben ser separadas para evitar poner en riesgo la integridad del model.
+- Pueden tener entidades compartidas y dependientes entre los contexto, las cuales deben ser separadas para evitar poner en riesgo la integridad del model.
+
+- Tener una entidad compartida entre contextos no significa una duplicidad del código sino una aclaración del mismo.
+
+- Al compartir entre contextos se puede llegar a la acumulación de detalles por eso es necesaria esta aclaración de las entidades dependientes.
 
 #### Características de los Contextos Acotados
 
@@ -92,3 +98,5 @@ Pueden tener entidades compartidas y dependientes entre los contexto, las cuales
 - **Consistencia Interna:** Dentro de un contexto acotado, los términos y conceptos son coherentes y se usan de manera consistente.
 
 - **Interacciones Controladas:** La comunicación entre contextos acotados debe ser bien definida y controlada para evitar dependencias innecesarias y para mantener la integridad de cada contexto.
+
+### Mapeo de contextos
