@@ -99,4 +99,42 @@ Toda la comunicación entre los diferentes roles del proyecto (PMs, desarrollado
 
 - **Interacciones Controladas:** La comunicación entre contextos acotados debe ser bien definida y controlada para evitar dependencias innecesarias y para mantener la integridad de cada contexto.
 
-### Mapeo de contextos
+### Mapeo de contextos (Context Mapping)
+
+- Definir los contextos acotados que componen el dominio del problema
+
+- Los contextos no son totalmente independientes y tienen interacciones con otros contextos
+
+- Es necesario identificar el tipo de dependencia e interacción entre los contextos
+
+- El mapeo de contextos es un diagrama para representar todas las relaciones y dependencias entre los distintos contextos
+
+- Cada relación entre contextos tiene una dirección de dependencia
+
+- Upstream: Un contexto acotado que influye en otros contextos. Los cambios en un contexto upstream pueden afectar a los contextos downstream que dependen de él. En otras palabras, el contexto upstream es la fuente de la dependencia.
+
+- Downstream: Un contexto acotado que depende de uno o más contextos upstream. Este contexto recibe la influencia de los contextos upstream, y los cambios en estos contextos pueden impactarlo.
+
+- Hay relaciones entre contextos donde puede suceder que ninguno mande sobre el otro
+
+#### Tipos de relaciones
+
+- Conformista: el contexto downstream no tiene ninguna capacidad de negociación sobre cambios en el contexto upstream
+
+- Cliente / proveedor (Customer / Supplier): Existe una leve capacidad de negociación entre las partes, requisitos en el cliente (downstream) pueden inferir en cambios en el proveedor (upstream)
+
+- Socio (Partnership) Ambos contextos colaboran por una meta en común, por lo que ambos lados de la relación de poder de influenciar cambios uno sobre el otro.
+
+- Nucleo compartido (Shared Kernel) todas las partes deben estar de acuerdo para un cambio, dificil de mantener
+
+- Anti-Corruption Layer (ACL) proteger el modelo de dominio de un contexto acotado (bounded context) de la influencia de modelos externos no deseados o inconsistentes. Este patrón se utiliza especialmente cuando un contexto acotado depende de otro contexto o de un sistema legado, evitando que el dominio quede "corrompido" por conceptos y estructuras ajenas.
+
+  - Protección del Modelo de Dominio: Evita que los conceptos y estructuras de sistemas externos o legados corrompan el modelo de dominio.
+
+  - Desacoplamiento: Aísla las dependencias externas, facilitando cambios y migraciones futuras.
+
+  - Adaptación y Traducción: Permite adaptar y traducir datos y comportamientos entre diferentes sistemas sin exponer los detalles internos de uno al otro.
+
+  - Mantenibilidad: Mejora la mantenibilidad del código al centralizar la lógica de traducción y adaptación en un único lugar.
+
+- Open host service / Published language: Es una relación conformista donde el cliente tiene mayor información del upstream context tales como versiones y compatibilidades.
