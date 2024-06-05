@@ -138,3 +138,13 @@ Toda la comunicación entre los diferentes roles del proyecto (PMs, desarrollado
   - Mantenibilidad: Mejora la mantenibilidad del código al centralizar la lógica de traducción y adaptación en un único lugar.
 
 - Open host service / Published language: Es una relación conformista donde el cliente tiene mayor información del upstream context tales como versiones y compatibilidades.
+
+### Capas del DDD
+
+Presentación
+
+Aplicación (Casos de uso)
+
+La capa de dominio debe ser lo mas estable del sistema, se debe evitar modificar el dominio para adaptarlo al exterior, debe estar desarrollado bajo el principio SOLID open / close, debe estar abierto para agregar mas funcionalidad pero cerrado para modificar las funcionalidad existente
+
+Antes de pensar en modificar la capa de dominio, se debe modificar las capas exteriores tales como infraestructura, presentación o aplicación
