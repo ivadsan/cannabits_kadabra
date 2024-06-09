@@ -141,10 +141,13 @@ Toda la comunicación entre los diferentes roles del proyecto (PMs, desarrollado
 
 ### Capas del DDD
 
+- Al inicio teniamos arquitecturas donde la capa de presentación, logica de negocio y datos estaban todas mezcladas.
+- Luego viene un ordenamiento donde se separan estas tres capas para organizar mejor la aplicación.
+- Ahora en DDD es una evolución de la arquitectura de tres capas donde la capa de lógica de negocio se ha separado en aplicación y dominio.
+- Donde aplicación es donde residen los casos de uso independientes de la capa de dominio.
+- En esta arquitectura la capa de datos ahora es de infraestructura.
+
 Presentación
 
-Aplicación (Casos de uso)
-
-La capa de dominio debe ser lo mas estable del sistema, se debe evitar modificar el dominio para adaptarlo al exterior, debe estar desarrollado bajo el principio SOLID open / close, debe estar abierto para agregar mas funcionalidad pero cerrado para modificar las funcionalidad existente
-
-Antes de pensar en modificar la capa de dominio, se debe modificar las capas exteriores tales como infraestructura, presentación o aplicación
+- La capa de dominio debe ser lo mas estable del sistema, se debe evitar modificar el dominio para adaptarlo al exterior, debe estar desarrollado bajo el principio SOLID open / close, debe estar abierto para agregar mas funcionalidad pero cerrado para modificar las funcionalidad existente
+- Antes de pensar en modificar la capa de dominio, se debe modificar las capas exteriores tales como infraestructura, presentación o aplicación
