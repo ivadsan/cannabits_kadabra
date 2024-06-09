@@ -40,15 +40,15 @@ La aplicación esta desplegada en un único servidor
 
 Nota: No significa que no se deba usar y que su código sea de mala calidad, es relativo al tamaño y objeto del proyecto y a las buenas prácticas de desarrollo.
 
-## Domain Driver Design (DDD)
-
-### Arquitectura centrada en los datos
+## Arquitectura centrada en los datos
 
 - Se planifica a partir de los datos a recolectar
-- Se recopilan los requisito para satisfacer las reglas de negocio.
+- Se recopilan los requisitos para satisfacer las reglas de negocio.
 - Se inicia por el diseño del modelo de datos
-- Se construye alrededor del model de datos
+- Se construye alrededor del modelo de datos
 - Se obtiene una arquitectura altamente dependiente del modelo de datos
+
+## Domain Driver Design (DDD)
 
 ### Intro: Domain Driver Design
 
@@ -56,7 +56,7 @@ Es un enfoque de diseño y desarrollo de software que pone énfasis en la comple
 
 - Se piensa primero en el dominio del problema
 - El objetivo es ser experto en el dominio del problema
-- Se modelan las entidades, proceso y reglas especificas del domino
+- Se modelan las entidades, procesos y reglas especificas del dominio
 - Se implementan los casos de uso que se requieren resolver.
 - Por una parte esta el dominio (Se mantiene en el tiempo) y por otra los casos de uso (Varian en el tiempo)
 
@@ -71,9 +71,9 @@ Toda la comunicación entre los diferentes roles del proyecto (PMs, desarrollado
 
 ### Bounded context (Contextos acotados)
 
-- Los contextos acotados son areas del dominio en la un modelo específico es aplicable.
+- Áreas específicas del dominio donde ciertos términos y conceptos tienen significados precisos y coherentes.
 
-- Es una forma de organizar el modelo y la lógica de negocio de la aplicación guiado por dominio.
+- Es una forma de organizar el modelo y la lógica de negocio de la aplicación guiado por el dominio.
 
 - Los contextos acotados tiene un sentido especial dentro del dominio
 
@@ -83,7 +83,7 @@ Toda la comunicación entre los diferentes roles del proyecto (PMs, desarrollado
 
 - Las entidades fuera del dominio puede tener características ligeremente diferentes
 
-- Pueden tener entidades compartidas y dependientes entre los contexto, las cuales deben ser separadas para evitar poner en riesgo la integridad del model.
+- Pueden tener entidades compartidas y dependientes entre los contextos, las cuales deben ser separadas para evitar poner en riesgo la integridad del modelo.
 
 - Tener una entidad compartida entre contextos no significa una duplicidad del código sino una aclaración del mismo.
 
