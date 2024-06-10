@@ -147,7 +147,45 @@ Toda la comunicación entre los diferentes roles del proyecto (PMs, desarrollado
 - Donde aplicación es donde residen los casos de uso independientes de la capa de dominio.
 - En esta arquitectura la capa de datos ahora es de infraestructura.
 
-Presentación
+#### Definición de cada capa
 
-- La capa de dominio debe ser lo mas estable del sistema, se debe evitar modificar el dominio para adaptarlo al exterior, debe estar desarrollado bajo el principio SOLID open / close, debe estar abierto para agregar mas funcionalidad pero cerrado para modificar las funcionalidad existente
-- Antes de pensar en modificar la capa de dominio, se debe modificar las capas exteriores tales como infraestructura, presentación o aplicación
+- Presentación: Ahora no se limita a la construcción de vistas, ahora maneja frameworks o apis que interactuan con el usuario. Entonces la capa de presentación es la API de entrada al sistema que da soporte a la interfaz de usuario. Es la fachada que interactua con los servicios de la aplicación para iniciar los casos de uso. (Equivalente a @Controller en spring)
+
+- Aplicación: Encargada de orquestar todos los casos de uso. (Equivalente a @Service en spring)
+
+  - Interactua con el dominio para ejecutar su lógica específica
+  - Interactura con la capa de infraestructura para el manejo de la persistencia, loggin, etc.
+  - Responde a la capa de presentación con los datos formateados.
+
+- Dominio: Contiene lo datos y lógica central del sistema diseñada bajo DDD
+
+  - No tiene conocimiento de los detalles de implementación (Framework, Base de datos)
+  - No le debe afectar ningún cambio en los detalles de implementación
+  - Aislada del mundo exterior, si interactua con la infraestructura es para temas de logging por ejemplo
+  - Se compone de entidades de dominio y servicios de dominio
+    - Entidades de dominio: Se diseña orientada a objetos datos y lógica, No son entidades de persistencia (@Entity en spring)
+    - Servicios de dominio: Lógica de dominio de una entidad de dominio (@Service en spring)
+  - La capa de dominio debe ser lo mas estable del sistema, se debe evitar modificar el dominio para adaptarlo al exterior, debe estar desarrollado bajo el principio SOLID open / close, debe estar abierto para agregar mas funcionalidad pero cerrado para modificar las funcionalidad existente
+  - Antes de pensar en modificar la capa de dominio, se debe modificar las capas exteriores tales como infraestructura, presentación o aplicación
+
+- Infraestructura: Persistencia (ORM, repositorios @Entity), Detalles del framework (configuración, arranque de la aplicación), Logging
+
+#### Modelo de dominio
+
+- Lo primero es identificar las entidades del dominio, que son los objetos con datos y comportamiento (Ejemplo: Equipo, miembro, proyecto)
+
+- Existen atributos relacionados con las entidades (value objects - Objetos de valor) (Proyecto: estado, categoría) Son clases con simplemente datos, deben ser inmutables y sirven para representar de manera clara los atributos de las entidades
+
+- El siguiente paso es establecer las relaciones del modelo
+
+- Cada entidad está relacionada con sus objetos de valor a esta relación (concepto), se le llama agregación Aggregate,
+
+- Cada aggregate tiene una entidad raíz (Ejemplo: Equipo, miembro, proyecto), tambien pueden existir en cada aggregate entidades secundarias con sus propios datos y lógica
+
+- No confundir Aggregate con bounded context, cada contexto puede estar conformado por varios aggregates
+
+- Como norma la comunicación entre distintos aggregates las hacemos a través de las entidades raiz, y una raiz no puede interactuar directamente con una entidad no raiz de otro aggregate. Cada aggregate tendrá una API que es por donde pasaran todas las interacciones de otros aggregates.
+
+![](/notes/arquitectura_software/assets/domain_model.png)
+
+### Modelo orientado a BBDD vs dominio

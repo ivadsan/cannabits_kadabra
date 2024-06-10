@@ -31,3 +31,7 @@ Se puede crear un script en el package.json para determinar si kadabra se carga 
 Hay un bug cuando se carga directamente una nota sin pasar por el home, la tabla de contenido toma el local storage de la sesion anterior y no se actualiza, solo se refresca si va al home y se vuelve a entrar el contenido
 
 Buscar una solución que permite visualizar en imagenes tanto desde el preview de markdown como de la aplicación compilada.
+
+Arreglar los estilos de los LI de segundo Nivel
+
+Si cambiamos el nombre de la carpeta con el proyecto compilado y recargamos sale un error fatal que se debe controlar
