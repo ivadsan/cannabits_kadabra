@@ -189,3 +189,18 @@ Toda la comunicación entre los diferentes roles del proyecto (PMs, desarrollado
 ![](/notes/arquitectura_software/assets/domain_model.png)
 
 ### Modelo orientado a BBDD vs dominio
+
+#### Modelo de persistencia
+
+- Basado totalmente en modelado de datos
+- Orientados a facilitar las operaciones de inserción, modificación, eliminación y consulta
+- Solo contiene información y no comportamiento
+- Se puede implementar un ORM
+
+#### Modelos de dominio
+
+- Orientado a modelar el dominio del problema: sus datos y comportamientos
+- El modelo se puede persistir: es en la capa de aplicación (La cual se comunica con la capa de infraestructura y de dominio ) donde se mapea el modelo del dominio y el modelo de persistencia
+- No tiene ningún conocimiento de la bbdd
+
+- Podemos crear las entidades a través de constructores establecidos, no podemos hacer uso de setters para inicializar las variables sino que se hace de manera controlada a través de los comportamientos de la entidad
