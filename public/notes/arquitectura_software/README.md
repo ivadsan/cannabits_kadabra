@@ -141,6 +141,8 @@ Toda la comunicación entre los diferentes roles del proyecto (PMs, desarrollado
 
 ### Capas del DDD
 
+![](/notes/arquitectura_software/assets/layers.png)
+
 - Al inicio teniamos arquitecturas donde la capa de presentación, logica de negocio y datos estaban todas mezcladas.
 - Luego viene un ordenamiento donde se separan estas tres capas para organizar mejor la aplicación.
 - Ahora en DDD es una evolución de la arquitectura de tres capas donde la capa de lógica de negocio se ha separado en aplicación y dominio.
@@ -204,3 +206,74 @@ Toda la comunicación entre los diferentes roles del proyecto (PMs, desarrollado
 - No tiene ningún conocimiento de la bbdd
 
 - Podemos crear las entidades a través de constructores establecidos, no podemos hacer uso de setters para inicializar las variables sino que se hace de manera controlada a través de los comportamientos de la entidad
+
+### Servicios de dominio
+
+- Ejecutan lógica que no tiene cabida en ninguna de las entidades
+- Suelen ser para coordinar la comunicación de dos o mas tipos de aggregates pero no tienen porqué
+- Son diferentes a los servicios de aplicación que ejecutan casos de uso
+- Son parte del dominio, no se crean de manera arbitraria, son parte del lenguaje ubicuo y se identifican en sesiones de brainstorming
+- No tienen cabida acciones como save, delete, upsert
+
+El concepto de servicios de dominio en Domain-Driven Design (DDD) se refiere a las operaciones y funciones que representan comportamientos dentro del dominio del negocio. A continuación, se presenta un resumen de los servicios de dominio en DDD:
+
+1. **Definición y Propósito**:
+
+   - **Servicios de Dominio**: Son componentes que encapsulan lógica de negocio que no pertenece a ninguna entidad o valor específico, pero es crucial para el dominio.
+   - **Propósito**: Mantener la lógica de negocio separada de las entidades y valores, promoviendo un diseño limpio y mantenible.
+
+2. **Características**:
+
+   - **Pureza**: No tienen estado, lo que significa que no mantienen información entre invocaciones.
+   - **Coherencia**: Se encargan de operaciones que implican múltiples entidades o valores y no encajan naturalmente dentro de una sola entidad.
+   - **Reutilizables**: Pueden ser llamados por diferentes partes del sistema, promoviendo la reutilización de lógica de negocio.
+
+3. **Tipos de Servicios en DDD**:
+
+   - **Servicios de Aplicación**: Coordina las tareas de alto nivel, orquestando las operaciones entre múltiples servicios de dominio y otros componentes.
+   - **Servicios de Dominio**: Contienen lógica de negocio pura, relevante y específica al dominio, que no pertenece a una única entidad.
+   - **Servicios de Infraestructura**: Gestionan las interacciones con sistemas externos y detalles técnicos, como persistencia y comunicación.
+
+4. **Implementación**:
+
+   - **Interfaz Clara**: Definen interfaces claras y explícitas que detallan las operaciones disponibles.
+   - **Ubicación en el Modelo de Dominio**: Normalmente se ubican en el modelo de dominio y forman parte integral del mismo.
+   - **Nombre Significativo**: Nombres que reflejan la operación de negocio que realizan, facilitando su comprensión y uso.
+
+5. **Ejemplos**:
+   - **Servicio de Facturación**: Calcula el total de una factura aplicando descuentos, impuestos y otras reglas de negocio.
+   - **Servicio de Envío**: Determina la mejor opción de envío basándose en las reglas del negocio y las preferencias del cliente.
+   - **Servicio de Autorización**: Verifica si un usuario tiene permiso para realizar una determinada operación en el sistema.
+
+Los servicios de dominio en DDD son esenciales para encapsular y gestionar la lógica de negocio compleja, promoviendo un diseño más limpio, modular y mantenible.
+
+### Resumen
+
+- El DDD se centra en la importancia de entender bien el dominio de nuestro problema para crear buen software.
+- En contraste al enfoque tradicional, centrado en los datos que tratamos.
+- Para identificar los elementos del dominio se utiliza
+  - Lenguaje ubicuo, brainstorming.
+  - Identificación de los contextos acotados.
+  - Mapeo de contextos.
+- Todo esto se hace con el fin de separar la lógica de aplicación (casos de uso) de la lógica de dominio.
+- Los casos de uso varían mucho más frecuentemente.
+
+**Modelar el dominio**
+
+1. Entidades.
+
+- Elementos del dominio con entidad propia.
+- Comportamiento + datos.
+
+2. Value Objects.
+
+- Elementos que almacenan sólo datos.
+- Creados para representar de forma más clara los atributos de las entidades.
+
+3. Aggregates.
+
+- Conjunto de entidades y value objects con un sentido común.
+
+4. Domain Services.
+
+- Elementos del dominio con lógica que no tiene cabida en ninguna de las entidades.
