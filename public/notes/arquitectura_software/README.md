@@ -301,3 +301,99 @@ Los servicios de dominio en DDD son esenciales para encapsular y gestionar la l�
 - Problemas con una lógica de dominio presente.
 - Si lo único que necesitas es un CRUD, no tiene sentido.
 - Disponibilidad de un equipo comprometido en analizar detalladamente el dominio.
+
+## Command Query Responsibility Segregation (CQRS)
+
+### Introducción
+
+Este principio se basa en la seperación de los comandos y las consultas en el sistema.
+
+- **Comandos** es toda acción que modifica el estado del sistema y que no retorna información (Ejm: Encender el motor)
+
+- **Consultas** acciones que no alteran el estado del sistema y que solo retornan datos (ejm: numero de kms recorridos)
+
+En el modelo anémico (clases con solo atributos, getter y setters pero nada de lógica, permite el acceso a su información de manera libr con riesgo de estados incongruentes) es apropiado para las consultas
+
+![](/notes/arquitectura_software/assets/modelo_anemico.png)
+
+En el modelo de dominio, se ejerce un mayor control sobre el estado para evitar inconsistencias, ya que se regulan estrictamente las acciones que pueden modificar la información, impidiendo que quede expuesta abiertamente. Esto es especialmente adecuado para el manejo de comandos, aunque necesita modificaciones para su persistencia.
+
+El CQRS permite organizar los comandos y consultas para que pueda co-existir en un sistema, tanto para operar la persistencia como para modificar el estado.
+
+![](/notes/arquitectura_software/assets/cqrs.png)
+
+### CQRS Avanzado
+
+CQRS (Command Query Responsibility Segregation) es un patrón arquitectónico que separa las operaciones de lectura y escritura en un sistema, utilizando modelos diferentes para cada una. Este patrón es especialmente útil en sistemas con requisitos complejos o con una alta demanda tanto de operaciones de lectura como de escritura.
+
+#### Componentes Clave de CQRS
+
+1. Modelo de Escritura (Comandos):
+
+- Comandos: Son las operaciones que cambian el estado del sistema. Cada comando representa una acción que altera los datos, como crear, actualizar o eliminar información.
+
+- Consistencia Transaccional: Este modelo se encarga de validar y aplicar las reglas de negocio para asegurar que el estado del sistema se mantenga consistente.
+
+2. Modelo de Lectura (Consultas):
+
+- Consultas: Son las operaciones que recuperan datos sin modificarlos. Estas operaciones están optimizadas para ser rápidas y eficientes.
+- Proyecciones: A menudo se utilizan vistas materializadas o índices que están optimizados para las necesidades específicas de las consultas.
+
+#### Ventajas de CQRS
+
+- Escalabilidad: Permite escalar de forma independiente las operaciones de lectura y escritura.
+- Optimización: Cada modelo puede ser optimizado para su propósito específico, mejorando el rendimiento general del sistema.
+- Separación de Responsabilidades: Claramente define las responsabilidades, simplificando el mantenimiento y la evolución del sistema.
+- Flexibilidad en el Diseño: Facilita la implementación de arquitecturas de microservicios y la adopción de diferentes tecnologías para cada modelo.
+
+#### Desventajas de CQRS
+
+- Complejidad: Añade complejidad al diseño y desarrollo del sistema, especialmente en términos de sincronización y consistencia eventual.
+- Curva de Aprendizaje: Requiere un conocimiento profundo del patrón y de las técnicas asociadas para su correcta implementación.
+- Infraestructura: Puede necesitar una infraestructura adicional para manejar las proyecciones y la sincronización de datos.
+
+#### Ejemplo de Uso de CQRS
+
+- Contexto: Una aplicación de gestión de pedidos.
+
+- Modelo de Escritura: Cuando un usuario crea o actualiza un pedido, el comando correspondiente valida la información y actualiza la base de datos relacional, garantizando la consistencia mediante transacciones ACID.
+
+- Modelo de Lectura: Para visualizar los pedidos, se consulta una base de datos NoSQL donde los datos están preprocesados y optimizados para respuestas rápidas. Las vistas materializadas pueden actualizarse en tiempo real o en intervalos regulares a partir de los eventos generados por el modelo de escritura.
+
+#### CQRS y Bases de Datos
+
+1. Bases de Datos Relacionales:
+
+- Ventajas:
+
+  - Transacciones ACID garantizan la consistencia y durabilidad de los datos.
+  - Soporte robusto para integridad referencial y consultas complejas.
+
+- Desventajas:
+
+  - Escalabilidad limitada para escrituras de alto volumen.
+  - Consultas complejas pueden ser lentas y costosas.
+
+2. Bases de Datos No Relacionales:
+
+- Ventajas:
+
+  - Escalabilidad horizontal facilita el manejo de grandes volúmenes de datos.
+  - Flexibilidad para manejar datos semi-estructurados o no estructurados.
+  - Altas velocidades de lectura gracias a la indexación optimizada.
+
+- Desventajas:
+
+- Falta de transacciones ACID en algunos sistemas, lo que puede comprometer la consistencia.
+- Consultas complejas pueden ser limitadas o menos eficientes.
+
+#### CQRS como Solución
+
+Al separar los modelos de lectura y escritura, CQRS permite utilizar bases de datos relacionales para operaciones de escritura y bases de datos no relacionales para operaciones de lectura, maximizando las ventajas de cada tipo de base de datos y mitigando sus desventajas. De esta manera, se mejora tanto la escalabilidad como el rendimiento del sistema.
+
+### MÉTODOS DE SINCRONIZACIÓN
+
+- Consistencia inmediata: Método síncrono.
+- Consistencia eventual: Sincronización asíncrona.
+- Consistencia programada: Sincronización a ciertas horas del día.
+- Consistencia bajo demanda: Se realiza la sincronización cuando se determine necesaria.
