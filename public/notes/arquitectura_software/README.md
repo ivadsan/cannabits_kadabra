@@ -262,21 +262,21 @@ Los servicios de dominio en DDD son esenciales para encapsular y gestionar la l�
 
 1. Entidades.
 
-- Elementos del dominio con entidad propia.
-- Comportamiento + datos.
+   - Elementos del dominio con entidad propia.
+   - Comportamiento + datos.
 
 2. Value Objects.
 
-- Elementos que almacenan sólo datos.
-- Creados para representar de forma más clara los atributos de las entidades.
+   - Elementos que almacenan sólo datos.
+   - Creados para representar de forma más clara los atributos de las entidades.
 
 3. Aggregates.
 
-- Conjunto de entidades y value objects con un sentido común.
+   - Conjunto de entidades y value objects con un sentido común.
 
 4. Domain Services.
 
-- Elementos del dominio con lógica que no tiene cabida en ninguna de las entidades.
+   - Elementos del dominio con lógica que no tiene cabida en ninguna de las entidades.
 
 ### Pros y contras DDD
 
@@ -312,7 +312,7 @@ Este principio se basa en la seperación de los comandos y las consultas en el s
 
 - **Consultas** acciones que no alteran el estado del sistema y que solo retornan datos (ejm: numero de kms recorridos)
 
-En el modelo anémico (clases con solo atributos, getter y setters pero nada de lógica, permite el acceso a su información de manera libr con riesgo de estados incongruentes) es apropiado para las consultas
+En el modelo anémico (clases con solo atributos, getter y setters pero nada de lógica, permite el acceso a su información de manera libre con riesgo de estados incongruentes) es apropiado para las consultas
 
 ![](/notes/arquitectura_software/assets/modelo_anemico.png)
 
