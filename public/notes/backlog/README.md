@@ -32,6 +32,8 @@ Hay un bug cuando se carga directamente una nota sin pasar por el home, la tabla
 
 Buscar una solución que permite visualizar en imagenes tanto desde el preview de markdown como de la aplicación compilada.
 
-Arreglar los estilos de los LI de segundo Nivel
+[x] Arreglar los estilos de los LI de segundo Nivel
 
 Si cambiamos el nombre de la carpeta con el proyecto compilado y recargamos sale un error fatal que se debe controlar
+
+validar si se puede crear rutas con el titulo del curso URLs SEO-friendly
