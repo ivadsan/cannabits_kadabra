@@ -397,3 +397,87 @@ Al separar los modelos de lectura y escritura, CQRS permite utilizar bases de da
 - Consistencia eventual: Sincronización asíncrona.
 - Consistencia programada: Sincronización a ciertas horas del día.
 - Consistencia bajo demanda: Se realiza la sincronización cuando se determine necesaria.
+
+**Mejorando la escritura**
+
+- El problema es su dependencia directa con el método de sincronización
+- Complejidad para insertar el modelo de escritura en la base de datos de lectura
+- Esto se puede mejorar con event sourcing (Representación de la información en forma de eventos)
+
+### Pros y contras de CQRS
+
+#### Pros
+
+- Tratamiento independiente de las lecturas y las escrituras.
+  - Posibilidad de tener dos modelos distintos.
+  - Uso de bases de datos adecuadas para cada situación.
+    - Escalado independiente en función de las necesidades de lectura / escritura.
+    - Normalización y desnormalización independientes.
+- Posibilidad de tener dos equipos independientes.
+  - Un equipo para el stack de comandos.
+  - Otro equipo para el stack de consultas.
+
+#### Contras
+
+- Gran complejidad
+  - Mantenimiento de dos stacks distintos para escritura y lectura.
+  - Mantenimiento de múltiples Bases de Datos.
+- Sincronización
+  - Mantener la consistencia de los datos es un problema añadido.
+- Duplicidad / redundancia de código
+
+#### CUÁNDO USAR
+
+- Sistemas dónde la escalabilidad es muy importante o crítica.
+- Volumen de datos y transacciones elevados.
+- Proyectos con problemas de rendimiento.
+- No es necesaria una consistencia inmediata de la información.
+- Distinto tratamiento para las escrituras y lecturas.
+- Equipos grandes.
+
+## Eventos
+
+### Introducción a los eventos
+
+- Nos proporciona la trazabilidad completa de las acciones realizadas sobre el sistema
+- Un evento es algo que ha sucedido en el pasado.
+  - Por lo tanto, son entidades inmutables.
+- Forma básica de interacción en el mundo real.
+  - Menos usado en el software, dónde es más frecuente el estado.
+- Es una forma de representar la información a más bajo nivel.
+  - Ofrecen más información que el simple estado final de una entidad.
+- No nos perdemos nada de lo que sucede en nuestro sistema.
+
+### Donde aplicar eventos
+
+**Event Sourcing**
+
+- Persistencia de eventos, en lugar del estado actual.
+- Se ejecutan los eventos para obtener el estado en cierto momento.
+- Se puede combinar con CQRS.
+
+**Event Driven Programming**
+
+- Eventos de aplicación.
+- Una entidad los produce y los lanza, otra los recibe y procesa.
+- Procesamiento asíncrono
+
+**Event Driven Architecture**
+
+### Introducción al Event Sourcing
+
+Es una técnica que se centra en guardar en un almacen de datos todas las acciones sobre un sistema o que modificaron el estado en lugar de guardar solo el estado actual.
+
+#### Donde puede aplicar
+
+**Problema muy común.**
+
+- Login / logout, tiempo de sesión, acción específica realizada en tu sistema etc.
+
+**Soluciones específicas**
+
+- Herramientas de logging.
+- New Relic.
+- Google Analytics.
+
+No es un concepto nuevo, las bases de datos relacionales lo implementan a modo de transacciones.
