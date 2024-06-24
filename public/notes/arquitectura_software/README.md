@@ -360,7 +360,7 @@ CQRS (Command Query Responsibility Segregation) es un patrón arquitectónico qu
 
 - Modelo de Lectura: Para visualizar los pedidos, se consulta una base de datos NoSQL donde los datos están preprocesados y optimizados para respuestas rápidas. Las vistas materializadas pueden actualizarse en tiempo real o en intervalos regulares a partir de los eventos generados por el modelo de escritura.
 
-#### CQRS y Bases de Datos
+#### CQRS y Bases de Datos
 
 1. Bases de Datos Relacionales:
 
@@ -481,3 +481,41 @@ Es una técnica que se centra en guardar en un almacen de datos todas las accion
 - Google Analytics.
 
 No es un concepto nuevo, las bases de datos relacionales lo implementan a modo de transacciones.
+
+### Event sourcing a detalle
+
+- Los eventos no deben ser eliminados o modificados, tan solo insertados
+- En caso de requerir desechar un evento debemos generar un evento nuevo que revierta los cambios dejando trazabilidad de los cambios.
+- Permiten conocer el estado de un sistema en el pasado, tan solo se necesitan recrear todos los eventos hasta un punto especifico
+
+Los campos esenciales de un evento son: id del evento, timestamp y detalles del evento.
+
+- Los timestamps suelen estar en formatos estándar como ISO 8601 (por ejemplo, 2024-06-23T15:45:00Z), que especifica tanto la fecha como la hora en un formato legible y uniforme.
+
+- UTC (Tiempo Universal Coordinado): Se indica con una Z al final del timestamp, por ejemplo, 2024-06-23T15:45:00Z.
+
+Delta del evento: se llama al campo o los campos que cambian en el ultimo evento registrado
+
+![](/notes/arquitectura_software/assets/delta.png)
+
+- El borrado es lógico y no físico
+
+Los eventos no solo se limitan a un crud (create, update, delete), en DDD los eventos son expresiones del lenguaje ubicuo (start, finish, point, warn, etc)
+
+Los eventos son personalizables, lo que define a un evento es el id de la acción y el timestamp, los detalles del evento depende de los datos que se requieran para recrear el evento.
+
+### Proyección de datos a partir de los eventos
+
+1. Consulta de datos filtrados por ID y ordenados por Timestamp de forma ascendente
+2. Creación de una nueva instancia de la entidad
+3. Aplicación de todos los eventos en orden
+4. Retorno de la instancia con el estado actual
+
+### Problemas de eficiencia
+
+- Procesar entidades con muchos eventos puede ser algo lento y costoso.
+- Para esto se pueden usar snapshots que son capturas del estado en un momento específico
+- Se puede obtener el estado actual a partir de la ejecucion de los eventos desde el último snapshot
+- Gestionar snapshots requiere espacio y procesamiento, se deben usar donde la ganancia sea sustancial y la eficiencia que se genera sea necesaria.
+
+### Event sourcing y CQRS
