@@ -519,3 +519,41 @@ Los eventos son personalizables, lo que define a un evento es el id de la acció
 - Gestionar snapshots requiere espacio y procesamiento, se deben usar donde la ganancia sea sustancial y la eficiencia que se genera sea necesaria.
 
 ### Event sourcing y CQRS
+
+- El command stack utilizaría event sourcing
+- Al realizar un comando se guardaría un evento en la base de datos de escritura
+- El sistema de sincronizacion puede ir leyendo los eventos de la base de escritura e irlos aplicando a la base de lectura
+
+### Pros y contras del event sourcing
+
+#### Pros
+
+- Trazabilidad del estado del sistema en el tiempo.
+  - Recuperación del estado en días pasados.
+  - Estadísticas y análisis.
+- Nos proporciona un log de las acciones de los usuarios.
+  - No hay necesidad de usar librerías externas ni implementar logging propio.
+- Es más eficiente espacialmente que guardar un log con la entidad completa.
+- Con CQRS podemos aprovechar los beneficios de ambos, mitigando los puntos débiles.
+- Al no tener UPDATES ni DELETES físicos, es más eficiente en las escrituras.
+
+#### Contras
+
+- Eficiencia en las consultas.
+  - Se puede mitigar el problema con snapshots o eliminarlo usando CQRS.
+- Eficiencia espacial.
+  - Necesita mucho más espacio que para representar simplemente el estado.
+- Dificultad para debuggear.
+  - No hay forma sencilla de hacer consultas directas para conocer el estado actual.
+- Técnica mucho menos usada.
+  - Será menos intuitiva para los programadores.
+  - Necesita un tiempo de adaptación.
+- Tratamiento de dominios amplios.
+  - Pocos eventos son fáciles de tratar, pero se puede complicar con dominios grandes.
+
+#### Cuando usar
+
+- Situaciones dónde consideremos usar CQRS.
+- Cuando necesitemos conocer el estado del sistema en un instante del pasado.
+- Necesidad de un log con todas las acciones realizadas por los usuarios.
+- Cuando la eficiencia de las consultas no sea algo crítico.
