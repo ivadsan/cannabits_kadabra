@@ -578,9 +578,9 @@ Los eventos de aplicación pueden ser:
 
 Por ejemplo, podemos tener un controlador que en un momento dado deba comunicarse con dos servicios distintos. Esto lo puede hacer mediante dos llamadas directas, pero utilizando eventos de aplicación, ambos servicios podrían registrarse en un publicador de eventos. Luego, el controlador puede emitir un evento para que las entidades registradas lo ejecuten o procesen sin necesidad de interacción directa entre el controlador y las entidades registradas en el publicador de eventos.
 
-Se busca el desacople del emisor de las consumidoras del evento.
+- Se busca desacoplar al emisor de los consumidores del evento.
 
-Con este modelo no debemos hacer mas cambios en el controlador en caso que necesitemos comunicarnos con mas servicios, ya que son estos los que debe registrarse al publicador de eventos y estarian escuchando cada vez que se emite un evento.
+Con este modelo no debemos hacer mas cambios en el controlador en caso que necesitemos comunicarnos con mas servicios, ya que son estos los que deben registrarse al publicador de eventos y estarian escuchando cada vez que se emite un evento.
 
 Un event publisher requiere de dos partes:
 
@@ -588,3 +588,39 @@ Un event publisher requiere de dos partes:
 - un mecanismo de publicacion de eventos a las entidades interesadas.
 
 Una de las ventajas de los eventos de aplicación es que cada servicio puede ejecutarse de manera asincrónica, evitando que el flujo se bloquee debido a los tiempos de procesamiento, como ocurre en el caso de las ejecuciones sincrónicas.
+
+### Pros y contras Event Driven Programming
+
+#### Pros
+
+- Desacople entre las partes publicadoras y consumidoras del evento
+- Flexibilidad, es muy sencillo añadir o eliminar consumidores sin modificar el productor.
+- Proceso asíncrono sencillo, sin la necesidad de gestionar hilos.
+- Al estar las partes más desacopladas, puede ser más sencillo de testear, solo se debe testar que el controlador emite el evento correctamente.
+
+#### Contras
+
+- Es más complicado seguir el flujo, se debe buscar que entidades estan resgitradas y que ejecutan al escuchar el evento
+- Tarea de debug más difícil.
+- Añade la complejidad del Event Publisher.(Mitigado usando frameworks como .NET o Spring.)
+
+#### Cuando usar?
+
+- Cuando en el futuro probablemente necesitemos más entidades que procesen el mismo evento.
+- Necesidad de operaciones asíncronas.
+- Cuando la parte productora no necesite el resultado de la parte que escucha y procesa el evento
+
+## Event Driven Architecture
+
+- Patrón de arquitectura software en el que el flujo de información entre los distintos subsistemas viene determinado por eventos.
+  - Un componente o subsistema publica un evento.
+  - Otro lo consume.
+- Muy utilizado en microservicios.
+
+Por ejemplo, un subsistema puede comunicarse con otro utilizando una API REST, donde el primero realiza una solicitud HTTP al segundo. Este último responde con un resultado, si es necesario. Este tipo de interacción implica que ambos subsistemas deben estar conscientes uno del otro, lo cual crea un acoplamiento y una dependencia directa. Además, es crucial gestionar la respuesta de manera asincrónica para mantener la eficiencia y la escalabilidad del sistema.
+
+- Ahora usando el patro de arquitectura basado en eventos, un servicio de subscribe a los eventos que quiere escuchar
+- El otro servicio publica los eventos
+- El event manager redirige los eventos a los consumers
+  - Desacople total entre los subsistemas
+  - Procesamiento asincrono
