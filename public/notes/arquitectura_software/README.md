@@ -557,3 +557,34 @@ Los eventos son personalizables, lo que define a un evento es el id de la acció
 - Cuando necesitemos conocer el estado del sistema en un instante del pasado.
 - Necesidad de un log con todas las acciones realizadas por los usuarios.
 - Cuando la eficiencia de las consultas no sea algo crítico.
+
+### Event Driven Programming
+
+En event sourcing utilizabamos los eventos para almacenar la trazabilidad del estado del sistema pero tambien es posible usar los eventos para la comunicación entre componentes de una apilcación.
+
+EDP es un paradigma de programación donde el flujo de un programa de dá por eventos (Por ejemplo una página web y sus CTA)
+
+- una entidad publica un evento
+- otra entidad lo consume
+
+Aunque es asíncrono tambien es posible hacerlo de manera sincrona.
+
+Los eventos de aplicación pueden ser:
+
+- inputs del usuario (entredas de teclado, clicks)
+- Condión del sistema en un momento concreto (sensor de temperatura)
+- Evento lanzado como resultado de un procesamiento (Finalización de un backup)
+- Otros
+
+Por ejemplo, podemos tener un controlador que en un momento dado deba comunicarse con dos servicios distintos. Esto lo puede hacer mediante dos llamadas directas, pero utilizando eventos de aplicación, ambos servicios podrían registrarse en un publicador de eventos. Luego, el controlador puede emitir un evento para que las entidades registradas lo ejecuten o procesen sin necesidad de interacción directa entre el controlador y las entidades registradas en el publicador de eventos.
+
+Se busca el desacople del emisor de las consumidoras del evento.
+
+Con este modelo no debemos hacer mas cambios en el controlador en caso que necesitemos comunicarnos con mas servicios, ya que son estos los que debe registrarse al publicador de eventos y estarian escuchando cada vez que se emite un evento.
+
+Un event publisher requiere de dos partes:
+
+- un registro de las entidades interesadas en el evento
+- un mecanismo de publicacion de eventos a las entidades interesadas.
+
+Una de las ventajas de los eventos de aplicación es que cada servicio puede ejecutarse de manera asincrónica, evitando que el flujo se bloquee debido a los tiempos de procesamiento, como ocurre en el caso de las ejecuciones sincrónicas.
