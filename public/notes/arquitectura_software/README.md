@@ -384,8 +384,8 @@ CQRS (Command Query Responsibility Segregation) es un patrón arquitectónico qu
 
 - Desventajas:
 
-- Falta de transacciones ACID en algunos sistemas, lo que puede comprometer la consistencia.
-- Consultas complejas pueden ser limitadas o menos eficientes.
+  - Falta de transacciones ACID en algunos sistemas, lo que puede comprometer la consistencia.
+  - Consultas complejas pueden ser limitadas o menos eficientes.
 
 #### CQRS como Solución
 
@@ -619,7 +619,7 @@ Una de las ventajas de los eventos de aplicación es que cada servicio puede eje
 
 Por ejemplo, un subsistema puede comunicarse con otro utilizando una API REST, donde el primero realiza una solicitud HTTP al segundo. Este último responde con un resultado, si es necesario. Este tipo de interacción implica que ambos subsistemas deben estar conscientes uno del otro, lo cual crea un acoplamiento y una dependencia directa. Además, es crucial gestionar la respuesta de manera asincrónica para mantener la eficiencia y la escalabilidad del sistema.
 
-- Ahora usando el patro de arquitectura basado en eventos, un servicio de subscribe a los eventos que quiere escuchar
+- Ahora usando el patrón de arquitectura basado en eventos, un servicio de subscribe a los eventos que quiere escuchar
 - El otro servicio publica los eventos
 - El event manager redirige los eventos a los consumers
   - Desacople total entre los subsistemas
