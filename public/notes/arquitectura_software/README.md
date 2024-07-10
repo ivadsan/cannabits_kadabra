@@ -610,7 +610,7 @@ Una de las ventajas de los eventos de aplicación es que cada servicio puede eje
 - Necesidad de operaciones asíncronas.
 - Cuando la parte productora no necesite el resultado de la parte que escucha y procesa el evento
 
-## Event Driven Architecture
+### Event Driven Architecture
 
 - Patrón de arquitectura software en el que el flujo de información entre los distintos subsistemas viene determinado por eventos.
   - Un componente o subsistema publica un evento.
@@ -624,3 +624,8 @@ Por ejemplo, un subsistema puede comunicarse con otro utilizando una API REST, d
 - El event manager redirige los eventos a los consumers
   - Desacople total entre los subsistemas
   - Procesamiento asincrono
+
+## Microservicios
+
+Cada microservicio debe propender a gestionar su propio almacen de datos
+Aunque hay microservicios que comparten base de datos esto es un antipatro
