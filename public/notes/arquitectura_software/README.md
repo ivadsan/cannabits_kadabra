@@ -627,5 +627,25 @@ Por ejemplo, un subsistema puede comunicarse con otro utilizando una API REST, d
 
 ## Microservicios
 
-Cada microservicio debe propender a gestionar su propio almacen de datos
-Aunque hay microservicios que comparten base de datos esto es un antipatro
+### Introducción
+
+- Los microservicios se utilizan para la creación de software complejo de manera eficiente, rápida y a mayor escala.
+- Los microservicios son agnósticos de la tecnología
+- El término 'micro' en microservicios no se refiere al tamaño del software, sino a la separación de contextos. Este enfoque permite que cada servicio esté claramente delimitado, lo cual facilita su organización y gestión por equipos específicos.
+- A diferencia de las arquitecturas monolíticas, los microservicios y las metodologías ágiles permiten estar iterando el ciclo del vida del software por cada nuevo feature que añadimos al producto
+- Permite despliegues solo de los contextos con nuevo código y no de todo el sistema. Es posible mantener disponible el producto sin tener que bajarlo para poder desplegar.
+- Cada microservicio debe propender a gestionar su propio almacen de datos para evitar acoplar los microservicios a una única base de datos compartida. Aunque hay microservicios que comparten base de datos esto es un antipatron
+- Tambíen deben contar con su propio equipo, repositorio.
+- Cada microservicio puede implementar la tecnología mas apropiada al caso de uso
+- Se pueden desplegar de manera independiente.
+- Los microservicios se divide en contextos cerrados (bounded context) y se crea un microservio por cada contexto
+- Un Microservicio debe hacer una sola cosa y hacerla bien, no debe acaparar mucha responsabilidad.
+
+No puede haber dependencia entre los distintos microservicios, para deshacer las dependencias se requiere que cada microservicio cuente con su propio modelo de datos, las entidades comunes entre los contextos no genera duplicidad sino una clarificación de código.
+
+![](/notes/arquitectura_software/assets/example_microservice.png)
+
+- Es necesario una buena comunicación entre los equipos que administran cada servicio para dejar claras las necesidades y restricciones.
+- Como métodos de comunicación entre los microservicios podemos usar API rest o event driven architecture.
+
+### Elemento de los microservicios
