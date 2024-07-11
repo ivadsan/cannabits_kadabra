@@ -649,3 +649,17 @@ No puede haber dependencia entre los distintos microservicios, para deshacer las
 - Como métodos de comunicación entre los microservicios podemos usar API rest o event driven architecture.
 
 ### Elemento de los microservicios
+
+#### Almacenenes de datos
+
+- Compartir la base de datos es un antipatron
+- Una base de datos compartida no se puede desarrollar, desplegar y escalar de manera independiente
+- Hay riesgo que un microservicio modifique información que no le corresponde
+
+Para la sincronización de los datos hay dos opciones:
+
+- Bajo demanda -> se pierde independencia entre los microservicios
+- Sistema de mensajes -> un microservicio publica un evento cuando sus datos han sido modificados, y los microservicios interesados lo consumen y actualizan su información
+
+Comunicaciones entre microservicios
+Interfaz de usuario
