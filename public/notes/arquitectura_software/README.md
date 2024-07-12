@@ -722,3 +722,25 @@ En la actualidad, es esencial tener un conocimiento exhaustivo de nuestro sistem
 Para evitar la segregación de la información debido a la presencia de múltiples microservicios e instancias, es recomendable centralizar los logs en un único repositorio, como Splunk, para facilitar su consulta.
 
 Además, para la consulta de información en tiempo real, se pueden utilizar plataformas como New Relic.
+
+### API Gateway
+
+Una API Gateway actúa como un punto de entrada único para las solicitudes que van dirigidas a varios servicios en un sistema basado en microservicios. Aquí están algunas de sus funciones principales:
+
+Enrutamiento de Solicitudes: La API Gateway recibe solicitudes de los clientes y las redirige al servicio correspondiente en el backend. Esto simplifica la comunicación cliente-servidor al proporcionar un único punto de acceso.
+
+Autenticación y Autorización: Puede manejar la autenticación de las solicitudes entrantes y asegurarse de que solo los usuarios autorizados tengan acceso a los servicios específicos.
+
+Agregación de Respuestas: Puede reunir datos de múltiples servicios y devolver una respuesta unificada al cliente, reduciendo la cantidad de llamadas necesarias desde el cliente.
+
+Transformación de Protocolo: Puede convertir protocolos y formatos de mensajes, por ejemplo, transformando una solicitud REST en una llamada SOAP y viceversa.
+
+Gestión de Seguridad: Implementa medidas de seguridad como la protección contra ataques DDoS, limitación de tasas (rate limiting) y políticas de autorización.
+
+Registro y Monitoreo: Centraliza el registro y monitoreo de las solicitudes, proporcionando un lugar único para rastrear el tráfico y diagnosticar problemas.
+
+Balanceo de Carga: Puede distribuir las solicitudes entre múltiples instancias de un servicio para equilibrar la carga y mejorar la disponibilidad.
+
+Gestión de API: Facilita la gestión del ciclo de vida de las APIs, incluyendo el versionado y la documentación.
+
+En resumen, una API Gateway simplifica y centraliza muchas funciones críticas para la gestión de microservicios, mejorando la eficiencia, la seguridad y la capacidad de administración del sistema.
