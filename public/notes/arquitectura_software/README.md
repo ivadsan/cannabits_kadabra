@@ -744,3 +744,35 @@ Balanceo de Carga: Puede distribuir las solicitudes entre múltiples instancias 
 Gestión de API: Facilita la gestión del ciclo de vida de las APIs, incluyendo el versionado y la documentación.
 
 En resumen, una API Gateway simplifica y centraliza muchas funciones críticas para la gestión de microservicios, mejorando la eficiencia, la seguridad y la capacidad de administración del sistema.
+
+### Pros y contras
+
+### Pros
+
+- División del sistema en subsistemas más manejables.
+  - El código será más fácil de mantener.
+- Independencia real entre equipos. Cada uno es dueño de su microservicio.
+- Posibilidad de realizar escalado y optimización independiente.
+  - Menor coste, empezamos con menos recursos y escalamos cuando sea necesario.
+- Despliegue independiente. Si falla un microservicio, el resto podría seguir funcionando.
+- Elección de la tecnología apropiada para cada microservicio.
+
+#### Contras
+
+- Cooperación entre distintos equipos para los puntos en común entre microservicios.
+- Más complejo en general que una solución monolítica.
+  - Necesidad de identificar correctamente los subdominios.
+  - Test en las fronteras entre microservicios.
+  - Despliegue del sistema completo.
+  - Seguridad.
+- Interfaz de usuario.
+  - Si es única, se puede volver un monolito difícil de mantener, y el equipo que la
+    desarrolla puede ser el cuello de botella.
+- Si son varias puede haber problemas en la integración en una única UI.
+
+#### Cuando usar
+
+- Sistemas grandes y complejos con subdominios claramente identificables.
+- Disponibilidad de personal para asignar al equipo de cada microservicio.
+- Sistemas de alta disponibilidad en los que necesitemos escalar fácilmente cada pieza.
+- Ahorro de costes.
