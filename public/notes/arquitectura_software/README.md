@@ -691,6 +691,34 @@ Los microservicios al ser independientes ofrecen un sistema escalable y altament
 
 **Escalabilidad horizontal:** Múltiples instancias del proceso que queremos escalar, mayor capacidad de procesamiento en paralelo, procesamiento de mas peticiones en el mismo tiempo, se eliminan puntos únicos de fallos (Pieza que si falla el sistema deja de funcionar)
 
-Uno de los retos API Rest es conocer la ubicación de cada microservicio, para ello se usa un registro de servicios que almacena las direcciones ip y puertos de los servicios y redirige el request según corresponda (ejm: eureka), si el registro de servicios se cae, el sistema deja de funcionar (punto único de falla, por eso deben ser robustos para garantizar disponibilidad)
+#### Servicios distribuidos
+
+**Interacción HTTP:** Uno de los retos API Rest es conocer la ubicación de cada microservicio, para ello se usa un registro de servicios que almacena las direcciones ip y puertos de los servicios y redirige el request según corresponda (ejm: eureka), si el registro de servicios se cae, el sistema deja de funcionar (punto único de falla, por eso deben ser robustos para garantizar disponibilidad)
 
 En el caso de escalabilidad horizontal, al tener multiples instancias de un mismo servicio se debe conocer a cual de ellas se hace las peticiones, para eso se usan los balanceadores de carga, este tipo de sistema puede estar integrado en el registro de servicios.
+
+**Interacción por mensajes**
+
+Los microservicios no necesitan saber de la ubicación de los otros microservicios e intancias, se suscribe a los eventos que le interesan y publica los eventos necesarios.
+
+En el caso de multiples instancias, utiliza la primera que encuentre libre.
+
+El servicio de mensajes se convierte en el punto único de falla
+
+### Seguridad y monitorización microservicios
+
+#### Seguridad
+
+La seguridad en microservicios es un punto crítico ya que existen mas punto de entrada al sistema.
+
+Una primer opción podria ser que cada microservicio tuviera su propio sistema de autenticación pero esto sería ineficaz e ineficiente porque por cada interacción deberían autenticarse.
+
+Existen servicios de autenticación centralizada, como Keycloak y Okta, que gestionan la autenticación en un único punto. En este modelo, cada microservicio solo comparte y verifica el token de autenticación, garantizando así una gestión eficiente y segura de las credenciales.
+
+#### Monitorización
+
+En la actualidad, es esencial tener un conocimiento exhaustivo de nuestro sistema. Para ello, debemos registrar la información relevante utilizando distintos niveles de log: debug, info, warn y error, lo que nos permitirá aplicar filtros efectivos.
+
+Para evitar la segregación de la información debido a la presencia de múltiples microservicios e instancias, es recomendable centralizar los logs en un único repositorio, como Splunk, para facilitar su consulta.
+
+Además, para la consulta de información en tiempo real, se pueden utilizar plataformas como New Relic.
