@@ -661,5 +661,36 @@ Para la sincronización de los datos hay dos opciones:
 - Bajo demanda -> se pierde independencia entre los microservicios
 - Sistema de mensajes -> un microservicio publica un evento cuando sus datos han sido modificados, y los microservicios interesados lo consumen y actualizan su información
 
-Comunicaciones entre microservicios
-Interfaz de usuario
+#### Comunicaciones entre microservicios
+
+- Puedes ser por API Rest pero esto genera que los servicios esten acoplados, por lo general es sincrono y los servicios tienen que estar disponibles para que funcione.
+
+- Sistema de mensajes como kafka, rabbitMQ, activeMQ, son asincronos, desacople total entre los servicios, si un sistema no esta disponible el mensaje puede permanecer en la cola hasta que vuelva a estar disponible.
+
+Con API Rest puede haber multiples request para todos los servicios que necesitan comunicarse, con un sistema de mensajeria solo se requiere de un solo evento para todos los servicios que esten suscritos.
+
+API rest se debe usar cuando es necesario una comunicación sincrona mientras que los eventos son preferibles para operaciones asincronas que lleven mucho procesamiento.
+
+#### Interfaz de usuario
+
+Hay tres opciones para manejar la interfaz de usuario:
+
+- Un solo front: en este caso se requiere generar una API Layer que se encargue de enrutar los pedidos a cada microservicio, al ser un único front es mas facil garantizar consistencia visual pero puede llegar a convertirse en un monolito con múltiples responsabilidades
+
+- Cada microservicio expone su front, esto hace que podamos navegar a través de diferentes fronts, puede que sea complicado garantizar consistencia visual
+
+- Fragmentos: cada microservicio expone fragmentos para construir un front único lo que puede ser un modelo complicado y que no garantiza lograr la consistencia visual.
+
+### Servicios distribuidos y despliegue
+
+Los microservicios al ser independientes ofrecen un sistema escalable y altamente disponible.
+
+#### Tipos de escalabilidad
+
+**Escalabilidad vertical:** se añaden mas recursos a una misma máquina, mas potencia en un nodo. Puede ser para tareas costosas que requieren mucha memoria.
+
+**Escalabilidad horizontal:** Múltiples instancias del proceso que queremos escalar, mayor capacidad de procesamiento en paralelo, procesamiento de mas peticiones en el mismo tiempo, se eliminan puntos únicos de fallos (Pieza que si falla el sistema deja de funcionar)
+
+Uno de los retos API Rest es conocer la ubicación de cada microservicio, para ello se usa un registro de servicios que almacena las direcciones ip y puertos de los servicios y redirige el request según corresponda (ejm: eureka), si el registro de servicios se cae, el sistema deja de funcionar (punto único de falla, por eso deben ser robustos para garantizar disponibilidad)
+
+En el caso de escalabilidad horizontal, al tener multiples instancias de un mismo servicio se debe conocer a cual de ellas se hace las peticiones, para eso se usan los balanceadores de carga, este tipo de sistema puede estar integrado en el registro de servicios.
