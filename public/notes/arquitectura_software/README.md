@@ -693,7 +693,7 @@ Los microservicios al ser independientes ofrecen un sistema escalable y altament
 
 #### Servicios distribuidos
 
-**Interacción HTTP:** Uno de los retos API Rest es conocer la ubicación de cada microservicio, para ello se usa un registro de servicios que almacena las direcciones ip y puertos de los servicios y redirige el request según corresponda (ejm: eureka), si el registro de servicios se cae, el sistema deja de funcionar (punto único de falla, por eso deben ser robustos para garantizar disponibilidad)
+**Interacción HTTP:** Uno de los retos en las API REST es conocer la ubicación de cada microservicio. Para ello, se utiliza un registro de servicios que almacena las direcciones IP y puertos de los servicios, y redirige las solicitudes según corresponda (ejemplo: Eureka). Sin embargo, si el registro de servicios falla, el sistema deja de funcionar, convirtiéndose en un punto único de falla. Por esta razón, estos registros deben ser robustos para garantizar su disponibilidad. Además, se requiere un mecanismo de descubrimiento de servicios (service discovery) para que los microservicios puedan ser ubicados y registrados automáticamente.
 
 En el caso de escalabilidad horizontal, al tener multiples instancias de un mismo servicio se debe conocer a cual de ellas se hace las peticiones, para eso se usan los balanceadores de carga, este tipo de sistema puede estar integrado en el registro de servicios.
 
