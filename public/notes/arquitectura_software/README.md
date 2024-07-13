@@ -776,3 +776,7 @@ En resumen, una API Gateway simplifica y centraliza muchas funciones críticas p
 - Disponibilidad de personal para asignar al equipo de cada microservicio.
 - Sistemas de alta disponibilidad en los que necesitemos escalar fácilmente cada pieza.
 - Ahorro de costes.
+
+## Otros patrones y estilos de arquitectura
+
+### Arquitectura Hexagonal
