@@ -780,3 +780,53 @@ En resumen, una API Gateway simplifica y centraliza muchas funciones críticas p
 ## Otros patrones y estilos de arquitectura
 
 ### Arquitectura Hexagonal
+
+La arquitectura hexagonal, también conocida como arquitectura de puertos y adaptadores, es un enfoque de diseño de software que tiene como objetivo hacer que un sistema sea más flexible y fácil de mantener al desacoplar su lógica de negocio de las interfaces externas.
+
+#### Componentes Clave
+
+**Dominio Central (Lógica de Negocio):**
+
+- Representa el núcleo de la aplicación.
+- Contiene la lógica de negocio y las reglas fundamentales.
+- No tiene dependencias directas con el mundo exterior.
+
+**Puertos (Interfaces):**
+
+- Definen contratos que la lógica de negocio necesita para interactuar con el mundo exterior.
+- Son abstracciones que representan lo que el sistema necesita (entradas) y proporciona (salidas).
+
+**Adaptadores:**
+
+- Implementan los puertos para conectar el núcleo de la aplicación con el mundo exterior.
+- Pueden ser adaptadores primarios (para recibir datos) o secundarios (para enviar datos).
+- Ejemplos incluyen controladores de API, repositorios de bases de datos, sistemas de mensajería, etc.
+
+#### Beneficios
+
+**Desacoplamiento:**
+
+La lógica de negocio no depende directamente de detalles de implementación externos, facilitando los cambios y la evolución del sistema.
+
+**Testabilidad:**
+
+La separación clara entre la lógica de negocio y los detalles externos permite pruebas unitarias más simples y efectivas.
+
+**Flexibilidad:**
+Es fácil cambiar o añadir nuevas interfaces externas sin afectar el núcleo de la aplicación.
+
+#### Ejemplo de Aplicación
+
+Supongamos una aplicación de gestión de pedidos:
+
+**Dominio Central:**
+
+Clases que representan pedidos, clientes, productos y la lógica para manejar pedidos.
+
+**Puertos:**
+
+Interfaces como RepositorioDePedidos y NotificadorDeClientes.
+
+**Adaptadores:**
+
+Implementaciones concretas de los puertos, como RepositorioDePedidosSQL y NotificadorDeClientesEmail.
