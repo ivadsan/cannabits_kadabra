@@ -847,3 +847,24 @@ La arquitectura de microkernel es una evolución del manejo de kernels monolíti
 - Aportan modularidad, facilitando el mantenimiento y la escalabilidad del sistema.
 
 _Esta arquitectura también es conocida como "arquitectura de plug-ins" debido a su dependencia en estos componentes modulares para expandir las capacidades del sistema._
+
+#### Aspectos positivos
+
+- Más fácil de testear.
+- Más fácil de mantener a largo plazo que una arquitectura monolítica.
+- Flexibilidad para añadir o eliminar plug-ins, permitiendo así una personalización del sistema según las necesidades.
+
+#### Aspectos Negativos
+
+- Necesita un análisis previo.
+  - ¿Qué funcionalidades introducimos al microkernel?
+  - ¿Qué plug-ins tenemos? ¿Cuán grandes deben ser los plug-ins?
+  - ¿Existe comunicación entre plug-ins? ¿Mecanismo de comunicación?
+- No demasiado apto para arquitecturas web.
+  - Los microservicios son una mejor opción.
+
+#### Cuando usar
+
+- Aplicaciones de escritorio que necesiten el concepto de plug-ins.
+- Necesidad de un sistema escalable.
+- Sistemas con un tiempo de vida largo.
