@@ -830,3 +830,20 @@ Interfaces como RepositorioDePedidos y NotificadorDeClientes.
 **Adaptadores:**
 
 Implementaciones concretas de los puertos, como RepositorioDePedidosSQL y NotificadorDeClientesEmail.
+
+### Arquitectura Microkernel
+
+La arquitectura de microkernel es una evolución del manejo de kernels monolíticos, que son robustos pero difíciles de mantener. Esta arquitectura implementa solo la funcionalidad mínima necesaria para que el sistema se ejecute y funcione, delegando la mayoría de las funcionalidades a componentes externos llamados plug-ins.
+
+**Microkernel:**
+
+- Se encarga de coordinar los plug-ins registrados en él.
+- Proporciona canales de comunicación entre los plug-ins.
+
+**Plug-ins:**
+
+- Son componentes que aportan funcionalidades adicionales al sistema.
+- No pueden operar de manera independiente y dependen del microkernel para funcionar.
+- Aportan modularidad, facilitando el mantenimiento y la escalabilidad del sistema.
+
+_Esta arquitectura también es conocida como "arquitectura de plug-ins" debido a su dependencia en estos componentes modulares para expandir las capacidades del sistema._
