@@ -868,3 +868,63 @@ _Esta arquitectura también es conocida como "arquitectura de plug-ins" debido a
 - Aplicaciones de escritorio que necesiten el concepto de plug-ins.
 - Necesidad de un sistema escalable.
 - Sistemas con un tiempo de vida largo.
+
+## Arquitectura Testeable
+
+Para implementar CI/CD y garantizar la calidad del código, es esencial realizar pruebas exhaustivas antes de la integración y despliegue.
+
+Las diferentes arquitecturas buscan crear un código más modular y fácil de testear.
+
+![](/notes/arquitectura_software/assets/test_pyramid.png)
+
+### Pruebas Unitarias
+
+Los tests unitarios son rápidos, fáciles de crear y mantener, pero tienen una integración limitada con otros módulos del software.
+
+- Cobertura: Se recomienda tener una alta cobertura, superior al 90%.
+- Mocking: Mockear dependencias para aislar la clase bajo prueba.
+- Condiciones: Testear diferentes condiciones y casos límite.
+
+### Pruebas de Integración
+
+Las pruebas de integración prueban cómo interactúan varios componentes del sistema y suelen ser más costosas.
+
+- Base de Datos: Para pruebas con bases de datos, se recomienda utilizar testcontainers de Docker para desplegar bases de datos reales y realizar pruebas de migración y acciones específicas.
+- Ejecución: Son más lentas de ejecutar que las pruebas unitarias.
+
+### Pruebas de Contrato
+
+Las pruebas de contrato verifican las interfaces entre dos servicios, siendo útiles en arquitecturas de microservicios. Prueban ambos extremos de la comunicación: productores y consumidores.
+
+- Ejecución: Son rápidas de ejecutar.
+
+### Pruebas de UI
+
+Las pruebas de UI, a diferencia de las pruebas E2E, mockean las respuestas del backend para verificar la interfaz.
+
+- Utilidad: Pueden ser menos útiles si los componentes cambian constantemente.
+
+### Pruebas E2E
+
+Las pruebas E2E verifican el sistema completo en un entorno similar al de producción. Son costosas y lentas.
+
+- Cobertura: Prueban el sistema desde un punto de entrada hasta el punto donde se reflejan los resultados.
+
+### Pruebas de Aceptación
+
+- Las pruebas de aceptación utilizan un lenguaje común, lo que permite integrar a los stakeholders.
+- Sintaxis: Utilizan la sintaxis Given-When-Then.
+- BDD: Siguen el enfoque de BDD (Behavior Driven Development).
+
+### Pruebas de Exploración
+
+Las pruebas de exploración son las más costosas ya que se realizan manualmente. Implican explorar el sistema y tratar de encontrar fallos.
+
+### Estrategia de Pruebas
+
+- Pruebas Unitarias: Deben ser numerosas y cubrir la mayoría de los casos.
+- Pruebas de Integración: Limitarlas a componentes críticos, como bases de datos o dependencias de terceros.
+- Pruebas de UI: Focalizar en los flujos más importantes o comunes.
+- Pruebas E2E: Reservarlas para la validación completa del sistema en entornos de producción.
+
+Una arquitectura testeable garantiza que el código sea robusto, fiable y apto para su integración y despliegue continuo.
