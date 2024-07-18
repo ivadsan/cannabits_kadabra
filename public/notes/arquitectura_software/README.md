@@ -928,3 +928,18 @@ Las pruebas de exploración son las más costosas ya que se realizan manualmente
 - Pruebas E2E: Reservarlas para la validación completa del sistema en entornos de producción.
 
 Una arquitectura testeable garantiza que el código sea robusto, fiable y apto para su integración y despliegue continuo.
+
+## Evolving / Sacrificial Architectures
+
+### Evolving Architecture
+
+Una buena arquitectura debe ser flexible. No importa si se elige una arquitectura monolítica, DDD, CQRS, microservicios, etc. Una buena arquitectura debe permitir tomar decisiones en el mejor momento posible.
+
+### Sacrificial Architectures
+
+La mayoría del código que escribes ahora se desechará en dos o tres años. No se debe abandonar la calidad del diseño y del código, ya que esto traerá problemas mucho mayores rápidamente.
+
+#### Principios:
+
+- Arquitectura Modular: Diseñar de manera que permita desechar un módulo o componente afectando lo menos posible al sistema.
+- Equilibrio: Mantener un equilibrio entre una buena arquitectura, la calidad del código y el hecho de que el código tiene una vida útil limitada a medio plazo.
