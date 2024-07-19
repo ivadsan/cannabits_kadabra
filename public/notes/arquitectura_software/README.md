@@ -943,3 +943,5 @@ La mayoría del código que escribes ahora se desechará en dos o tres años. No
 
 - Arquitectura Modular: Diseñar de manera que permita desechar un módulo o componente afectando lo menos posible al sistema.
 - Equilibrio: Mantener un equilibrio entre una buena arquitectura, la calidad del código y el hecho de que el código tiene una vida útil limitada a medio plazo.
+
+## Conclusiones
