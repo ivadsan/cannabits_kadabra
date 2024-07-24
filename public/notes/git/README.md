@@ -308,9 +308,9 @@ Ver todas las ramas y su historial
     git show-branch
     git show-branch --all
 
-### Intefaz gráfica para ramas gitk
+### Intefaz gráfica para ramas - gitk
 
-**Instalación**
+**Instalación Linux**
 
     sudo apt-get update
     sudo apt-get install gitk
@@ -318,6 +318,19 @@ Ver todas las ramas y su historial
 Ver en una interfaz gráfica el historial de las ramas
 
     gitk
+
+### Intefaz gráfica git gui
+
+**Instalción en Mac**
+
+    brew update
+    bret install git-gui
+
+- Se debe tener instalado previamente git
+
+Para abrir la interfaz gráfica
+
+    git gui
 
 ## checkout
 
