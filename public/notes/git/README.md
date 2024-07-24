@@ -288,7 +288,8 @@ Explorar las ramas
     git branch
 
 Moverse entre ramas
-git checkout nombre_rama
+
+    git checkout nombre_rama
 
 volver a la rama master
 
