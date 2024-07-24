@@ -384,3 +384,7 @@ Ver los archivos y sus conflictos
 Al solucionar el conflicto realizar add y commit para terminar el merge.
 
     git commit -a
+
+### git pull
+
+![git-pull](/notes/git/assets/git-pull.png)
