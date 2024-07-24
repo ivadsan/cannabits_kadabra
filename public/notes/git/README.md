@@ -379,7 +379,7 @@ Ver los archivos y sus conflictos
 
     git diff
 
-![git-diff](./assets/git-diff.png)
+![git-diff](/notes/git/assets/git-diff.png)
 
 Al solucionar el conflicto realizar add y commit para terminar el merge.
 
