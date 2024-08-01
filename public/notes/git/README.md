@@ -1,5 +1,5 @@
 [//]: # @param group $$ Desarrollo de software
-[//]: # @param title $$ Git - Control de versiones
+[//]: # @param title $$ Control de versiones - Git
 [//]: # @param author $$ Iván D. Sánchez
 
 # Git
