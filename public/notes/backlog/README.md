@@ -4,7 +4,7 @@
 
 # Backlog
 
-Generar una tabla de contenido de tipo sticky que se arme en funcion de los elementos h1,h2,h3 de la página y genere marcadores automáticos basado en un id del tipo title + número
+[x] Generar una tabla de contenido de tipo sticky que se arme en funcion de los elementos h1,h2,h3 de la página y genere marcadores automáticos basado en un id del tipo title + número
 
 Cerrar tabla de contenido al seleccionar un marcador
 
@@ -37,3 +37,5 @@ Buscar una solución que permite visualizar en imagenes tanto desde el preview d
 Si cambiamos el nombre de la carpeta con el proyecto compilado y recargamos sale un error fatal que se debe controlar
 
 validar si se puede crear rutas con el titulo del curso URLs SEO-friendly
+
+se puede agregar un boton o radio que permita marcar donde quedó el usuario estudiando para volver a cargar la pagina y ubicarlo en este marcador
