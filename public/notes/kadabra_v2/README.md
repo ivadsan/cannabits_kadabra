@@ -1,6 +1,6 @@
-[//]: # @param group $$ Kadabra V2
-[//]: # @param title $$ Intro
-[//]: # @param author $$ Iván D. Sánchez
+// # @param group $$ Kadabra V2
+// # @param title $$ Intro
+// # @param author $$ Iván D. Sánchez
 
 # Kadabra V2
 
