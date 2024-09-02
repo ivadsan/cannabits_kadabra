@@ -37,3 +37,13 @@ To automate this, you can add the following scripts to your package.json in the 
 The build-content script will process the markdown files before starting the React development server with npm run start or npm run dev. This ensures that the directory file is always up to date before the application is launched.
 
 Simply run npm start or npm run dev, and the library will handle the rest.
+
+## Requirements
+
+To use this library, you must have Node.js version 16 or higher installed on your system.
+
+### Check your Node.js version
+
+You can check your current Node.js version by running the following command in your terminal:
+
+    node -v
