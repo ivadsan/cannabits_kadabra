@@ -70,3 +70,45 @@ Para saber si tu margen de ganancia es óptimo, compara con el promedio de tu se
 **Análisis de Rentabilidad por Producto o Servicio:** No todos los productos o servicios generan la misma rentabilidad. Analizar de forma individual la utilidad de cada uno permite identificar cuáles son los más rentables y optimizar la oferta de la empresa.
 
 Estos conceptos e indicadores financieros permiten a las empresas tomar decisiones estratégicas más informadas y evaluar su sostenibilidad económica. Cada negocio tiene particularidades que pueden requerir ajustes o análisis adicionales para obtener una perspectiva completa de su rentabilidad.
+
+### Valor de Vida del Cliente LTV - Lifetime Value
+
+El LTV mide el valor total que un cliente aporta a la empresa a lo largo de su relación con la misma. A diferencia de un enfoque centrado en pagos únicos, este indicador se basa en la contribución económica que un cliente genera a lo largo del tiempo.
+
+Para calcularlo, se consideran tanto datos históricos (cuántos clientes han realizado compras a lo largo del tiempo) como proyecciones futuras (cuántos clientes podrían seguir comprando).
+
+Fórmula para calcular el LTV:
+
+    LTV = Tiempo promedio de relación * Ingreso promedio por cliente
+
+    suscripcion netflix mensual $5
+    al año: 60$
+    Duración promedio de la suscripción: 5 años
+    LTV: $300
+
+**¿Por qué es importante calcular el LTV?**
+
+Conocer el valor de vida de un cliente permite a las empresas optimizar sus estrategias de adquisición, retención y fidelización de clientes. Algunas de las ventajas clave son:
+
+- **Reducción de costos de adquisición:** Identificar a los clientes más valiosos permite priorizar recursos en su retención, evitando inversiones excesivas en la captación de nuevos clientes.
+
+- **Optimización de la rentabilidad:** Con un enfoque en los clientes de mayor valor, la empresa puede tomar decisiones más informadas para maximizar el retorno de la inversión (ROI).
+
+- **Mejor planificación de estrategias de marketing:** Al entender el LTV, se puede definir el presupuesto adecuado para campañas de adquisición y fidelización.
+
+### Valor de Vida del Cliente Ajustado (CLTV - Customer Lifetime Value)
+
+El CLTV (Customer Lifetime Value) es una versión más completa del LTV, ya que tiene en cuenta no solo los ingresos generados por el cliente, sino también los costos asociados con su adquisición y mantenimiento.
+
+Fórmula para calcular el CLTV:
+
+    CLTV = (Ingreso anual por cliente * Duración de la relación) - Costo de adquisición - Costo de mantenimiento
+
+Desglose de la fórmula:
+
+- **Ingreso anual por cliente:** El promedio de ingresos generados por el cliente cada año.
+- **Duración de la relación:** El tiempo promedio (en años) que el cliente se mantiene activo con la empresa.
+- **Costo de adquisición (CAC):** El costo que la empresa incurre para atraer a un nuevo cliente.
+- **Costo de mantenimiento:** Los costos asociados con la atención, el soporte y la retención del cliente.
+
+El LTV y el CLTV son métricas clave para la rentabilidad de una empresa. Mientras que el LTV se enfoca en los ingresos brutos generados por un cliente, el CLTV considera los costos asociados para obtener una visión más realista de la rentabilidad por cliente. Ambas métricas permiten a las empresas tomar decisiones más inteligentes sobre adquisición, retención y fidelización de clientes, ayudando a optimizar la rentabilidad y reducir los costos operativos.
