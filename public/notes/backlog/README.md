@@ -41,3 +41,5 @@ validar si se puede crear rutas con el titulo del curso URLs SEO-friendly
 se puede agregar un boton o radio que permita marcar donde quedó el usuario estudiando para volver a cargar la pagina y ubicarlo en este marcador
 
 podemos ver la forma de crear una forma de almacenar cronologicamente los cambios para armar un archivo de recientes o ultimos vistos
+
+Crear estilos para las tablas, ver curso de project_management como ejemplo
