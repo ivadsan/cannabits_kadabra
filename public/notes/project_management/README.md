@@ -204,7 +204,7 @@ Portafolio es la sumatoria de todo los programas no necesariamente tienen que es
 
 Cada uno de estos roles es fundamental para garantizar que el proyecto se lleve a cabo de manera eficiente y cumpla con sus objetivos.
 
-### alcance
+### Alcance
 
 El alcance de un proyecto es la definición clara de lo que se va a entregar y lo que no se va a entregar durante la ejecución del proyecto. Establece los límites del proyecto y describe en detalle los entregables, los objetivos, las tareas y las actividades necesarias para alcanzar esos objetivos.
 
@@ -322,3 +322,7 @@ Para elaborar un buen alcance de proyecto, es fundamental responder a una serie 
 - ¿Cómo se coordinarán estos efectos?
 
 Respondiendo a estas preguntas se puede obtener una comprensión clara y detallada del alcance del proyecto, lo que ayuda a asegurar que todos los involucrados estén alineados y a minimizar riesgos de desviaciones o malentendidos durante la ejecución.
+
+## Los tiempos de un proyecto
+
+### La importancia del tiempo
