@@ -326,3 +326,22 @@ Respondiendo a estas preguntas se puede obtener una comprensión clara y detalla
 ## Los tiempos de un proyecto
 
 ### La importancia del tiempo
+
+- Maximizar el uso disponible del tiempo
+- Definir actividades: Cuales son y determinar si estas tienen tareas (y cuales)
+- Secuenciar actividades: Determinar si una actividad debe finalizar para que otra pueda iniciar y determinar si alguna puede iniciar sin necesidad de que otra finalice.
+- Definir los recursos: Con qué contamos (personal, materia prima, financiación)
+- Duración: Cuándo inician y cuando finalizan las actividades (sea realista).
+- Frecuencia de las actividades: ¿Repetitiva? ¿Única?
+- Responsables: ¿A quién preguntar por resultados y/o progreso de cada actividad?
+- Control: Cómo se solicitará el avance, como se medirá si se ejecutó en tiempo y forma, que mejoras a realizar.
+- Desarrollo del cronograma: Elaborarlo con la info anterior.
+
+### Cómo controlar el tiempo
+
+Herramientas para controlar el tiempo:
+
+- Diagrama de Gantt
+- Cronograma de hitos
+- Diagrama de Pert
+- Cronograma de trabajo
