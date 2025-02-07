@@ -345,3 +345,85 @@ Herramientas para controlar el tiempo:
 - Cronograma de hitos
 - Diagrama de Pert
 - Cronograma de trabajo
+
+¿Que puede afectar el control del tiempo?
+
+- Comunicación ineficaz dentro del equipo
+- Cuando no se establecen objetivos claros de lo que se quiere alcanzar.
+- Interrupciones, cuellos de botella, visitas inesperadas
+- Mal manejo de las herramientas
+- Escaza planificación de una actividad
+- Insuficiente delegación de tareas.
+
+### Cómo gestionar el tiempo de un proyecto?
+
+Gestionar el tiempo de un proyecto implica planificar, organizar y controlar las tareas para cumplir con los plazos establecidos.
+
+1. **Definir Objetivos y Alcance**
+
+- Establece qué se debe lograr y en qué tiempo.
+- Define entregables y criterios de éxito.
+
+2. **Desglosar el Trabajo (WBS - Work Breakdown Structure)**
+
+- Divide el proyecto en tareas pequeñas y manejables.
+- Identifica dependencias entre tareas.
+
+3. **Estimar Tiempos**
+
+- Usa métodos como PERT, estimaciones basadas en experiencia o descomposición de tareas.
+- Considera tiempo de buffer para imprevistos.
+
+4. **Definir Cronograma**
+
+- Usa herramientas como Gantt o Kanban para visualizar plazos.
+- Asigna responsables y fechas límite.
+
+5. **Priorizar Tareas**
+
+- Aplica técnicas como Eisenhower Matrix o MoSCoW para diferenciar lo urgente de lo importante.
+- Usa metodologías ágiles si es un proyecto flexible.
+
+6. **Asignar Recursos**
+
+- Identifica quién hará qué y con qué herramientas.
+- Asegúrate de que el equipo tenga disponibilidad y habilidades adecuadas.
+
+7. **Monitorear y Ajustar**
+
+- Haz reuniones de seguimiento (dailies, weeklies, etc.).
+- Usa KPIs como cumplimiento de hitos, porcentaje de tareas completadas, etc.
+- Adapta el plan si surgen cambios o bloqueos.
+
+8. **Gestión de Riesgos**
+
+- Identifica posibles retrasos y crea planes de contingencia.
+- Ten una estrategia para manejar cambios en requisitos o imprevistos.
+
+9. **Automatización y Optimización**
+
+- Usa herramientas como Jira, Trello, Notion o Asana para gestión eficiente.
+- Reduce tareas repetitivas con automatización.
+
+Ejemplo práctico de cómo aplicar cada paso en un proyecto de desarrollo de una landing page para un nuevo producto.
+
+1. **Definir Objetivos y Alcance**
+
+- **Objetivo:** Crear una landing page responsiva con formulario de contacto en 4 semanas.
+- **Alcance:** Diseño UI/UX, desarrollo frontend, integración con backend, pruebas y despliegue.
+
+2. **Desglosar el Trabajo (WBS)**
+
+- **Diseño UI/UX:** Bocetos, wireframes, diseño final en Figma.
+- **Desarrollo Frontend:** Estructura HTML, estilos CSS, interactividad con JavaScript.
+- **Integración Backend:** Conectar el formulario con una API.
+- **Pruebas:** Verificar funcionalidad en distintos dispositivos y navegadores.
+- **Despliegue:** Subir a un hosting y configurar dominio.
+
+3. **Estimar Tiempos**
+
+- **Diseño UI/UX:** 1 semana
+- **Desarrollo Frontend:** 1.5 semanas
+- **Integración Backend:** 3 días
+- **Pruebas y ajustes:** 4 días
+- **Despliegue:** 2 días
