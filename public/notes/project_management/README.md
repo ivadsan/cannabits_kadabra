@@ -273,53 +273,53 @@ Para elaborar un buen alcance de proyecto, es fundamental responder a una serie 
 
 1. ¿Cuál es el objetivo principal del proyecto?
 
-- ¿Qué problema estamos resolviendo o qué oportunidad estamos aprovechando?
-- ¿Qué resultado final se espera alcanzar?
+   - ¿Qué problema estamos resolviendo o qué oportunidad estamos aprovechando?
+   - ¿Qué resultado final se espera alcanzar?
 
 2. ¿Cuáles son los entregables clave?
 
-- ¿Qué productos, servicios o resultados específicos deben ser entregados al final del proyecto?
-- ¿Cuáles son las características o requisitos de esos entregables?
+   - ¿Qué productos, servicios o resultados específicos deben ser entregados al final del proyecto?
+   - ¿Cuáles son las características o requisitos de esos entregables?
 
 3. ¿Cuáles son los requisitos y expectativas de los stakeholders?
 
-- ¿Qué necesitan y esperan los clientes, usuarios o cualquier otra parte interesada del proyecto?
-- ¿Cómo se validarán o aceptarán los entregables?
+   - ¿Qué necesitan y esperan los clientes, usuarios o cualquier otra parte interesada del proyecto?
+   - ¿Cómo se validarán o aceptarán los entregables?
 
 4. ¿Qué tareas y actividades deben realizarse?
 
-- ¿Cuáles son las actividades principales que deben llevarse a cabo para completar el proyecto?
-- ¿Quién es responsable de cada tarea?
+   - ¿Cuáles son las actividades principales que deben llevarse a cabo para completar el proyecto?
+   - ¿Quién es responsable de cada tarea?
 
 5. ¿Cuáles son las restricciones del proyecto?
 
-- ¿Qué limitaciones de tiempo, recursos, presupuesto o tecnología existen?
-- ¿Hay plazos inamovibles que deban cumplirse?
+   - ¿Qué limitaciones de tiempo, recursos, presupuesto o tecnología existen?
+   - ¿Hay plazos inamovibles que deban cumplirse?
 
 6. ¿Qué no está incluido en el alcance?
 
-- ¿Qué se considera fuera del alcance del proyecto?
-- ¿Qué aspectos no se abordarán o entregarán en esta fase?
+   - ¿Qué se considera fuera del alcance del proyecto?
+   - ¿Qué aspectos no se abordarán o entregarán en esta fase?
 
 7. ¿Cuáles son los riesgos potenciales que pueden afectar el alcance?
 
-- ¿Qué factores pueden causar desviaciones del alcance?
-- ¿Cómo se pueden mitigar esos riesgos?
+   - ¿Qué factores pueden causar desviaciones del alcance?
+   - ¿Cómo se pueden mitigar esos riesgos?
 
 8. ¿Cómo se gestionarán los cambios en el alcance?
 
-- ¿Cuál es el proceso para manejar solicitudes de cambio o modificaciones al alcance?
-- ¿Qué criterios se usarán para aprobar o rechazar cambios?
+   - ¿Cuál es el proceso para manejar solicitudes de cambio o modificaciones al alcance?
+   - ¿Qué criterios se usarán para aprobar o rechazar cambios?
 
 9. ¿Cómo se medirá el éxito del proyecto?
 
-- ¿Cuáles son los indicadores clave que nos ayudarán a evaluar si el proyecto ha cumplido con sus objetivos?
-- ¿Cómo y cuándo se validarán los entregables?
+   - ¿Cuáles son los indicadores clave que nos ayudarán a evaluar si el proyecto ha cumplido con sus objetivos?
+   - ¿Cómo y cuándo se validarán los entregables?
 
 10. ¿Cuál es el impacto del proyecto en otras áreas de la organización?
 
-- ¿Qué otros departamentos, proyectos o sistemas se verán afectados por el proyecto?
-- ¿Cómo se coordinarán estos efectos?
+    - ¿Qué otros departamentos, proyectos o sistemas se verán afectados por el proyecto?
+    - ¿Cómo se coordinarán estos efectos?
 
 Respondiendo a estas preguntas se puede obtener una comprensión clara y detallada del alcance del proyecto, lo que ayuda a asegurar que todos los involucrados estén alineados y a minimizar riesgos de desviaciones o malentendidos durante la ejecución.
 
@@ -343,7 +343,7 @@ Herramientas para controlar el tiempo:
 
 - Diagrama de Gantt
 - Cronograma de hitos
-- Diagrama de Pert
+- Diagrama de Pert (ruta crítica)
 - Cronograma de trabajo
 
 ¿Que puede afectar el control del tiempo?
@@ -361,69 +361,118 @@ Gestionar el tiempo de un proyecto implica planificar, organizar y controlar las
 
 1. **Definir Objetivos y Alcance**
 
-- Establece qué se debe lograr y en qué tiempo.
-- Define entregables y criterios de éxito.
+   - Establece qué se debe lograr y en qué tiempo.
+   - Define entregables y criterios de éxito.
 
 2. **Desglosar el Trabajo (WBS - Work Breakdown Structure)**
 
-- Divide el proyecto en tareas pequeñas y manejables.
-- Identifica dependencias entre tareas.
+   - Divide el proyecto en tareas pequeñas y manejables.
+   - Identifica dependencias entre tareas.
 
 3. **Estimar Tiempos**
 
-- Usa métodos como PERT, estimaciones basadas en experiencia o descomposición de tareas.
-- Considera tiempo de buffer para imprevistos.
+   - Usa métodos como PERT, estimaciones basadas en experiencia o descomposición de tareas.
+   - Considera tiempo de buffer para imprevistos.
 
 4. **Definir Cronograma**
 
-- Usa herramientas como Gantt o Kanban para visualizar plazos.
-- Asigna responsables y fechas límite.
+   - Usa herramientas como Gantt o Kanban para visualizar plazos.
+   - Asigna responsables y fechas límite.
 
 5. **Priorizar Tareas**
 
-- Aplica técnicas como Eisenhower Matrix o MoSCoW para diferenciar lo urgente de lo importante.
-- Usa metodologías ágiles si es un proyecto flexible.
+   - Aplica técnicas como Eisenhower Matrix o MoSCoW para diferenciar lo urgente de lo importante.
+   - Usa metodologías ágiles si es un proyecto flexible.
 
 6. **Asignar Recursos**
 
-- Identifica quién hará qué y con qué herramientas.
-- Asegúrate de que el equipo tenga disponibilidad y habilidades adecuadas.
+   - Identifica quién hará qué y con qué herramientas.
+   - Asegúrate de que el equipo tenga disponibilidad y habilidades adecuadas.
 
 7. **Monitorear y Ajustar**
 
-- Haz reuniones de seguimiento (dailies, weeklies, etc.).
-- Usa KPIs como cumplimiento de hitos, porcentaje de tareas completadas, etc.
-- Adapta el plan si surgen cambios o bloqueos.
+   - Haz reuniones de seguimiento (dailies, weeklies, etc.).
+   - Usa KPIs como cumplimiento de hitos, porcentaje de tareas completadas, etc.
+   - Adapta el plan si surgen cambios o bloqueos.
 
 8. **Gestión de Riesgos**
 
-- Identifica posibles retrasos y crea planes de contingencia.
-- Ten una estrategia para manejar cambios en requisitos o imprevistos.
+   - Identifica posibles retrasos y crea planes de contingencia.
+   - Ten una estrategia para manejar cambios en requisitos o imprevistos.
 
 9. **Automatización y Optimización**
 
-- Usa herramientas como Jira, Trello, Notion o Asana para gestión eficiente.
-- Reduce tareas repetitivas con automatización.
+   - Usa herramientas como Jira, Trello, Notion o Asana para gestión eficiente.
+   - Reduce tareas repetitivas con automatización.
 
 Ejemplo práctico de cómo aplicar cada paso en un proyecto de desarrollo de una landing page para un nuevo producto.
 
 1. **Definir Objetivos y Alcance**
 
-- **Objetivo:** Crear una landing page responsiva con formulario de contacto en 4 semanas.
-- **Alcance:** Diseño UI/UX, desarrollo frontend, integración con backend, pruebas y despliegue.
+   - **Objetivo:** Crear una landing page responsiva con formulario de contacto en 4 semanas.
+   - **Alcance:** Diseño UI/UX, desarrollo frontend, integración con backend, pruebas y despliegue.
 
 2. **Desglosar el Trabajo (WBS)**
 
-- **Diseño UI/UX:** Bocetos, wireframes, diseño final en Figma.
-- **Desarrollo Frontend:** Estructura HTML, estilos CSS, interactividad con JavaScript.
-- **Integración Backend:** Conectar el formulario con una API.
-- **Pruebas:** Verificar funcionalidad en distintos dispositivos y navegadores.
-- **Despliegue:** Subir a un hosting y configurar dominio.
+   - **Diseño UI/UX:** Bocetos, wireframes, diseño final en Figma.
+   - **Desarrollo Frontend:** Estructura HTML, estilos CSS, interactividad con JavaScript.
+   - **Integración Backend:** Conectar el formulario con una API.
+   - **Pruebas:** Verificar funcionalidad en distintos dispositivos y navegadores.
+   - **Despliegue:** Subir a un hosting y configurar dominio.
 
 3. **Estimar Tiempos**
 
-- **Diseño UI/UX:** 1 semana
-- **Desarrollo Frontend:** 1.5 semanas
-- **Integración Backend:** 3 días
-- **Pruebas y ajustes:** 4 días
-- **Despliegue:** 2 días
+   - **Diseño UI/UX:** 1 semana
+   - **Desarrollo Frontend:** 1.5 semanas
+   - **Integración Backend:** 3 días
+   - **Pruebas y ajustes:** 4 días
+   - **Despliegue:** 2 días
+
+4. **Definir Cronograma**
+   **Semana 1:** Diseño UI/UX
+   **Semana 2-3:** Desarrollo frontend e integración backend
+   **Semana 4:** Pruebas, ajustes y despliegue
+
+   **Herramienta:** Diagrama de Gantt en Trello.
+
+5. **Priorizar Tareas**
+
+   - **Urgente e importante:** Diseño y estructura base
+   - **Importante pero no urgente:** Optimización de rendimiento
+   - **No importante:** Animaciones secundarias
+
+6. **Asignar Recursos**
+
+   - **Diseñador:** Wireframes y UI
+   - **Desarrollador frontend:** HTML, CSS, JS
+   - **Desarrollador backend:** API del formulario
+   - **QA:** Pruebas y ajustes
+
+7. **Monitorear y Ajustar**
+
+   - Reuniones semanales para revisión de avances.
+   - Kanban en Trello para seguimiento de tareas.
+
+8. **Gestión de Riesgos**
+
+   - **Retraso en diseño** → Usar un diseño básico para avanzar en código.
+   - **Errores en integración API** → Crear datos mockeados para pruebas iniciales.
+
+9. **Automatización y Optimización**
+   - Usar Figma para colaboraciones rápidas.
+   - GitHub Actions para despliegue automático.
+   - Notion/Trello para gestión de tareas.
+
+### Matriz de Eisenhower
+
+1. Urgente + Importante (HACER AHORA) -> Tareas críticas que requieren acción inmediata
+2. No Urgente + Importante (PLANIFICAR) -> Tareas estratégicas que deben programarse para no volverse urgentes
+3. Urgente + No Importante (DELEGAR) -> Tareas que deben hacerse pronto pero pueden ser manejadas por otros
+4. No Urgente + No Importante (ELIMINAR O POSPONER) -> Tareas que no aportan valor y deben minimizarse
+
+**Beneficios:**
+
+- Te enfocas en lo realmente importante.
+- Evitas que lo urgente controle tu día.
+- Delegas lo que otros pueden hacer.
+- Eliminas tareas que no aportan valor.
