@@ -476,3 +476,19 @@ Ejemplo práctico de cómo aplicar cada paso en un proyecto de desarrollo de una
 - Evitas que lo urgente controle tu día.
 - Delegas lo que otros pueden hacer.
 - Eliminas tareas que no aportan valor.
+
+## Recursos y costos
+
+### ¿Qué son los recursos y los costos?
+
+**Recursos:** todo aquello que se necesita para ejecutar una tarea o proyecto. Existen los recursos físicos, humanos, propiedad intelectual, relaciones y contactos y financieros.
+
+**Tipos de Recursos:**
+
+- Físicos: instalaciones, oficinas, terrenos, maquinaria, etc.
+- Humanos: Personal con el que contamos para ejecutar el proyecto.
+- Información confidencial: Metodologías, patentes registradas, etc.
+- Relaciones y contactos: vínculos y contactos fuera del proyecto que nos pueden ayudar con la ejecución.
+- Financieros: dinero que tenemos para ejecutar el proyecto
+
+**Costos:** todos aquellos gastos en los que se incurre para realizar una tarea, un trabajo o un proyecto determinado. Estos están estrechamente relacionados en la producción o servicio resultado del proyecto, así que no todos los gastos del proyecto son un costo, sino aquellos que están estrechamente vinculados con el producto o servicio.
