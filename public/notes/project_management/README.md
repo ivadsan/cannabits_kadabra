@@ -498,3 +498,24 @@ Ejemplo práctico de cómo aplicar cada paso en un proyecto de desarrollo de una
 - Una estrategia puede ser el uso de fichas unitarias de costos y fichas unitarias de materiales para poder asignar por cada actividad los recurso requeridos para terminar la actividad.
 
 ## Riesgos y crisis
+
+### Identificación de riesgos
+
+Los riesgos en proyectos son los eventos o condiciones inciertas que, en caso de ocurrir, tiene un efecto positivo o negativo sobre los objetos de un proyecto
+
+Debemos analizar riesgos potenciales que pueden aparecer durante la ejecución
+
+**Proceso de Gestion de Riesgos**
+
+1. Identificar los riesgos.
+2. Determinar probabilidad e impacto.
+3. Encontrar soluciones para cada riesgo.
+4. Evaluar de forma periódica.
+
+5 errores comunes que podrían presentar un riesgo en el futuro
+
+- Escasez de recursos.
+- Bajo desempeño. (Vinculado al desempeño del equipo)
+- Falta de claridad. (No hacemos las preguntas precisas para aclarar los entregable)
+- Costos elevados.
+- Factor de tiempo. (error en la planificacion, control y administración del tiempo)
