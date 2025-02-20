@@ -492,3 +492,9 @@ Ejemplo práctico de cómo aplicar cada paso en un proyecto de desarrollo de una
 - Financieros: dinero que tenemos para ejecutar el proyecto
 
 **Costos:** todos aquellos gastos en los que se incurre para realizar una tarea, un trabajo o un proyecto determinado. Estos están estrechamente relacionados en la producción o servicio resultado del proyecto, así que no todos los gastos del proyecto son un costo, sino aquellos que están estrechamente vinculados con el producto o servicio.
+
+- Los recursos del proyecto van ligados a la estructura de desgloce de trabajo, que estan en función de las actividades que se requieren para ir desarrollando los entregables
+
+- Una estrategia puede ser el uso de fichas unitarias de costos y fichas unitarias de materiales para poder asignar por cada actividad los recurso requeridos para terminar la actividad.
+
+## Riesgos y crisis
