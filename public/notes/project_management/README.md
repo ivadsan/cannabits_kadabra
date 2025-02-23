@@ -519,3 +519,48 @@ Debemos analizar riesgos potenciales que pueden aparecer durante la ejecución
 - Falta de claridad. (No hacemos las preguntas precisas para aclarar los entregable)
 - Costos elevados.
 - Factor de tiempo. (error en la planificacion, control y administración del tiempo)
+
+### Gestión de crisis
+
+Interrupción en la normalidad, un evento imprevisto que podría tener un efecto negativo en el proyecto, su producción, su reputación o los intereses de los interesados.
+
+La gestión de riesgos es un sistema, donde hay muchos interventores.
+
+**¿Qué puede provocar una crisis?**
+
+- Ataques al proyecto
+- Accidentes
+- Daños premeditados
+
+**¿Cómo afronto una crisis?**
+
+- Detección de señales.
+- Preparación y prevención.
+- Gestión o comunicación.
+- Contención o control.
+- Recuperación.
+- Aprendizaje.
+
+### Como anticipar los riesgos de un proyecto?
+
+- Podemos usar matrices de riesgo para evaluar escenarios de riesgo
+- Realizar mediciones para evaluar el progreso en actividades y analizar probabilidades.
+- Considerar el entorno del proyecto para ver que otras actividades externas podrían inferir en nuestro proyecto.
+- Prevenir y capacitar a los componentes de la organización.
+
+## Cierre de un proyecto
+
+Cierre contractual finalizacion de relacion con proveedores y personal tecnico que ya no necesitamos
+
+Cierre administrativo, lo hace la empresa dueña del proyecto
+
+- Confirmar que el trabajo se haya cumplido como se esperaba
+- Verificar que las compras se hayan hecho de manera exitosa
+- Realizar el cierre financiero
+- Transferencia del producto o servicio final
+- Obtener feedback
+- Realizar y completar el informe final
+- Lecciones aprendidas
+- Archivar información (aprendizaje para el futuro)
+- Entrega de activos (informe escrito con fechas)
+- Liberar el equipo (físico y personal)
