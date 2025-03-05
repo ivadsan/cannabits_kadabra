@@ -14,6 +14,7 @@
 
 ## Planificación
 
+- Identificar los stakeholders del proyecto para alinear expectativas y prioridades.
 - Calcular holguras y no dejar las estimaciones sin margen de maniobra del cambio
 
 ## Lecciones aprendidas
