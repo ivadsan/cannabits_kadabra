@@ -76,3 +76,53 @@ Los 12 principios del Manifiesto Ágil son la base de las metodologías ágiles 
 12. Reflexión y mejora continua
 
     En intervalos regulares, el equipo debe analizar cómo mejorar su forma de trabajar y ajustar procesos para optimizar la eficiencia.
+
+### ¿Qué es Scrum?
+
+Scrum es un marco de trabajo ágil (framework) utilizado principalmente en el desarrollo de software, pero también en otras áreas, para gestionar proyectos de manera flexible e iterativa.
+
+Scrum se basa en ciclos cortos llamados sprints (de 1 a 4 semanas), donde se entrega un incremento del producto funcionando en cada iteración. Promueve la colaboración, adaptación y entrega continua de valor.
+
+#### Los Valores de Scrum
+
+Scrum se rige por 5 valores fundamentales que guían la cultura del equipo:
+
+**Compromiso** 💪
+
+Los miembros del equipo se comprometen a alcanzar los objetivos y entregar valor en cada sprint.
+
+**Coraje** 🦁
+
+Se necesita valentía para afrontar retos, adaptarse al cambio y expresar opiniones de manera abierta.
+
+**Foco** 🎯
+
+El equipo se concentra en el trabajo del sprint y en los objetivos definidos.
+
+**Respeto** 🤝
+
+Se fomenta la colaboración y el respeto entre los miembros del equipo, valorando las contribuciones de cada uno.
+
+**Apertura** 🔍
+
+Se promueve la transparencia y el intercambio de información sobre el progreso, desafíos y mejoras.
+
+#### Los Principios de Scrum
+
+Scrum se basa en 3 pilares fundamentales que aseguran la inspección y adaptación constante:
+
+**Transparencia** 🏆
+
+Todos los miembros del equipo deben tener acceso a la misma información para tomar decisiones basadas en datos reales.
+
+**Inspección** 🔍
+
+Se revisan constantemente los procesos, el progreso del sprint y el producto para identificar mejoras.
+
+**Adaptación** 🔄
+
+Se ajusta el enfoque de trabajo en función de los hallazgos de la inspección para mejorar la eficiencia y calidad.
+
+Estos principios ayudan a que Scrum sea un framework ágil y efectivo en la gestión de proyectos. 🚀
+
+### Conponentes de Scrum
