@@ -126,3 +126,76 @@ Se ajusta el enfoque de trabajo en función de los hallazgos de la inspección p
 Estos principios ayudan a que Scrum sea un framework ágil y efectivo en la gestión de proyectos. 🚀
 
 ### Conponentes de Scrum
+
+Scrum se compone de roles, eventos y artefactos, que trabajan juntos para garantizar la entrega incremental de valor en cada sprint.
+
+#### Roles en Scrum
+
+Scrum define tres roles principales dentro del equipo:
+
+**Product Owner (PO)**
+
+- Representa la voz del cliente y los stakeholders.
+- Prioriza el Product Backlog para maximizar el valor del producto.
+- Asegura que el equipo entienda los requerimientos.
+
+**Scrum Master (SM)**
+
+- Facilita el proceso Scrum y elimina impedimentos.
+- Promueve la transparencia, inspección y adaptación.
+- Ayuda al equipo a seguir las prácticas ágiles.
+
+**Development Team (Equipo de Desarrollo)**
+
+- Grupo autoorganizado y multidisciplinario que construye el producto.
+- Responsable de entregar incrementos funcionales en cada Sprint.
+- No tiene jerarquías internas dentro del equipo.
+
+#### Eventos en Scrum (Ceremonias)
+
+Scrum organiza el trabajo en eventos para mejorar la eficiencia y la comunicación:
+
+**Sprint**
+
+- Iteración de 1 a 4 semanas donde se desarrolla un incremento del producto.
+- Tiene una meta clara y es inmutable una vez iniciado.
+
+**Sprint Planning (Planificación del Sprint)**
+
+- Se definen los objetivos y las tareas del sprint.
+- El equipo selecciona los elementos del Product Backlog que trabajará.
+
+**Daily Scrum (Reunión diaria)**
+
+- Reunión corta (máximo 15 min).
+- Cada miembro responde:
+  ¿Qué hice ayer?
+  ¿Qué haré hoy?
+  ¿Tengo algún bloqueo?
+
+**Sprint Review (Revisión del Sprint)**
+
+- Se presenta el incremento desarrollado a los stakeholders.
+- Se recopila feedback para futuras mejoras.
+
+**Sprint Retrospective (Retrospectiva del Sprint)**
+
+- Se analiza qué salió bien, qué se puede mejorar y qué cambios implementar en el próximo sprint.
+
+#### Artefactos en Scrum
+Scrum maneja tres artefactos principales para gestionar el trabajo y la entrega de valor:
+
+**Product Backlog**
+
+- Lista priorizada de funcionalidades y mejoras pendientes.
+- Gestionada por el Product Owner.
+
+**Sprint Backlog**
+
+- Subconjunto del Product Backlog seleccionado para el sprint actual.
+- Gestionado por el Development Team.
+
+**Incremento**
+
+- Versión funcional y entregable del producto al final del sprint.
+- Debe cumplir con la Definition of Done (DoD).
