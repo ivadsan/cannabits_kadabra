@@ -199,3 +199,53 @@ Scrum maneja tres artefactos principales para gestionar el trabajo y la entrega 
 
 - Versión funcional y entregable del producto al final del sprint.
 - Debe cumplir con la Definition of Done (DoD).
+
+## Roles en scrum
+
+### El equipo scrum y sus roles
+
+Para los procesos de desarrollo de software y en específico en Scrum tenemos un equipo con varios roles.
+
+**Product owner**
+
+- Dueño del producto.
+- Gestor de requisitos.
+- Atiende peticiones del cliente.
+
+**Scrum master**
+
+- Responsable de promover y apoyar Scrum.
+- Implementa la metodología.
+- Elimina impedimentos.
+
+**Equipo de desarrollo**
+
+- Realiza el trabajo a entregar.
+- Autoorganizado y autogestionado.
+- Genera el incremento del producto.
+
+El modelo de equipo en Scrum está diseñado para optimizar la flexibilidad, la creatividad y la productividad.
+
+Los equipos Scrum entregan productos de forma iterativa e incremental, maximizando las oportunidades de obtener retroalimentación.
+
+El equipo debe de eliminar las dependencias externas, ya que lo ideal es organizar los equipos pensando en minimizar las dependencias con entes externos.
+
+Por otro lado la organización del equipo puede ser basada en funcionales o componentes.
+
+### Product owner
+
+El Product Owner (PO) es el representante del cliente y el responsable de maximizar el valor del producto mediante el trabajo del equipo de desarrollo. Su principal responsabilidad es la gestión y priorización de la lista de producto (Product Backlog), asegurando que refleje las necesidades y expectativas del cliente.
+
+Responsabilidades clave:
+
+- Gestión del Product Backlog: Es el único responsable de administrar y priorizar la lista de producto, definiendo el orden en que se desarrollan las Historias de Usuario (HU) en función del valor para el negocio y el feedback del cliente.
+
+- Claridad y enfoque: Debe garantizar que las HU sean comprensibles para el equipo de desarrollo, minimizando la ambigüedad y asegurando que el equipo conozca el propósito de cada funcionalidad.
+
+- Optimización del trabajo del equipo: A través de una adecuada priorización, ayuda a maximizar el impacto del desarrollo en el producto final.
+
+- Transparencia: Se encarga de que el Product Backlog sea accesible para todos los interesados, permitiendo que el cliente tenga visibilidad sobre el estado del desarrollo.
+
+- Toma de decisiones: Define en qué se va a trabajar y en qué orden. Su criterio debe ser respetado, ya que es la única persona autorizada para modificar y gestionar la lista de producto.
+
+En resumen, el Product Owner es el puente entre el negocio y el equipo de desarrollo, asegurando que cada entrega contribuya al valor del producto y que el equipo tenga claridad sobre sus objetivos.
