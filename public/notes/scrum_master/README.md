@@ -249,3 +249,46 @@ Responsabilidades clave:
 - Toma de decisiones: Define en qué se va a trabajar y en qué orden. Su criterio debe ser respetado, ya que es la única persona autorizada para modificar y gestionar la lista de producto.
 
 En resumen, el Product Owner es el puente entre el negocio y el equipo de desarrollo, asegurando que cada entrega contribuya al valor del producto y que el equipo tenga claridad sobre sus objetivos.
+
+### Scrum Master
+
+El Scrum Master es el responsable de promover y apoyar la ejecución de Scrum dentro del equipo, ayudando a todos a entender la teoría, la práctica, las reglas y los valores de este marco de trabajo. Si algo no se está haciendo bien, debe proponer mejoras.
+
+Es un líder que está al servicio del equipo de Scrum y es el encargado de ayudar a entender a los externos al equipo scrum cuando deben interactuar con el equipo.
+
+**¿Cómo ayuda el Scrum Master al Product Owner?**
+
+- Asegura que los objetivos y el alcance sean entendidos por todo el equipo scrum, que todos entiendan en el planning qué se va a trabajar.
+- Transmite los conocimientos sobre Scrum y prácticas ágiles.
+- Facilita los eventos de scrum según se requiera: planea el lugar, la fecha, la hora, los recursos y se asegura de que todo esté listo cuando el equipo llegue a la sala.
+
+**¿Cómo ayuda el Scrum Master al equipo de desarrollo?**
+
+- Guía al equipo de desarrollo para que sea autoorganizado y multifuncional. También identifica líderes que puedan resolver dudas o inconvenientes.
+- Ayuda al equipo de desarrollo a crear productos de alto valor, asegurándose de que los objetivos durante el sprint sean entendidos. Recuerda al equipo los objetivos durante el sprint.
+- Elimina impedimentos para el progreso del equipo de desarrollo.
+
+**¿Cómo ayuda el Scrum Master a la organización?**
+
+- Lidera y guía a la organización en el proceso de adopción de Scrum.
+- Trabaja en conjunto con otros Scrum Masters para incrementar la efectividad de la ejecución de Scrum en la organización.
+
+### El equipo de desarrollo
+
+El equipo de desarrollo en Scrum es el conjunto de profesionales que se encarga de crear y entregar producto terminado, el cual se pueda poner en producción al final de cada sprint. De esta forma, el desarrollo es incremental.
+
+La organización es la encargada de estructurar y empoderar a los equipos de desarrollo para que estos organicen y gestionen su propio trabajo.
+
+**Características del equipo de desarrollo**
+
+El equipo de desarrollo en Scrum tiene las siguientes características:
+
+- Autoorganizado. Sabe cómo y qué va a desarrollar durante el sprint. Se autogestiona en términos de roles y actividades internas.
+- Multifuncional. Es un grupo multidisciplinario capaz de realizar cualquier actividad, si cuenta con las personas indicadas para la ejecución de las diferentes tareas.
+- No tiene títulos. Es decir, no hay jerarquía y todos se deben tratar por igual, con respeto y buscando el consenso para sacar lo mejor de las diferentes habilidades individuales.
+- No hay subequipos. No existen grupos dentro del equipo de desarrollo. Las actividades y responsabilidades se asignan por igual.
+- No se modifica el equipo de desarrollo hasta terminar el sprint. Esto con el fin de no afectar el desarrollo de las actividades planeadas.
+
+El tamaño óptimo del equipo de desarrollo debe ser lo suficientemente pequeño como para garantizar la agilidad, pero también lo suficientemente grande para completar el trabajo encomendado.
+
+Lo ideal es que el equipo de desarrollo esté conformado por 3 a 9 personas, sin considerar al Product Owner o Scrum Master
