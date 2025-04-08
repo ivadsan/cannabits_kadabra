@@ -4,7 +4,7 @@
 
 # Curso Profesional de Scrum
 
-## Introducción a las metodologías ágiles y Scrum
+## Introducción a las metodologías ágiles y Scrum
 
 ### ¿Qué es una metodología ágil?
 
@@ -83,7 +83,7 @@ Scrum es un marco de trabajo ágil (framework) utilizado principalmente en el de
 
 Scrum se basa en ciclos cortos llamados sprints (de 1 a 4 semanas), donde se entrega un incremento del producto funcionando en cada iteración. Promueve la colaboración, adaptación y entrega continua de valor.
 
-#### Los Valores de Scrum
+#### Los Valores de Scrum
 
 Scrum se rige por 5 valores fundamentales que guían la cultura del equipo:
 
@@ -125,7 +125,7 @@ Se ajusta el enfoque de trabajo en función de los hallazgos de la inspección p
 
 Estos principios ayudan a que Scrum sea un framework ágil y efectivo en la gestión de proyectos. 🚀
 
-### Conponentes de Scrum
+### Componentes de Scrum
 
 Scrum se compone de roles, eventos y artefactos, que trabajan juntos para garantizar la entrega incremental de valor en cada sprint.
 
@@ -182,7 +182,8 @@ Scrum organiza el trabajo en eventos para mejorar la eficiencia y la comunicaci�
 
 - Se analiza qué salió bien, qué se puede mejorar y qué cambios implementar en el próximo sprint.
 
-#### Artefactos en Scrum
+#### Artefactos en Scrum
+
 Scrum maneja tres artefactos principales para gestionar el trabajo y la entrega de valor:
 
 **Product Backlog**
@@ -292,3 +293,26 @@ El equipo de desarrollo en Scrum tiene las siguientes características:
 El tamaño óptimo del equipo de desarrollo debe ser lo suficientemente pequeño como para garantizar la agilidad, pero también lo suficientemente grande para completar el trabajo encomendado.
 
 Lo ideal es que el equipo de desarrollo esté conformado por 3 a 9 personas, sin considerar al Product Owner o Scrum Master
+
+## Preparar los artefactos a utilizar en Scrum
+
+### Qué es el Backlog, las Épicas y las Historias de Usuario
+
+En Scrum, la Lista de Producto (product backlog) es una lista ordenada de todo lo que se identifica y es necesario para el proyecto. Es la única fuente de requisitos para cualquier cambio que se realice en el producto.
+
+Si durante la revisión del producto el cliente sugiere un cambio, ese cambio debe agregarse a la lista del producto, si una historia de usuario no está en la lista del producto no existe y nadie debe trabajar en ello.
+
+- El Backlog es dinámico. Por lo tanto, va evolucionando a medida que avanza el proyecto, según los nuevos requerimientos.
+- Los elementos en la lista más prioritarios tienen descripciones más completas.
+- La Lista de Producto es dinámica, cambia constantemente para identificar lo que el producto necesita para ser adecuado, competitivo y útil.
+- La Lista del Producto es un artefacto vivo, está cambiando constantemente y en ella residen todos los elementos necesarios para completar el producto.
+
+**Qué son las Historias de Usuario y las Épicas**
+
+Los elementos del Backlog (Lista del Producto) se denominan Historias de Usuario. Todas las historias de usuario se pueden agrupar en elementos más grandes denominados Épicas.
+
+Las epicas son conjuntos de historias de usuario.
+
+Las Épicas se pueden crear con base en funcionalidades o módulos del producto que se está desarrollando y normalmente van a tomar más de un sprint para ser completadas.
+
+### ¿Cómo crear Historias de Usuario?
