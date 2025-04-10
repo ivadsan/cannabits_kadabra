@@ -316,3 +316,107 @@ Las epicas son conjuntos de historias de usuario.
 Las Épicas se pueden crear con base en funcionalidades o módulos del producto que se está desarrollando y normalmente van a tomar más de un sprint para ser completadas.
 
 ### ¿Cómo crear Historias de Usuario?
+
+Las Historias de Usuario son los elementos más específicos de la lista de producto y contienen la visión del usuario sobre la funcionalidad esperada del producto. No se deben confundir las Historias de Usuario con requerimientos, en ellas se referencia lo que el usuario quiere o espera del producto terminado.
+
+#### Componentes de una Historia de Usuario
+Estos son los componentes que debe tener una buena Historia de Usuario, para que sea fácil de entender por parte del equipo, genere valor y simplifique el proceso de desarrollo:
+
+- Título. Permite conocer rápidamente de qué se trata la historia y por ello debe ser concreta y clara.
+- Descripción. Contiene información sobre cómo se deben ejecutar las tareas, puede incluir componentes técnicos, especificar el tipo de diseño, el lugar donde se van a almacenar las tareas o el flujo de arquitectura que se debe seguir. En resumen, contempla una definición más específica para completar la historia.
+  Para la descripción es útil emplear una plantilla como la siguiente:
+
+Como <rol> quiero <acción> para qué <beneficio>
+
+Ejemplos:
+
+Como usuario registrado
+Quiero poder restablecer mi contraseña
+Para recuperar el acceso a mi cuenta en caso de olvidarla.
+
+Como administrador del sistema
+Quiero ver un panel con estadísticas de uso
+Para monitorear el comportamiento de los usuarios en tiempo real.
+
+Como cliente de un e-commerce
+Quiero agregar productos a mi carrito sin perder mi lugar en la tienda
+Para seguir explorando sin interrupciones.
+
+Como editor de contenido
+Quiero guardar borradores de mis artículos
+Para poder continuar editando más tarde sin perder mis cambios.
+
+Como visitante del sitio
+Quiero buscar contenido por palabras clave
+Para encontrar más rápido la información que necesito.
+
+Como desarrollador frontend
+Quiero tener una API que devuelva los documentos organizados por categoría
+Para renderizar dinámicamente la tabla de contenidos en la interfaz.
+
+Como desarrollador backend
+Quiero crear un endpoint que devuelva los documentos en formato JSON
+Para que el frontend pueda renderizar la tabla de contenidos dinámicamente.
+
+Como desarrollador backend
+Quiero validar que la carpeta docs exista al iniciar la app
+Para evitar errores de lectura al generar los archivos de índice.
+
+Como desarrollador backend
+Quiero guardar un archivo toc.json por cada documento
+Para tener precargadas las tablas de contenido y mejorar el tiempo de respuesta del cliente.
+
+Como desarrollador backend
+Quiero estructurar los archivos del directorio en una respuesta anidada por categorías y documentos
+Para facilitar el mapeo del contenido en el cliente.
+
+Como desarrollador frontend
+Quiero renderizar una tabla de contenidos en el sidebar al abrir un documento
+Para mejorar la navegación dentro del contenido.
+
+Como desarrollador frontend
+Quiero consumir el archivo directory.json al montar la app
+Para mostrar el listado inicial de categorías y documentos disponibles.
+
+Como desarrollador frontend
+Quiero permitir la búsqueda de categorías y documentos desde un input
+Para que el usuario encuentre fácilmente lo que necesita.
+
+Como desarrollador frontend
+Quiero mostrar un mensaje cuando no haya más resultados en una paginación
+Para evitar que el usuario espere una carga infinita sin contenido.
+
+- Puntos. Los puntos de una Historia de Usuario representan el esfuerzo que le va a tomar al equipo de desarrollo completar las actividades de la historia.
+- Criterio de aceptación. A través de él se definen los requisitos que la historia debe cumplir para que esté completa.
+
+#### Cómo definir que una Historia de Usuario está terminada
+
+La definición de “completado” en una Historia de Usuario debe incluir la lista de elementos requeridos. Este es un ejemplo:
+
+✅ Funcionalidad (que se cumplan los criterios de aceptación)
+
+✅ Sistema de gestión del código o de versiones (código actualizado en git)
+
+✅ Pruebas creadas (unitarias, funcionales, de rendimiento)
+
+✅ Documentación (a través de manuales o tutoriales)
+
+Antes de comenzar la planeación del sprint se debe de invertir tiempo en la planeación de las Historias de Usuario. Existe una técnica llamada las tres C (por sus nombres en inglés):
+
+Cards. Son las tarjetas creadas con los componentes o información de cada historia.
+Conversation. Es la conversación del equipo acerca de la historia, para asegurar que no haya dudas en el proceso de desarrollo.
+Confirmation. Todas las personas que trabajan en la historia llegan a un acuerdo y confirman que entienden su contenido.
+
+#### Cómo debe ser una buena Historia de Usuario
+
+I - Independiente. No debe depender de otra Historia de Usuario. Si es así, debe marcarse con tiempo y no se debe empezar a trabajar hasta que se complete su dependencia.
+
+N - Negociable. Si el equipo encuentra que la historia es muy grande para completarla durante el sprint, se puede negociar con el Product Owner para dividirla en historias más pequeñas.
+
+V - Valiosa. Debe entregar valor al cliente, debe hacer algo por la funcionalidad o el producto.
+
+E - Estimable. Se debe poder estimar el esfuerzo para completar la historia.
+
+S - Small (pequeña). Debe ser lo suficientemente pequeña para cumplir una funcionalidad
+
+T - Testeable (comprobable). Se debe verificar que la historia se completó a través de los criterios de aceptación y de la definición de completado.
