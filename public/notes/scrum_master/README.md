@@ -420,3 +420,34 @@ E - Estimable. Se debe poder estimar el esfuerzo para completar la historia.
 S - Small (pequeña). Debe ser lo suficientemente pequeña para cumplir una funcionalidad
 
 T - Testeable (comprobable). Se debe verificar que la historia se completó a través de los criterios de aceptación y de la definición de completado.
+
+### Cómo estimar Historias de Usuario
+
+Para estimar Historias de Usuario en un proyecto Scrum se deben tener en cuenta 4 elementos:
+
+- Complejidad de la historia. Junto con el equipo se debe definir qué tan difícil es implementar la historia.
+- Cantidad de trabajo requerido. Representa el esfuerzo que debe invertir el equipo para llevar a cabo la historia.
+- Conocimientos necesarios. Habilidades técnicas, de diseño y de negocio, entre otras, para completar la historia.
+- Incertidumbre. Acciones que se requieren para ejecutar la Historia de Usuario, aunque no se tenga claro el tiempo o esfuerzo real.
+
+El proceso de estimación de las Historias de Usuario se hace a través de puntos. Estos puntos no están relacionadas con una escala de medición, no representan horas o días de trabajo, sino un estimado empírico con base en la experiencia del equipo.
+
+#### Qué es el póker de planeación o planning poker
+
+El planning poker es una herramienta que sirve para que el equipo de un proyecto Scrum participe en la estimación de las Historias de Usuario.
+
+Existen cartas físicas de planning poker pero, en caso de no tenerlas, también se puede hacer uso de aplicaciones como Scrum Poker Cards, disponible en PlayStore.
+
+Los puntos para hacer la estimación se pueden establecer tomando como referencia diferentes escalas:
+
+- Una de las más usadas es Fibonacci modificada (1, 2, 3, 4, 8, 13, 20, 40, 100, ∞ y ? → representa incertidumbre)
+- 2X (1, 2, 4, 8, 16, 32)
+
+La idea de usar estas escalas en lugar de números consecutivos es minimizar el tiempo que se puede perder en discusiones triviales o que no permitan dar continuidad al proyecto.
+
+Al final del proceso de estimación, se obtendrá el valor total de puntos de todas las Historias de Usuario y eso va a reflejar:
+
+- Velocidad. Es el total de puntos de las historias de usuario completadas por el equipo durante un sprint.
+- Capacidad. Total de historias de usuario que se pueden completar en un sprint futuro.
+
+Durante el primer sprint es posible identificar la velocidad del equipo y con base en los resultados, será más fácil estimar los próximos sprints.
