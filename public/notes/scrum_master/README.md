@@ -319,7 +319,8 @@ Las Épicas se pueden crear con base en funcionalidades o módulos del producto 
 
 Las Historias de Usuario son los elementos más específicos de la lista de producto y contienen la visión del usuario sobre la funcionalidad esperada del producto. No se deben confundir las Historias de Usuario con requerimientos, en ellas se referencia lo que el usuario quiere o espera del producto terminado.
 
-#### Componentes de una Historia de Usuario
+#### Componentes de una Historia de Usuario
+
 Estos son los componentes que debe tener una buena Historia de Usuario, para que sea fácil de entender por parte del equipo, genere valor y simplifique el proceso de desarrollo:
 
 - Título. Permite conocer rápidamente de qué se trata la historia y por ello debe ser concreta y clara.
@@ -403,9 +404,9 @@ La definición de “completado” en una Historia de Usuario debe incluir la li
 
 Antes de comenzar la planeación del sprint se debe de invertir tiempo en la planeación de las Historias de Usuario. Existe una técnica llamada las tres C (por sus nombres en inglés):
 
-Cards. Son las tarjetas creadas con los componentes o información de cada historia.
-Conversation. Es la conversación del equipo acerca de la historia, para asegurar que no haya dudas en el proceso de desarrollo.
-Confirmation. Todas las personas que trabajan en la historia llegan a un acuerdo y confirman que entienden su contenido.
+- Cards. Son las tarjetas creadas con los componentes o información de cada historia.
+- Conversation. Es la conversación del equipo acerca de la historia, para asegurar que no haya dudas en el proceso de desarrollo.
+- Confirmation. Todas las personas que trabajan en la historia llegan a un acuerdo y confirman que entienden su contenido.
 
 #### Cómo debe ser una buena Historia de Usuario
 
