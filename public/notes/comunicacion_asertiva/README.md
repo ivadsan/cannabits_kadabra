@@ -14,12 +14,6 @@
 - Fuerza
 - Proposito
 
-Lenguajes clave:
-
-Verbal: Lo que dices
-No verbal: Postura, gestos y mirada
-Paraverbal: Tono, las pausas y silencios
-
 ### Comunicación consciente: estar presente, escuchar y responder
 
 Una comunicación efectiva es como entrenar un músculo: entre más se practica, más fuerte se vuelve. Este entrenamiento comienza con un calentamiento basado en entender cómo te comunicas actualmente. Así, la comunicación consciente se posiciona como un aspecto clave, compuesta por tres elementos fundamentales:
@@ -170,3 +164,131 @@ La comunicación asertiva considera ambas partes por igual. Un jefe asertivo bus
 
 **¿Por qué es importante practicar la comunicación asertiva?**
 Este ejercicio muestra que la comunicación efectiva no consiste en ganar una discusión, sino en mantener un intercambio claro, respetuoso y con entendimiento mutuo. Ser capaz de ponerse en el lugar del otro, escuchar y expresar tu punto de vista claramente contribuye enormemente a la creación de mejores ambientes laborales y relaciones interpersonales más sólidas.
+
+### Diferentes perspectivas en comunicación asertiva
+
+La comunicación asertiva implica entender y aceptar diferentes perspectivas sin necesidad de juzgar quién tiene la razón o está equivocado. Una historia que retrata muy bien esto es la de los seis ciegos y el elefante; cada uno describe al animal según la parte que logra tocar. Este relato deja claro cómo cada perspectiva es válida desde su posición, aunque parezcan distintas o incluso contradictorias.
+
+**¿Por qué es importante reconocer distintas perspectivas?**
+
+Cuando escuchamos diferentes opiniones, podemos comprender mejor una situación en toda su dimensión. Cada persona aporta desde su visión limitada, lo cual no implica un error, sino un enfoque particular. Valorar esta pluralidad de enfoques permite una comunicación más efectiva, clara y enriquecedora.
+
+**¿Qué podemos aprender del relato de los seis ciegos?**
+
+Este relato enseña varias ideas claves:
+
+- Cada persona observa la realidad parcialmente desde su contexto particular.
+- Las percepciones diversas no niegan otras realidades, sino que las complementan.
+- Reconocer diferentes puntos de vista facilita un diálogo asertivo y constructivo.
+
+**¿Cómo aplicar esto en conversaciones diarias?**
+
+Para ser más asertivos en nuestras interacciones cotidianas, considera lo siguiente:
+
+- Escuchar con apertura y sin prejuicios.
+- Evitar conclusiones rápidas que invaliden otras opiniones.
+- Expresar nuestra perspectiva aceptando la convivencia con otras opiniones.
+
+Reconocer que tu punto de vista no es el único fomenta una comunicación más empática y asertiva, ayudando a construir relaciones sólidas y a generar soluciones creativas en contextos diversos.
+
+### El poder transformador del lenguaje positivo en tu vida diaria
+
+¿Sabías que tus palabras no solo describen situaciones, sino que también pueden crear nuevas realidades? El lenguaje, expresado correctamente, tiene la facultad de transformar percepciones y experiencias. Al utilizar palabras positivas, el cerebro recibe un impulso favorable, cambiando la manera en la que aprecias tu entorno y a ti mismo.
+
+**¿Por qué es importante utilizar un lenguaje positivo contigo mismo?**
+La forma en que nos hablamos puede cambiar profundamente nuestra perspectiva. Por ejemplo:
+
+- En lugar de decir "soy un desastre", es más constructivo decir "estoy aprendiendo, estoy creciendo con cada experiencia".
+- Esta pequeña modificación genera una diferencia significativa en cómo nos percibimos y aborda el crecimiento personal.
+
+**¿De qué manera afecta el lenguaje positivo a las relaciones con los demás?**
+Utilizar palabras amables y constructivas con otros facilita las relaciones interpersonales. Por ejemplo:
+
+- Cambiar la crítica como: "eres muy malo porque te equivocas bastante",
+- Por una expresión más positiva: "estás en un momento de evolución y aprendizaje".
+
+**_Este enfoque permite transformar situaciones complicadas en oportunidades constructivas, promoviendo que otros deseen mejorar._**
+
+### Lenguaje tóxico versus lenguaje constructivo en comunicación
+
+Muchas veces, hablamos sin darnos cuenta de cómo expresamos nuestras ideas, cayendo en patrones negativos o tóxicos. Saber diferenciar entre un lenguaje tóxico y uno constructivo puede mejorar la comunicación y generar empatía, convirtiéndose en una herramienta valiosa para todos.
+
+**¿Qué es el lenguaje tóxico y cómo identificarlo?**
+
+El lenguaje tóxico es aquel que utiliza críticas constantes, descalificaciones o palabras negativas como "nunca", "siempre" y "nada". Este lenguaje generalmente busca herir, juzgar o menospreciar.
+
+Ejemplos claros de lenguaje tóxico son:
+
+- "Nunca haces nada bien".
+- "Soy un desastre".
+- "Es que tú siempre te equivocas".
+
+Estas frases tienen connotaciones negativas que pueden afectar el autoestima y la confianza tanto de quien las recibe como de quien las expresa.
+
+**¿El lenguaje tóxico es solo hacia los demás?**
+
+No necesariamente. También puede estar dirigido hacia uno mismo, manifestándose en diálogos internos negativos y autocríticas constantes que afectan nuestra salud emocional.
+
+**¿Cómo identificar el lenguaje constructivo?**
+
+Contrariamente, el lenguaje constructivo comunica empatía, apoyo y orientación hacia soluciones o mejoras. Evita etiquetas, prejuicios y abre la posibilidad al diálogo positivo y tolerante.
+
+Algunos ejemplos de lenguaje constructivo son:
+
+- "Podemos revisar esto juntos para que salga mejor".
+- "Estoy aprendiendo, no soy perfecto".
+
+Estas afirmaciones generan un espacio seguro para el crecimiento personal y colectivo.
+
+### Cómo las frases de tu crianza afectan tu comunicación actual
+
+La forma en que te comunicas hoy podría estar conectada directamente con las frases que escuchaste durante tu crianza. Frases como "uno no llora en público", "primero piensa, después siente" o "aquí se hace lo que yo digo" influyen inconscientemente en cómo hablas y reaccionas en la actualidad. Entender este factor es fundamental para darte cuenta si empleas un lenguaje tóxico o constructivo sin advertirlo claramente.
+
+**¿Cómo influyen en ti las frases que escuchaste desde pequeño?**
+
+Son frecuentes ciertas expresiones que escuchaste toda tu vida, las cuales podrías repetir sin cuestionarlas. Estas frases establecen mandatos inconscientes, formando bloqueos en tu habilidad comunicativa. Por ejemplo, decir "yo soy un desastre" puede estar profundamente arraigado en ti, condicionando negativamente tu autoevaluación y manera de expresarte sin que seas consciente del todo.
+
+**¿Por qué ciertas frases se convierten en bloqueos inconscientes?**
+
+Estas frases heredadas constituyen normas invisibles en tu dinámica comunicativa. Su constante repetición puede influenciar significativamente tu estilo comunicativo habitual:
+
+- Te impiden cuestionar tu manera habitual de expresarte.
+- Limitan la capacidad de ajustar tu lenguaje hacia formas más positivas.
+- Reducen tu habilidad para expresar emociones de manera abierta y saludable.
+
+**¿Qué puedes hacer para cambiar tu estilo de comunicación?**
+
+Identificar estas frases negativas es un paso vital hacia la transformación personal. Puedes realizar un ejercicio práctico que consiste en lo siguiente:
+
+- Elige a tres personas cercanas, como familiares o amigos íntimos.
+- Pídeles que identifiquen frases negativas frecuentes en tu discurso.
+- Transforma esas expresiones negativas hacia otras con connotaciones positivas.
+
+Este ejercicio complementa y amplía tu inventario comunicativo desarrollado en prácticas anteriores, promoviendo así mejoras progresivas tanto en la percepción propia como en tu interacción diaria.
+
+## Entrenamiento
+
+### Estrategia Brain Trust para conversaciones difíciles
+
+La comunicación efectiva es esencial, especialmente durante conversaciones difíciles. Aprender cómo gestionar estos momentos implica considerar diferentes perspectivas para lograr el objetivo deseado. Una estrategia innovadora para esto es el método Brain Trust
+
+Brain trust es una expresión en inglés que se refiere a un grupo de expertos o asesores de alto nivel que se reúnen para ofrecer ideas, conocimientos y orientación estratégica a una persona, organización o proyecto.
+
+Estas reuniones se caracterizan por la ausencia de jerarquía, permitiendo que cada participante aporte desde distintos roles y perspectivas sin miedo a ser juzgado o criticado.
+
+**¿Por qué el Brain Trust es efectivo en conversaciones difíciles?**
+
+Esta estrategia es efectiva porque evita caer en el sesgo de proyección, es decir, no presupone automáticamente que las reacciones, pensamientos o sentimientos de los demás sean iguales a los propios. Gracias al enfoque del Brain Trust, la comunicación se mantiene abierta y respetuosa, favoreciendo que el mensaje central sea lo verdaderamente importante, por encima del rol o posición de quien participa.
+
+Además, esta metodología inspira conversaciones basadas en consejos, sabiduría y recomendaciones en lugar de juicios o críticas personales, fortaleciendo aún más la comunicación interpersonal.
+
+**¿Cómo aplicar la metodología del Brain Trust a tu conversación difícil?**
+
+Si quieres poner en marcha esta práctica, sigue estos pasos:
+
+- Identifica claramente la conversación difícil que tienes pendiente, ya sea laboral, familiar o personal.
+- Pregúntate qué debería suceder para que esa conversación sea exitosa.
+- Evita caer en la trampa del sesgo de proyección, asegurando considerar cómo podría reaccionar realmente la otra persona.
+- Reúne un grupo confiable y diverso, y pide opiniones enfocadas en sugerencias y soluciones constructivas.
+
+Integrando estos elementos en tus conversaciones, podrás manejar situaciones complicadas con mayor seguridad y eficacia, guiado por la colaboración y el respeto.
