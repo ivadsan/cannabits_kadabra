@@ -57,10 +57,11 @@ Este proceso personal se facilita al responder a preguntas específicas a travé
 
 Inicia ahora la práctica hacia una comunicación más consciente y efectiva, fortaleciendo con cada interacción tus habilidades personales y sociales.
 
-Curso de Comunicación Asertiva
+**Guía de autodiagnóstico - Curso de Comunicación Asertiva**
+
 Paso 1: Trae una conversación a la mente
-Piensa en una conversación reciente (o significativa) en la que
-sentiste que no quedó claro el mensaje y responde:
+
+Piensa en una conversación reciente (o significativa) en la que sentiste que no quedó claro el mensaje y responde:
 
 1. ¿Con quién fue la conversación?
 
@@ -81,9 +82,9 @@ Paso 2: Analiza lo que pasó
 
 5. ¿Qué era lo que realmente querías decir o comunicar en el
    fondo?
-   Guía de autodiagnóstico
-   Curso de Comunicación Asertiva
-   Paso 3: Reconstruye tu mensaje
+
+Paso 3: Reconstruye tu mensaje
+
 6. Si pudieras repetir la conversación, ¿cómo lo dirías hoy para
    que se entienda mejor?
 
