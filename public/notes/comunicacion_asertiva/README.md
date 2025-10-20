@@ -293,3 +293,128 @@ Si quieres poner en marcha esta práctica, sigue estos pasos:
 - Reúne un grupo confiable y diverso, y pide opiniones enfocadas en sugerencias y soluciones constructivas.
 
 Integrando estos elementos en tus conversaciones, podrás manejar situaciones complicadas con mayor seguridad y eficacia, guiado por la colaboración y el respeto.
+
+### Metodología DESC para conversaciones difíciles en el trabajo
+
+La metodología DESC es un método especialmente útil para preparar y tener éxito en aquellas conversaciones complicadas o delicadas. Se basa en cuatro etapas clave representadas por sus siglas:
+
+- Describir: Observa la situación sin juicios ni críticas.
+- Expresar: Comunica cómo te sientes al respecto.
+- Sugerir: Propón soluciones prácticas y efectivas.
+- Consecuencia: Muestra claramente qué pasará si se aplica esa solución.
+
+**¿Cómo aplicar cada paso del método DESC?**
+
+Este método requiere atención y claridad en cada uno de sus pasos. Observa el siguiente ejemplo práctico basado en una situación típica: una persona siente que sus ideas no son valoradas porque constantemente es interrumpida.
+
+¿Cómo **describir** situaciones sin emitir juicios?
+La clave aquí es ser claro y directo, sin emitir juicios personales ni emocionales. Por ejemplo:
+
+    "Cuando interrumpes mis ideas..."
+
+¿De qué manera **expresar** sentimientos asertivamente?
+Esta etapa implica explicar directamente tu sentir frente a la situación descrita anteriormente:
+
+    "...siento que no me valoras."
+
+¿Qué implica **sugerir** una solución efectiva?
+Aquí buscas acuerdos que permitan mejorar la situación en beneficio de ambas partes, asegurando el éxito de la conversación:
+
+    "Por eso me gustaría que dejáramos hablar cada uno su parte."
+
+¿Cuál es la importancia de mencionar **consecuencias** positivas?
+Finalmente, establece claramente lo que sucederá si se sigue tu sugerencia:
+
+    "Esto nos ayudará a que todas las ideas sean bienvenidas."
+
+### Técnicas para decir "no" de manera efectiva en conversaciones
+
+El miedo a ser percibido como egoísta, quedar mal con la otra persona o simplemente la presión de complacer, hacen complicado expresar claramente un "no".
+
+**¿Qué estrategias facilitan decir "no" de forma efectiva?**
+
+Decir "no" no tiene por qué ser un acto brusco o desagradable. Existen diferentes técnicas para hacerlo de manera amable y firme:
+
+- **Manera amable y firme:** agradeciendo y mostrando empatía, ejemplo: “Gracias por pensar en mí, pero no puedo en este momento”.
+
+- **Forma breve y directa:** claramente y sin rodeos, ejemplo: “Oye, no puedo acompañarte hoy, necesito descansar, quizá otro día pueda hacerlo”.
+
+- **Proponer alternativas:** ofreciendo opciones al pedido inicial, ejemplo: “Hoy no me da tiempo, pero lo podemos revisar mañana”.
+
+- **Reconocimiento emocional:** mostrando comprensión hacia la situación o emociones del otro, ejemplo: “Entiendo que esto es importante para ti, pero necesito priorizar otras cosas por ahora”.
+
+Estas estrategias aseguran una comunicación más asertiva y efectiva, evitando malentendidos y permitiendo que todas las partes se sientan entendidas y respetadas.
+
+### Técnica del sándwich para dar feedback constructivo
+
+La técnica del sándwich es una estrategia que consta de tres pasos fundamentales para ofrecer un feedback constructivo. Su objetivo es mejorar la comunicación, alcanzando resultados positivos y manteniendo buenas relaciones interpersonales. Estos tres pasos incluyen:
+
+- **Comienza destacando algo positivo:** Inicia reconociendo un aspecto valioso o destacable de lo expresado por el otro, lo cual ayuda a crear una conexión inicial positiva.
+
+- **Plantea el desacuerdo o área de mejora:** Expresa aquello con lo que no estás conforme de forma clara pero respetuosa, argumentando desde una postura empática y asertiva.
+
+- **Finaliza con un reconocimiento:** Cierra tu intervención reforzando el valor de la otra persona o destacando aspectos importantes de sus ideas, evidenciando así que la opinión emitida surge desde un lugar de aprecio hacia su trabajo o perspectiva.
+
+### Escucha activa para conversaciones complejas
+
+Importancia de la escucha activa
+
+Escuchar para entender —en lugar de simplemente esperar tu turno para hablar— te permitirá construir relaciones más sólidas, productivas y empáticas.
+
+**¿Qué diferencia genera realmente la escucha activa?**
+
+Una conversación marcada por escucha activa permite que las personas se sientan verdaderamente comprendidas. Cuando esto sucede, se incrementa considerablemente la percepción positiva sobre la interacción, hasta en un 40%. Al sentirse comprendido, el interlocutor percibe que su opinión es valorada, lo cual genera mayor apertura emocional y motivación para comunicarse clara y sinceramente.
+
+Este tipo de escucha implica parafrasear lo que dice la persona que habla, mostrando atención genuina e interés en sus palabras.
+
+**¿Qué frases facilitan una escucha activa efectiva?**
+
+Usar algunas frases específicas durante una conversación puede ayudarte a demostrar claramente tu comprensión y fomentar empatía. Aquí tienes ejemplos concretos que puedes aplicar:
+
+- "Si entendí bien, lo que te molestó fue..."
+- "Lo que estás sintiendo es..."
+- "Quieres decir que, para ti, esto significó..."
+
+_La ausencia de escucha activa puede resultar perjudicial, ya que la otra persona puede sentirse juzgada o incomprendida. Estas emociones negativas pueden impedir una conversación clara y efectiva, generando tensión y conflicto emocional innecesario._
+
+### Control emocional en conversaciones difíciles con técnica STOP
+
+Las conversaciones difíciles representan un desafío emocional, pero el manejo emocional efectivo te permite comunicarte mejor. Controlar tus emociones es esencial para evitar que dominen tu comunicación, limitando así tu capacidad de expresar claramente tus ideas y sentimientos
+
+**¿Qué pasa cuando las emociones dominan la conversación?**
+
+Cuando atraviesas una comunicación complicada, las emociones pueden tomar control de tu cerebro. Generalmente, una emoción prevalece, bloqueando cualquier otra, y define la forma en que reaccionas. Por ejemplo, pueden tomar fuerza sentimientos como:
+
+- Ansiedad.
+- Rabia.
+- Miedo.
+
+Observar estas emociones te ayuda a identificarlas claramente y proporciona herramientas para controlarlas eficazmente.
+
+**¿En qué consiste la técnica STOP?**
+
+La técnica STOP ofrece pasos claros para gestionar emociones durante momentos complicados y consta de cuatro sencillas acciones:
+
+**¿Qué hacer con la 'S' en STOP?**
+
+La letra 'S' significa "Stop", es decir, detenerse. Cuando percibas que una emoción comienza a abrumarte:
+
+- Detente un segundo.
+- Respira profundamente.
+- Toma conciencia de lo que estás sintiendo.
+
+**¿Cómo aplicar la 'T' (Take a breath)?**
+
+Literalmente, "toma un respiro". Aplicar técnicas conscientes y profundas para inhalar y exhalar contribuye enormemente a retomar el control sobre la emoción que sientes.
+
+**¿Qué observar con la letra 'O'?**
+
+Observa claramente cuál emoción predomina en ese momento. Al reconocerla, facilitas el control consciente, transformando la emoción en algo manejable y tangible.
+
+**¿Cómo usar 'P' (Proceed)?**
+
+Procede tomando una decisión consciente sobre tu reacción. Al decidir cómo responderás según la emoción identificada, puedes modificar tu comunicación hacia un enfoque más asertivo.
+
+**¿Qué ventaja tiene usar la técnica STOP?**
+
+Psicológicamente está comprobado que al identificar explícitamente tu emoción, puedes manejarla e incluso eliminar su impacto negativo. Este método no solo mejora tu comunicación verbal, sino también evita que transmitas emociones negativas a través de tu lenguaje no verbal.
