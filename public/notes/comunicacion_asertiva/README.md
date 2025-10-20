@@ -418,3 +418,87 @@ Procede tomando una decisión consciente sobre tu reacción. Al decidir cómo re
 **¿Qué ventaja tiene usar la técnica STOP?**
 
 Psicológicamente está comprobado que al identificar explícitamente tu emoción, puedes manejarla e incluso eliminar su impacto negativo. Este método no solo mejora tu comunicación verbal, sino también evita que transmitas emociones negativas a través de tu lenguaje no verbal.
+
+### Microexpresiones faciales y las 7 emociones básicas de Paul Ekman
+
+Comprender y controlar las emociones a través del lenguaje no verbal es clave para mejorar tu comunicación personal y laboral. Las emociones se reflejan inconscientemente en nuestro cuerpo mediante microexpresiones, que son reacciones involuntarias imposibles de ocultar. El psicólogo Paul Ekman destacó siete emociones básicas que predominan en nuestro rostro, facilitando su reconocimiento para gestionar mejor las interacciones diarias.
+
+**¿Qué nos revela Paul Ekman sobre las emociones?**
+
+Ekman identificó siete emociones básicas reflejadas en el lenguaje no verbal:
+
+- Desprecio: rechazo moral visible con una leve sonrisa unilateral y mirada de superioridad.
+- Tristeza: pérdida o desánimo, reflejada en labios hacia abajo, cejas caídas y mirada baja.
+- Sorpresa: reacción a eventos inesperados con ojos y boca abiertos, cejas arqueadas.
+- Miedo: percepción de peligro o amenaza, manifestada con ojos más abiertos que lo habitual, cejas elevadas y boca entreabierta.
+- Asco: rechazo hacia algo ofensivo o desagradable, expresado con nariz fruncida, labios elevados y expresión de repulsión.
+- Felicidad: satisfacción representada mediante una sonrisa amplia, ojos entrecerrados y mejillas elevadas.
+- Enfado: surge por injusticia o frustración, caracterizado por cejas fruncidas, labios apretados y mirada intensa.
+
+**¿Por qué es esencial controlar tus emociones?**
+Controlar emociones es fundamental; cuando las emociones dominan, el lenguaje corporal toma protagonismo, revelando sentimientos reales a través de gestos involuntarios. Reconocer estas microexpresiones ayuda a:
+
+- Mejorar la comunicación interpersonal.
+- Prevenir conflictos innecesarios.
+- Incrementar el autoconocimiento y la empatía hacia los demás.
+
+### Técnica PIR para comunicación asertiva en el trabajo
+
+Dominar la comunicación clara y efectiva en el ámbito laboral marca una gran diferencia en el cumplimiento de objetivos. La técnica PIR es una herramienta práctica que ayuda a transmitir mensajes de forma concisa y asertiva, especialmente útil cuando el tiempo para planificar es escaso.
+
+**¿Qué es la técnica PIR y cómo te ayuda en el trabajo?**
+
+La técnica PIR simplifica la comunicación en situaciones laborales al estructurar tu mensaje en tres pasos fundamentales:
+
+- Punto: expresa claramente lo que quieres decir, cuál es tu premisa central.
+- Impacto: expón el efecto o las consecuencias que tendría tu mensaje, por qué es relevante.
+- Recomendación: presenta tu propuesta o solución concreta que facilite tomar acciones.
+
+Este método enfoca la conversación hacia soluciones, manteniendo el respeto y claridad que exige el contexto laboral.
+
+**¿Cómo aplicar la técnica PIR con un ejemplo?**
+
+Para que entiendas mejor cómo se aplica el método PIR, aquí te presento un ejemplo sencillo:
+
+- Punto: “Me preocupa que no lleguemos a los plazos”.
+- Impacto: “Porque afecta la confianza del cliente”.
+- Recomendación: “Propongo revisar los entregables esta semana”.
+
+Este ejemplo sencillo muestra cómo un mensaje breve y claro puede favorecer soluciones rápidas y eficientes, garantizando que tus intervenciones sean significativas.
+
+**¿Cómo puedes poner en práctica esta técnica?**
+
+Una excelente manera de incorporar la técnica PIR en tu rutina es identificar aquellas situaciones frecuentes en tu día a día laboral que resultan complicadas o dejan pendientes por resolver. Te sugiero:
+
+- Define claramente cuál sería tu punto o premisa frente a esa situación.
+- Describe específicamente qué impacto tendría resolver o no esa premisa en tu entorno laboral.
+- Propón recomendaciones concretas que permitan avanzar de manera positiva.
+
+Practicar con anticipación te permitirá contar con un guión claro y estructurado que agiliza tus respuestas cuando surjan estos escenarios habituales en tu trabajo.
+
+## Práctica diaria para mejorar tu comunicación asertiva
+
+**¿Cómo puedes registrar tu comunicación diaria para mejorarla?**
+
+Para fortalecer tus habilidades comunicativas, lleva un registro diario de tus interacciones cotidianas. Al finalizar el día, realiza un análisis sencillo haciéndote preguntas clave:
+
+- ¿Cómo me comunico con los demás?
+- ¿Qué aspectos puedo mejorar en mi forma de comunicarme?
+- ¿Qué hago bien en mis interacciones diarias?
+
+Con este autoanálisis constante podrás identificar patrones frecuentes en tu lenguaje.
+
+**¿En qué te ayuda identificar patrones de comunicación?**
+
+Detectar patrones comunes en tu comportamiento comunicativo te facilitará estandarizar una forma eficaz de expresarte. Con ello lograrás:
+
+- Mejorar la claridad y efectividad en tus mensajes.
+- Reducir hábitos negativos o poco efectivos en la expresión verbal.
+- Fortalecer los aspectos positivos que ya dominas.
+
+**¿Qué beneficios te brinda tener un diario de comunicación?**
+Registrar tus reflexiones y observaciones diarias creará lo que llamamos un "diario de comunicación". Este diario ofrece beneficios como:
+
+- Mapeo claro de tu evolución comunicativa.
+- Identificación precisa de tus progresos.
+- Motivación constante por avanzar en comunicación asertiva
