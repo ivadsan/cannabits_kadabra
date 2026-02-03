@@ -16,6 +16,18 @@ Mientras utilizas ChatGPT, es crucial proteger la confidencialidad de tu informa
 - Activa los filtros de privacidad de la plataforma.
 - Revisa y ajusta las respuestas de la IA según tus necesidades específicas.
 
+**Cómo funciona**
+
+LLM Large Language Model
+
+- Es un reconocedor de patrones. Relaciones entre palabras. Infiere
+-
+
+```mermaid
+flowchart TD
+    A[Inicio] --> B[Proceso] --> C[Fin]
+```
+
 ## Checklist
 
 - Configurar las opciones de privacidad
