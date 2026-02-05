@@ -497,3 +497,60 @@ Asegurar que los LLMs actúen según valores humanos:
 Los LLMs representan un salto significativo en la capacidad de las máquinas para entender y generar lenguaje humano. Aunque tienen limitaciones importantes, están transformando cómo interactuamos con la tecnología y cómo trabajamos. Entender cómo funcionan, sus capacidades y limitaciones te permitirá usarlos de manera más efectiva y responsable.
 
 La clave es verlos como herramientas poderosas que aumentan nuestras capacidades, no como reemplazos del juicio y creatividad humanos.
+
+## Trabajando con Sembly
+
+Sembly AI es un asistente de reuniones impulsado por IA. Se une automáticamente a tus llamadas, graba y transcribe las discusiones, y entrega insights claros y accionables.
+
+### Principales Funciones
+
+Transcribe las reuniones en tiempo real, identifica y hace seguimiento de los action items, y proporciona resúmenes inteligentes para captar rápidamente los puntos clave y decisiones. No solo captura cada palabra, sino que también analiza el contenido para encontrar action items, decisiones clave e información importante. Además ofrece funciones como análisis de sentimientos y métricas de participación de los asistentes.
+
+### Compatibilidad
+
+Funciona con las principales plataformas de videollamadas sin necesidad de instalar ni descargar nada:
+
+- Google Meet
+- Zoom
+- Microsoft Teams
+- Cisco Webex
+
+También soporta conversaciones en 48 idiomas.
+
+### Seguridad
+
+Sembly AI cumple con los principales estándares de seguridad y privacidad:
+
+- GDPR
+- FERPA
+- PCI DSS
+- SOC 2 Type II
+- HIPAA
+
+### Tips usando Sembly
+
+- Pasar la Trascripción a un LLM puede ser en un formato PDF
+- Dar contexto sobre el tema de la conversacion
+- En el contexto pedirle a la IA que `aprenda sobre la reunión para posteriormente responder sobre mis dudas`
+- Consultar sobre algo en especifico de la conversacion
+- Cuando tengamos los insights de la conversacino `Agrega quien dijo esto y en que momento lo dijo`
+- Preguntar sobre cuales fueron los accionables a seguir
+- Podemos aprovechar con la IA y preguntarle sobre la efectividad o implicaciones de los accionables
+
+## ¿Cómo disminuir las alucinaciones en las respuestas dé la IA?
+
+1. Sé claro y específico en tu pregunta
+
+2. Solicita fuentes o verificaciones
+
+3. Pregunta sobre temas conocidos o verificables
+
+4. Divide preguntas complejas en partes
+
+5. Usa tus conocimientos para validar
+
+6. Indica que no invente si no sabe
+
+7. Consulta varias fuentes
+
+8. Pídeme que te explique la lógica detrás de mi respuesta
