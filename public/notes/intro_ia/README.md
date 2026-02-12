@@ -554,3 +554,31 @@ Sembly AI cumple con los principales estándares de seguridad y privacidad:
 7. Consulta varias fuentes
 
 8. Pídeme que te explique la lógica detrás de mi respuesta
+
+## ¿Qué es la inteligencia artificial generativa?
+
+La inteligencia artificial generativa crea contenido nuevo a partir de datos, introduciendo variabilidad para innovar. Modelos como ChatGPT combinan elementos de manera original en texto e imágenes, demostrando su potencial en aplicaciones creativas.
+
+### Ideogram
+
+Ideogram es una herramienta de inteligencia artificial para generar imágenes a partir de texto (text-to-image).
+
+🔹 ¿Qué la hace especial?
+
+🖋️ Es muy buena generando imágenes con texto legible (por ejemplo, logos, afiches, portadas o frases dentro de la imagen).
+
+🎨 Permite elegir estilos (realista, ilustración, 3D, tipográfico, etc.).
+
+⚡ Genera imágenes en segundos a partir de una descripción escrita.
+
+🔹 ¿Para qué sirve?
+
+Crear logos y branding.
+
+Diseñar posts para redes sociales.
+
+Hacer afiches, portadas, stickers o mockups.
+
+Explorar ideas visuales rápidamente.
+
+En resumen: Ideogram convierte lo que escribes en imágenes, destacándose especialmente cuando la imagen incluye texto integrado de forma clara y estética.
