@@ -563,7 +563,7 @@ La inteligencia artificial generativa crea contenido nuevo a partir de datos, in
 
 Ideogram es una herramienta de inteligencia artificial para generar imágenes a partir de texto (text-to-image).
 
-🔹 ¿Qué la hace especial?
+#### 🔹 ¿Qué la hace especial?
 
 🖋️ Es muy buena generando imágenes con texto legible (por ejemplo, logos, afiches, portadas o frases dentro de la imagen).
 
@@ -571,7 +571,7 @@ Ideogram es una herramienta de inteligencia artificial para generar imágenes a 
 
 ⚡ Genera imágenes en segundos a partir de una descripción escrita.
 
-🔹 ¿Para qué sirve?
+#### 🔹 ¿Para qué sirve?
 
 Crear logos y branding.
 
@@ -582,3 +582,63 @@ Hacer afiches, portadas, stickers o mockups.
 Explorar ideas visuales rápidamente.
 
 En resumen: Ideogram convierte lo que escribes en imágenes, destacándose especialmente cuando la imagen incluye texto integrado de forma clara y estética.
+
+#### 📌 Derechos sobre las imágenes generadas con Ideogram
+
+🖼️ Tú eres quien posee los derechos sobre las imágenes que generas con Ideogram (llamadas “User Output”) — es decir, Ideogram no reclama la propiedad de esas imágenes ni de lo que tú creas con la herramienta.
+
+📈 Puedes usar esas imágenes incluso con fines comerciales, sin que Ideogram te restrinja por eso, según sus términos de servicio.
+
+⚠️ Tu responsabilidad: aunque tú tengas derechos sobre la imagen generada, debes asegurarte de que no infrinja leyes o derechos de terceros (por ejemplo, marcas registradas, derechos de autor de obras ajenas, uso de rostros sin permiso, etc.).
+
+⚠️ Importante: la imagen puede no ser completamente “única” (otra persona podría generar algo parecido usando prompts similares).
+
+Resumen: tú te quedas con las imágenes que generas con Ideogram y puedes usarlas libremente, incluso para negocio; pero la responsabilidad legal del uso recae en ti, especialmente si usas contenido de terceros o protegido legalmente.
+
+#### Otras herramientas
+
+- Stable Diffusion
+- artlist.io (explorar hace video)
+- Flux AI (Circuitos impresos)
+
+## Napkin
+
+Napkin es una herramienta digital impulsada por inteligencia artificial que ayuda a convertir ideas escritas en diagramas y visuales claros automáticamente.
+
+### ¿Qué hace?
+
+- Transforma texto en mapas mentales, diagramas, flujos y esquemas visuales.
+- Resume ideas complejas en representaciones gráficas fáciles de entender.
+- Permite editar y personalizar los diagramas generados.
+
+### ¿Para qué sirve?
+
+- Organizar ideas rápidamente.
+- Preparar presentaciones.
+- Explicar conceptos técnicos o estratégicos.
+- Visualizar procesos o estructuras.
+
+### En pocas palabras
+
+Napkin es como un asistente que toma tus notas o pensamientos escritos y los convierte en gráficos listos para compartir.
+
+## ElevenLabs
+
+ElevenLabs es una empresa de inteligencia artificial fundada en 2022, con sede en Londres (Reino Unido), especializada en tecnologías avanzadas de audio generativo y síntesis de voz.
+
+### 🧠 ¿Qué hace?
+
+La compañía desarrolla modelos de IA para convertir texto en voz realista y expresiva, incluyendo:
+
+- Texto a voz (TTS) con tonos y emociones naturales.
+- Clonación de voz que replica voces reales a partir de muestras cortas.
+- Doblaje y localización de contenido en muchos idiomas.
+- Agentes conversacionales de voz (voice agents) para negocios y soporte al cliente.
+- Plataformas creativas que generan y editan audio, música y vídeo con IA.
+
+### 🌍 Usos principales
+
+- Narración de audiolibros, podcasts y videos.
+- Creación de voces personalizadas o de personajes.
+- Automatización de atención y agentes de voz para empresas.
+- Localización de contenido a múltiples idiomas.

@@ -53,3 +53,6 @@ Si quieres, también puedo explicarte cómo funciona paso a paso (por ejemplo pa
 
 - Tendencias Clave
 - Como capitalizar las tendencias
+- Investigacion de palabras clave
+- Redacción de artículos
+- Optimización para SEO
