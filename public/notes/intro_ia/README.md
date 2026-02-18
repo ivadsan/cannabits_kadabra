@@ -642,3 +642,29 @@ La compañía desarrolla modelos de IA para convertir texto en voz realista y ex
 - Creación de voces personalizadas o de personajes.
 - Automatización de atención y agentes de voz para empresas.
 - Localización de contenido a múltiples idiomas.
+
+## HeyGen
+
+HeyGen es una plataforma de inteligencia artificial que permite crear videos con avatares digitales realistas a partir de texto, sin necesidad de cámara, actores ni estudio.
+
+### ¿Qué hace?
+
+- Genera avatares humanos que hablan con movimientos faciales naturales.
+- Convierte texto en voz con múltiples idiomas y acentos.
+- Permite clonar tu propia voz.
+- Traduce y dobla videos automáticamente a otros idiomas.
+- Ofrece plantillas para videos corporativos, educativos y de marketing.
+
+### ¿Para qué se usa?
+
+- Capacitación empresarial
+- Videos de ventas y marketing
+- Contenido educativo
+- Presentaciones internas
+- Creación de contenido para redes sociales
+
+### Ventajas
+
+- Ahorra tiempo y costos de producción.
+- No requiere equipo audiovisual.
+- Escalable para empresas.
