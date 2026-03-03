@@ -26,3 +26,17 @@
 
 - Tener en cuenta "Medición del éxito: Sirve como base para evaluar si el proyecto cumple con sus objetivos"
 - Evaluar la satisfacción producida por el servicio o producto entregado
+
+## Job Description
+
+Un project leader es quien guía a un equipo hacia un objetivo concreto, combinando responsabilidad técnica con habilidades de coordinación humana. No necesariamente es el jefe jerárquico, pero sí es quien mantiene la visión clara del proyecto, distribuye tareas según las fortalezas de cada miembro, gestiona los obstáculos que aparecen en el camino y asegura que el equipo avance con coherencia y foco.
+
+Lo que lo diferencia de un simple gestor es que lidera desde adentro: trabaja junto al equipo, toma decisiones bajo incertidumbre, facilita la comunicación y protege al equipo de distracciones externas. También es el puente entre los stakeholders y quienes ejecutan, traduciendo expectativas en acciones concretas.
+
+En contextos de tecnología o IA, un buen project leader entiende lo suficiente del dominio técnico para tomar decisiones informadas, pero su valor principal está en mantener al equipo alineado, motivado y desbloqueado. ¿Lo preguntas en un contexto particular, como un rol que estás asumiendo o evaluando?
+
+### PL en tiempos de claude code
+
+1. Aprender a escribir specs para agentes de IA es hoy una habilidad diferencial. No es lo mismo que escribir un PRD tradicional. Requiere precisión, estructura y capacidad de anticipar ambigüedad.
+2. Entender cómo funciona Claude Code a nivel práctico te da ventaja para liderar equipos que lo usan, y para hablar el mismo idioma que la dirección técnica cuando tomen decisiones de adopción.
+3. Y tercero, consolidar tu valor en la capa de juicio estratégico: si tu reputación está en "sabe qué construir y por qué", eso no se automatiza fácilmente.
