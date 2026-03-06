@@ -188,3 +188,151 @@ Pregunta: ¿requiere plan paso a paso o basta con una respuesta directa?.
 - Para modelos de razonamiento: solicita análisis y pasos. Aunque muchos ya planifican, explicitar ayuda.
 - Estructura recomendada: rol, enfoque, contexto y límites.
 - Usa pro-prompts cuando necesites desgloses, evaluación de alternativas y recomendaciones priorizadas.
+
+### Técnicas zero shot, one shot y few shot para prompts efectivos
+
+#### Zero-shot
+
+Le pides la tarea sin dar ningún ejemplo. El modelo usa solo su conocimiento previo.
+
+    "Clasifica este texto como positivo o negativo: 'Me encantó la película'"
+
+El modelo responde directamente sin guía adicional. Funciona bien para tareas simples o cuando el modelo ya tiene mucho contexto sobre el tema.
+
+#### One-shot
+
+Le das un solo ejemplo antes de la tarea real.
+
+    "Clasifica el sentimiento. Ejemplo: 'Qué aburrida la clase' → negativo. Ahora clasifica: 'Me encantó la película'"
+
+Útil cuando quieres mostrarle el formato o estilo de respuesta esperado sin saturar el prompt.
+
+#### Few-shot
+
+Le das varios ejemplos (típicamente 3–10) antes de la tarea.
+
+    "Clasifica el sentimiento:
+    'Qué aburrida la clase' → negativo
+    'El servicio fue excelente' → positivo
+    'No me gustó nada' → negativo
+    Ahora clasifica: 'Me encantó la película'"
+
+Es la técnica más poderosa de las tres cuando necesitas que el modelo aprenda un patrón específico, un formato poco usual o un estilo muy concreto.
+
+#### ¿Cuándo usar cada una?
+
+TécnicaUsa cuando...Zero-shotLa tarea es sencilla o estándarOne-shotQuieres definir el formato de salidaFew-shotLa tarea es compleja, ambigua o requiere un patrón específico
+
+En general, más ejemplos = mejor rendimiento, pero también = más tokens consumidos. El truco está en encontrar el balance.
+
+#### ¿Importa el orden de los ejemplos en el prompt?
+
+- Sí: el orden puede afectar la efectividad entre 50% y 90%.
+- Lo que va al final recibe más atención del LLM; no dejes siempre lo negativo al final para no sesgar.
+- Alterna y varía: “uno sí, uno no” para balancear la atención en los ejemplos.
+
+### Estructura de prompts con etiquetas XML para IA
+
+Estructura de prompts con etiquetas XML para IA es una técnica de prompt engineering donde se usan etiquetas tipo XML para organizar y delimitar las distintas partes de un prompt, en lugar de escribirlo como texto plano corrido.
+
+En vez de esto:
+Eres un asistente experto. El usuario pregunta sobre Python. Responde de forma corta.
+
+Se estructura así:
+
+```
+<role>Eres un asistente experto en programación</role>
+<user_input>¿Cómo funciona un decorador en Python?</user_input>
+<instructions>Responde de forma concisa, máximo 3 párrafos</instructions>
+```
+
+#### ¿Por qué funciona mejor?
+
+- Le da al modelo límites claros entre contexto, instrucciones y datos
+- Reduce ambigüedad cuando el prompt es largo o complejo
+- Es especialmente útil cuando mezclas roles, ejemplos, contexto y restricciones en un mismo prompt
+- Anthropic lo recomienda explícitamente para Claude, ya que fue entrenado reconociendo esta estructura
+
+Se usa mucho para:
+
+- Separar documentos del sistema de instrucciones del usuario
+- Few-shot con ejemplos bien delimitados (<example>, <input>, <output>)
+- Prompts de producción en aplicaciones reales
+
+Es una de las técnicas más prácticas e impactantes del prompt engineering moderno.
+
+## Manejo de contexto extenso y datos
+
+### Ventana de contexto y modelo de atención en LLMs
+
+#### Ventana de contexto
+
+Es la cantidad máxima de texto que un modelo de IA puede "ver" y procesar al mismo tiempo en una sola interacción, contada en tokens.
+
+#### ¿Qué es un token?
+
+Una unidad de texto que puede ser una palabra, parte de una palabra o un carácter. Como regla general, 1 token ≈ ¾ de palabra en inglés (en español puede variar un poco).
+
+#### ¿Qué entra en la ventana de contexto?
+
+Todo lo que el modelo procesa cuenta:
+
+- El system prompt
+- El historial de la conversación
+- Los documentos o archivos que adjuntas
+- Tu mensaje actual
+- La respuesta que genera el modelo
+
+#### ¿Por qué importa?
+
+Si el contenido supera la ventana, el modelo olvida lo que quedó fuera, generalmente lo más antiguo. No tiene acceso a ello aunque haya estado en la conversación.
+
+#### Analogía simple
+
+Imagina que el modelo tiene una hoja de papel de tamaño fijo. Todo lo que necesita recordar o considerar debe caber en esa hoja. Si escribes más de lo que cabe, lo que sobra desaparece del borde.
+
+#### Tamaños típicos
+
+| Modelo            | Ventana aproximada |
+| ----------------- | ------------------ |
+| GPT-3.5           | 16k tokens         |
+| GPT-4o            | 128k tokens        |
+| Claude Sonnet 4.6 | 200k tokens        |
+| Gemini 1.5 Pro    | 1M tokens          |
+
+Una ventana de 200k tokens equivale aproximadamente a un libro de 400–500 páginas.
+
+En prompt engineering esto es clave porque si diseñas prompts muy largos con mucho contexto, documentos y ejemplos, debes considerar qué tan cerca estás del límite.
+
+#### Ventana de contexto + Mecanismo de Atención
+
+**¿Cómo se relacionan?**
+
+El modelo no lee el contexto como tú lees un párrafo, de forma lineal y uniforme. Usa un mecanismo llamado self-attention que le permite "prestarle atención" a diferentes partes del contexto con distinta intensidad según qué tan relevante es cada parte para generar el siguiente token.
+
+Dicho simple: no todo lo que está en la ventana tiene el mismo peso.
+
+**El problema: Lost in the Middle**
+
+Investigaciones han mostrado que los modelos tienden a prestar más atención a lo que está al principio y al final de la ventana de contexto, y menos a lo que queda en el medio.
+
+    [INICIO ✅ alta atención] ... [MEDIO ⚠️ baja atención] ... [FINAL ✅ alta atención]
+
+Esto significa que aunque algo esté dentro de la ventana, no garantiza que el modelo lo use bien.
+
+**Tips prácticos**
+
+1. Pon lo más importante al inicio o al final
+   Si tienes instrucciones críticas o contexto clave, no las entierres en el medio del prompt.
+2. Repite instrucciones clave
+   Para tareas complejas, reafirmar la instrucción principal al final del prompt ayuda a que el modelo la tenga "fresca" al generar la respuesta.
+3. Sé selectivo con el contexto
+   Meter mucho texto no siempre es mejor. El ruido compite por atención con lo que realmente importa. Menos contexto relevante > más contexto irrelevante.
+4. Usa etiquetas XML
+   Volviendo a la clase anterior — las etiquetas ayudan al mecanismo de atención a identificar qué sección es qué, funcionando casi como señales visuales para el modelo.
+5. En conversaciones largas, resume
+   Si la conversación se extiende mucho, considera incluir un resumen de los puntos clave en lugar de dejar que el historial crudo consuma la ventana.
+
+**Analogía integrada**
+
+Si la ventana de contexto es la hoja de papel, la atención es el resaltador del modelo — puede ver toda la hoja, pero subraya activamente ciertas partes más que otras al momento de responder.
