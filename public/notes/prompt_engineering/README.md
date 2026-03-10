@@ -336,3 +336,171 @@ Esto significa que aunque algo esté dentro de la ventana, no garantiza que el m
 **Analogía integrada**
 
 Si la ventana de contexto es la hoja de papel, la atención es el resaltador del modelo — puede ver toda la hoja, pero subraya activamente ciertas partes más que otras al momento de responder.
+
+### Grounding
+
+Es la técnica de **anclarle al modelo información externa y verificable** para que sus respuestas estén basadas en hechos concretos en lugar de en lo que "recuerda" de su entrenamiento.
+
+---
+
+#### ¿Por qué existe este problema?
+
+Los LLMs tienen dos limitaciones importantes:
+
+- **Knowledge cutoff** → su conocimiento se congela en la fecha en que fueron entrenados
+- **Alucinaciones** → pueden generar información falsa con total confianza
+
+El grounding es la solución a ambos problemas.
+
+---
+
+#### ¿Cómo funciona?
+
+En lugar de dejar que el modelo responda desde su memoria, le **inyectas la información relevante directamente en el prompt** para que base su respuesta en ese contenido.
+
+```xml
+<context>
+  [Aquí va el documento, artículo, base de datos, etc.]
+</context>
+
+<question>
+  Con base únicamente en el contexto anterior, responde: ¿Cuál es la política de devoluciones?
+</question>
+```
+
+El modelo ya no "adivina" — lee el contexto y responde desde ahí.
+
+---
+
+#### Tipos de grounding
+
+**1. Grounding con documentos**
+Le pasas PDFs, artículos, manuales directamente en el prompt.
+
+**2. Grounding con búsqueda web (RAG)**
+El sistema busca información actualizada en internet o en una base de datos antes de construir el prompt. Esto se llama **RAG** _(Retrieval-Augmented Generation)_ y es la arquitectura más usada en producción hoy en día.
+
+**3. Grounding con base de conocimiento interna**
+Empresas que conectan el LLM a su propia documentación, FAQs o bases de datos para que responda solo con información corporativa verificada.
+
+---
+
+#### Ejemplo sin vs con grounding
+
+❌ **Sin grounding**
+
+> _"¿Cuál es el precio del plan Pro de nuestra app?"_
+> El modelo inventa un precio o dice que no sabe.
+
+✅ **Con grounding**
+
+> _"Según el siguiente documento de precios: [documento], ¿cuál es el precio del plan Pro?"_
+> El modelo lee el documento y responde con el dato exacto.
+
+---
+
+#### Conectando con lo que ya viste
+
+| Concepto            | Relación con grounding                                            |
+| ------------------- | ----------------------------------------------------------------- |
+| Ventana de contexto | Es donde metes la información de grounding                        |
+| Atención            | El modelo le presta atención al contexto inyectado                |
+| System prompt       | Puedes instruir al modelo a responder _solo_ con el contexto dado |
+| Few-shot            | También es una forma de grounding: le muestras ejemplos concretos |
+
+---
+
+#### Tip clave
+
+Cuando uses grounding, agrégale esta instrucción al prompt:
+
+> _"Responde únicamente basándote en el contexto proporcionado. Si la respuesta no está en el contexto, di que no tienes esa información."_
+
+Esto evita que el modelo mezcle el contexto con su conocimiento propio y empiece a alucinar.
+
+### Chain of Thought (Cadena de pensamiento)
+
+Es una técnica donde le pides al modelo que **muestre su razonamiento paso a paso** antes de dar la respuesta final, en lugar de saltar directo a la conclusión.
+
+#### ¿Por qué funciona?
+
+Los LLMs generan token por token. Cuando fuerzan un razonamiento intermedio, cada paso sirve de contexto para el siguiente, lo que reduce errores en tareas complejas como matemáticas, lógica o análisis.
+
+#### ¿Cómo se activa?
+
+**Zero-shot CoT** — simplemente agregando una frase mágica:
+
+```
+Resuelve este problema paso a paso.
+```
+
+```
+Piensa antes de responder.
+```
+
+**Few-shot CoT** — mostrando ejemplos con razonamiento incluido:
+
+```
+Pregunta: Si tengo 3 cajas con 4 manzanas cada una y regalo 5, ¿cuántas me quedan?
+Razonamiento: 3 cajas × 4 manzanas = 12 manzanas. 12 - 5 = 7.
+Respuesta: 7 manzanas.
+
+Ahora resuelve: Si tengo 5 cajas con 6 naranjas...
+```
+
+#### Cuándo usarlo
+
+Tareas de razonamiento lógico, matemáticas, análisis de casos, decisiones con múltiples pasos.
+
+---
+
+### Self-Consistency
+
+Es una técnica que va **un nivel encima del Chain of Thought**. En lugar de pedirle al modelo que razone una sola vez, le pides que razone **múltiples veces** y luego tomas la respuesta más frecuente.
+
+#### La idea central
+
+Un modelo puede llegar a la respuesta correcta por distintos caminos. Si la mayoría de esos caminos convergen en la misma respuesta, esa respuesta es probablemente la más confiable.
+
+```
+Pregunta → Razonamiento 1 → Respuesta A
+Pregunta → Razonamiento 2 → Respuesta A
+Pregunta → Razonamiento 3 → Respuesta B
+Pregunta → Razonamiento 4 → Respuesta A
+
+Respuesta final → A (3 de 4 caminos)
+```
+
+#### ¿Cómo se implementa?
+
+Llamas al modelo varias veces con la misma pregunta usando **temperatura alta** (para que varíe su razonamiento) y luego haces un "voto" entre las respuestas.
+
+```xml
+<instruction>
+  Resuelve este problema paso a paso. Puedes explorar diferentes enfoques.
+</instruction>
+<problem>
+  [tu problema aquí]
+</problem>
+```
+
+Repites esto N veces y te quedas con la respuesta mayoritaria.
+
+---
+
+#### Cómo se relacionan ambas técnicas
+
+|                     | Chain of Thought          | Self-Consistency              |
+| ------------------- | ------------------------- | ----------------------------- |
+| **Razonamientos**   | 1                         | Múltiples                     |
+| **Respuesta final** | La del único razonamiento | La más votada                 |
+| **Costo**           | Bajo                      | Alto (más llamadas al modelo) |
+| **Confiabilidad**   | Media-alta                | Alta                          |
+
+Self-Consistency es esencialmente **CoT repetido con votación**. No tiene sentido usar Self-Consistency sin Chain of Thought.
+
+---
+
+#### Tip integrador
+
+Conectando con lo que ya viste — estas técnicas explotan al máximo la **ventana de contexto y la atención**. Al hacer que el modelo escriba su razonamiento, ese razonamiento queda en el contexto y el mecanismo de atención lo usa para generar mejores tokens finales. Le estás dando al modelo "espacio para pensar" dentro de su propia ventana.
