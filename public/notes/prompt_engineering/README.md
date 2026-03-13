@@ -504,3 +504,87 @@ Self-Consistency es esencialmente **CoT repetido con votación**. No tiene senti
 #### Tip integrador
 
 Conectando con lo que ya viste — estas técnicas explotan al máximo la **ventana de contexto y la atención**. Al hacer que el modelo escriba su razonamiento, ese razonamiento queda en el contexto y el mecanismo de atención lo usa para generar mejores tokens finales. Le estás dando al modelo "espacio para pensar" dentro de su propia ventana.
+
+## Tecnicas de razonamiento para tareas complejas
+
+### Modelos de razonamiento de ChatGPT y cadenas de pensamiento
+
+**¿Qué habilidades prácticas se fortalecen?**
+
+- Selección de modelo según objetivo: automático, instantáneo, Thinking, Pro, Legacy.
+- Ingeniería de prompts con “Piensa paso a paso”.
+- Aplicación de self-consistency pidiendo tres alternativas.
+- Diseño de plantillas para resolver familias de problemas.
+- Control de la cadena de pensamiento: cada paso como un prompt.
+
+### Modelos de razonamiento vs Modelos estándar
+
+---
+
+#### ¿Qué es un modelo de razonamiento?
+
+Son LLMs entrenados específicamente para **pensar antes de responder**. A diferencia de los modelos estándar, dedican tokens internos a razonar el problema antes de generar la respuesta final. Ese proceso interno se llama **"thinking" o scratchpad**.
+
+---
+
+#### ¿Qué es un modelo estándar?
+
+Son LLMs que generan la respuesta **directamente**, token por token, sin un proceso de razonamiento intermedio explícito. Son más rápidos, más baratos y suficientes para la mayoría de tareas del día a día.
+
+---
+
+#### Los principales modelos de razonamiento hoy
+
+**OpenAI o1 / o3**
+Diseñados para problemas complejos de matemáticas, ciencias y código. Razonan internamente durante segundos o minutos antes de responder. Son lentos y caros, pero muy precisos en tareas difíciles.
+
+**Claude con extended thinking**
+La versión de Anthropic. Activas el modo de pensamiento extendido y el modelo muestra su razonamiento antes de la respuesta final. Muy útil para análisis profundos y decisiones de múltiples pasos.
+
+**Gemini 2.0 Flash Thinking**
+La apuesta de Google, optimizada para ser más rápida que o1 manteniendo capacidad de razonamiento.
+
+---
+
+#### Diferencias clave
+
+| Característica    | Modelo estándar           | Modelo de razonamiento                |
+| ----------------- | ------------------------- | ------------------------------------- |
+| **Velocidad**     | Rápida                    | Lenta                                 |
+| **Costo**         | Bajo                      | Alto                                  |
+| **Razonamiento**  | Directo                   | Paso a paso interno                   |
+| **Ideal para**    | Tareas simples y medianas | Tareas complejas y de múltiples pasos |
+| **Transparencia** | No muestra proceso        | Puede mostrar el thinking             |
+
+---
+
+#### ¿Cuándo usar cada uno?
+
+| Tarea                                    | Modelo estándar | Modelo de razonamiento |
+| ---------------------------------------- | --------------- | ---------------------- |
+| Redactar un email                        | ✅              | Innecesario            |
+| Resolver un problema matemático complejo | ⚠️              | ✅                     |
+| Analizar un contrato legal               | ⚠️              | ✅                     |
+| Responder una FAQ                        | ✅              | Innecesario            |
+| Debugging de código complejo             | ⚠️              | ✅                     |
+| Generar ideas creativas                  | ✅              | Innecesario            |
+| Resumen de un documento corto            | ✅              | Innecesario            |
+| Estrategia de negocio multicapa          | ⚠️              | ✅                     |
+
+---
+
+#### Conexión con Chain of Thought
+
+Los modelos de razonamiento son esencialmente una versión **nativa y optimizada** del Chain of Thought. La diferencia es que en CoT tú le pides al modelo que razone, mientras que en los modelos de razonamiento ese comportamiento ya está integrado en el entrenamiento del modelo.
+
+|                                         | Chain of Thought        | Modelo de razonamiento         |
+| --------------------------------------- | ----------------------- | ------------------------------ |
+| **¿Quién activa el razonamiento?**      | El prompt del usuario   | El modelo por diseño           |
+| **¿Se puede usar en cualquier modelo?** | ✅                      | ❌ Solo en modelos específicos |
+| **Costo adicional**                     | Más tokens en el prompt | Precio más alto por llamada    |
+
+---
+
+#### Tip clave
+
+> Usar un modelo de razonamiento para tareas simples es como contratar un especialista para cambiar un bombillo — funciona, pero es costoso e innecesario. **Reservarlos para tareas donde el razonamiento multicapa realmente importa.**
