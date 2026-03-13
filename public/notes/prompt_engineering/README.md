@@ -588,3 +588,100 @@ Los modelos de razonamiento son esencialmente una versión **nativa y optimizada
 #### Tip clave
 
 > Usar un modelo de razonamiento para tareas simples es como contratar un especialista para cambiar un bombillo — funciona, pero es costoso e innecesario. **Reservarlos para tareas donde el razonamiento multicapa realmente importa.**
+
+### Prompt Chaining
+
+Es la técnica de **dividir una tarea compleja en una secuencia de prompts**, donde el output de uno se convierte en el input del siguiente. En lugar de pedirle todo a un solo prompt, construyes un pipeline de llamadas al LLM.
+
+---
+
+#### ¿Por qué usarlo?
+
+Un solo prompt tiene límites — mezclar demasiadas instrucciones en uno solo baja la calidad. El chaining permite que cada llamada se enfoque en **una sola responsabilidad**, lo que mejora precisión y control.
+
+También permite:
+
+- Validar o transformar outputs entre pasos
+- Meter lógica condicional entre llamadas
+- Escalar tareas que no caben en una sola ventana de contexto
+
+---
+
+#### Estructura base
+
+```
+Input → [Prompt 1] → Output 1 → [Prompt 2] → Output 2 → [Prompt 3] → Resultado final
+```
+
+---
+
+#### Ejemplo práctico: Pipeline de generación de contenido
+
+Supón que quieres generar un post de LinkedIn a partir de un artículo técnico.
+
+##### Paso 1 — Extraer ideas clave
+
+```python
+prompt_1 = f"""
+<task>Extrae las 3 ideas más importantes de este artículo</task>
+<article>{articulo}</article>
+<format>Devuelve solo un JSON con esta estructura:
+{{"ideas": ["idea1", "idea2", "idea3"]}}</format>
+"""
+ideas = llamar_llm(prompt_1)
+```
+
+##### Paso 2 — Elegir el ángulo
+
+```python
+prompt_2 = f"""
+<task>De estas ideas, elige la más impactante para una audiencia de developers</task>
+<ideas>{ideas}</ideas>
+<format>Devuelve solo la idea elegida como string</format>
+"""
+angulo = llamar_llm(prompt_2)
+```
+
+##### Paso 3 — Generar el post
+
+```python
+prompt_3 = f"""
+<task>Escribe un post de LinkedIn basado en esta idea</task>
+<idea>{angulo}</idea>
+<tone>Directo, técnico, sin emojis</tone>
+<length>Máximo 150 palabras</length>
+"""
+post_final = llamar_llm(prompt_3)
+```
+
+---
+
+#### Tips para developers
+
+**Formatea los outputs intermedios como JSON**
+Hace que el parsing entre pasos sea limpio y predecible. Evita procesar lenguaje natural entre llamadas.
+
+**Valida entre pasos**
+Antes de pasar el output al siguiente prompt, verifica que tenga la estructura esperada. Un output malformado en el paso 2 arruina todo lo que sigue.
+
+**Maneja errores por paso**
+Cada llamada puede fallar independientemente. Implementa reintentos a nivel de cada nodo, no del pipeline completo.
+
+**Guarda los outputs intermedios**
+Para debugging y para no repetir llamadas costosas si algo falla al final del chain.
+
+---
+
+#### ¿Cuándo usarlo vs un solo prompt?
+
+| Escenario                                | Un solo prompt | Prompt chaining |
+| ---------------------------------------- | -------------- | --------------- |
+| Tarea simple y directa                   | ✅             | Innecesario     |
+| Tarea con múltiples etapas               | ⚠️             | ✅              |
+| Necesitas validar pasos intermedios      | ❌             | ✅              |
+| Output depende de decisiones previas     | ❌             | ✅              |
+| Quieres reutilizar pasos en otros flujos | ❌             | ✅              |
+
+---
+
+> Prompt chaining es la base de la mayoría de los agentes de IA en producción. Dominar esta técnica es el paso previo a construir pipelines más complejos con herramientas como LangChain o LlamaIndex.
