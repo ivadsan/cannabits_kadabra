@@ -221,7 +221,9 @@ Es la técnica más poderosa de las tres cuando necesitas que el modelo aprenda 
 
 #### ¿Cuándo usar cada una?
 
-TécnicaUsa cuando...Zero-shotLa tarea es sencilla o estándarOne-shotQuieres definir el formato de salidaFew-shotLa tarea es compleja, ambigua o requiere un patrón específico
+- Zero-shot: La tarea es sencilla o estándar
+- One-shot: Quieres definir el formato de salida
+- Few-shot: La tarea es compleja, ambigua o requiere un patrón específico
 
 En general, más ejemplos = mejor rendimiento, pero también = más tokens consumidos. El truco está en encontrar el balance.
 
