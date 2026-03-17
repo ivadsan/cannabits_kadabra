@@ -687,3 +687,38 @@ Para debugging y para no repetir llamadas costosas si algo falla al final del ch
 ---
 
 > Prompt chaining es la base de la mayoría de los agentes de IA en producción. Dominar esta técnica es el paso previo a construir pipelines más complejos con herramientas como LangChain o LlamaIndex.
+
+### Playgrounds de IA
+
+Son entornos web donde puedes interactuar directamente con los modelos de un proveedor, ajustar parámetros y probar prompts **sin escribir código**. Son el puente entre usar un chat y llamar la API desde tu aplicación.
+
+---
+
+#### OpenAI — Playground
+
+Enfocado en developers del ecosistema OpenAI. Permite probar modelos GPT y o-series, ajustar parámetros, configurar system prompts y probar function calling. De pago por tokens con un crédito inicial.
+
+#### Anthropic — Console
+
+Orientado a prompt engineering iterativo con Claude. Destaca por el modo de extended thinking y flujos de trabajo para refinar prompts de forma sistemática. Requiere cuenta de developer y pago por tokens.
+
+#### Google — AI Studio
+
+El más accesible económicamente, con capa gratuita. Fuerte en multimodalidad nativa (texto, imagen, video, audio) y grounding con Google Search. Exporta el código listo para usar con la API. Ideal si ya trabajas en el ecosistema GCP.
+
+#### Mistral — AI Studio
+
+Orientado a enterprise y privacidad. Su diferencial es que ofrece modelos open-weight — puedes descargar los pesos y ejecutarlos localmente. Incluye herramientas de evaluación, fine-tuning y agentes.
+
+---
+
+#### ¿Cuál usar?
+
+Depende del modelo y ecosistema donde vayas a desplegar. Para aprender prompt engineering cualquiera sirve — la lógica de los prompts es transferible entre plataformas.
+
+|                       | OpenAI            | Anthropic                | Google            | Mistral                    |
+| --------------------- | ----------------- | ------------------------ | ----------------- | -------------------------- |
+| **Acceso gratuito**   | No                | No                       | Sí                | Sí (limitado)              |
+| **Multimodal nativo** | Parcial           | Parcial                  | ✅                | Parcial                    |
+| **Open-weight**       | ❌                | ❌                       | ❌                | ✅                         |
+| **Ideal para**        | Ecosistema OpenAI | Razonamiento y seguridad | GCP / prototipado | Privacidad / customización |
