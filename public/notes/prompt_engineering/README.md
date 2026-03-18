@@ -722,3 +722,110 @@ Depende del modelo y ecosistema donde vayas a desplegar. Para aprender prompt en
 | **Multimodal nativo** | Parcial           | Parcial                  | ✅                | Parcial                    |
 | **Open-weight**       | ❌                | ❌                       | ❌                | ✅                         |
 | **Ideal para**        | Ecosistema OpenAI | Razonamiento y seguridad | GCP / prototipado | Privacidad / customización |
+
+### Temperatura, Top-P, Determinismo y Estocasticidad
+
+Estos cuatro conceptos están directamente relacionados con **cómo el modelo elige el siguiente token** al generar una respuesta. Entenderlos permite controlar el comportamiento del modelo con precisión.
+
+---
+
+#### Cómo elige el modelo el siguiente token
+
+En cada paso, el modelo calcula una distribución de probabilidad sobre todos los tokens posibles:
+
+```
+"La capital de Francia es..."
+→ "París"     85%
+→ "Lyon"       8%
+→ "una"        4%
+→ otros        3%
+```
+
+Temperatura y Top-P modifican esa distribución antes de que se haga la selección final.
+
+---
+
+#### Temperatura
+
+Controla **qué tan aplastada o dispersa** queda la distribución de probabilidad.
+
+##### Valores y su efecto
+
+- **Temperatura 0** → siempre elige el token más probable. Completamente determinista.
+- **Temperatura baja (0.1 – 0.3)** → concentra la probabilidad en los tokens más probables. Respuestas predecibles y precisas.
+- **Temperatura media (0.5 – 0.7)** → balance entre consistencia y variedad.
+- **Temperatura alta (0.8 – 1.5)** → distribuye probabilidad hacia tokens menos probables. Respuestas creativas e impredecibles.
+
+```
+Temperatura 0.1             Temperatura 1.2
+"París"  98%                "París"  45%
+"Lyon"    1%                "Lyon"   25%
+"una"     1%                "Berlín" 20%
+                            "una"    10%
+```
+
+---
+
+#### Top-P (nucleus sampling)
+
+En lugar de modificar las probabilidades, **filtra el conjunto de tokens candidatos**. Le dice al modelo: _"considera solo los tokens cuyas probabilidades acumuladas sumen hasta P"_.
+
+##### Valores y su efecto
+
+- **Top-P = 1.0** → considera todos los tokens (sin filtro)
+- **Top-P = 0.9** → considera solo los tokens del top 90% de probabilidad acumulada
+- **Top-P = 0.1** → considera solo los tokens más probables hasta sumar el 10%
+
+El tamaño del conjunto cambia dinámicamente — si el modelo está muy seguro, el 90% puede estar cubierto por 2-3 tokens. Si está inseguro, puede requerir 50 tokens para llegar al 90%.
+
+---
+
+#### Determinismo vs Estocasticidad
+
+|                        | Determinista             | Estocástico                |
+| ---------------------- | ------------------------ | -------------------------- |
+| **Temperatura**        | 0                        | > 0                        |
+| **Selección de token** | Siempre el más probable  | Samplea según distribución |
+| **Mismo input**        | Siempre mismo output     | Output puede variar        |
+| **Uso ideal**          | Precisión y consistencia | Creatividad y variedad     |
+
+##### Analogía
+
+Imagina una máquina expendedora:
+
+- **Determinista** — cada vez que presionas B3 sale una Coca-Cola. Siempre, sin excepción.
+- **Estocástica** — presionas B3 y a veces sale Coca-Cola, a veces Pepsi, a veces agua, cada una con distinta probabilidad.
+
+Un LLM con temperatura alta es la segunda máquina. Con temperatura 0 es la primera.
+
+---
+
+#### Ejemplo concreto
+
+**Tarea:** completar la frase _"Para relajarme me gusta..."_
+
+| Configuración       | Posible output                                              |
+| ------------------- | ----------------------------------------------------------- |
+| Temp 0.1, Top-P 0.9 | "leer un libro o escuchar música"                           |
+| Temp 0.7, Top-P 0.9 | "caminar por el parque o cocinar algo nuevo"                |
+| Temp 1.3, Top-P 0.9 | "coleccionar sonidos de lluvia y dibujar mapas imaginarios" |
+| Temp 0.0, Top-P 1.0 | siempre la misma respuesta, sin variación                   |
+
+---
+
+#### ¿Cuándo usar cada configuración?
+
+| Caso de uso                                | Temperatura | Top-P |
+| ------------------------------------------ | ----------- | ----- |
+| Extracción de datos, clasificación, código | 0 – 0.3     | 0.9   |
+| Chatbots conversacionales                  | 0.5 – 0.7   | 0.9   |
+| Escritura creativa, brainstorming          | 0.8 – 1.2   | 0.95  |
+| Contenido experimental                     | 1.2 – 1.5   | 1.0   |
+
+---
+
+#### Tip clave
+
+No se recomienda modificar temperatura y Top-P al mismo tiempo — es difícil predecir cómo interactúan. La convención es ajustar uno y dejar el otro en su valor por defecto. Anthropic y OpenAI recomiendan tocar la temperatura primero y dejar Top-P en 1.0, o viceversa.
+
+## Aplicaciones y automatización profesional
