@@ -829,3 +829,68 @@ Un LLM con temperatura alta es la segunda máquina. Con temperatura 0 es la prim
 No se recomienda modificar temperatura y Top-P al mismo tiempo — es difícil predecir cómo interactúan. La convención es ajustar uno y dejar el otro en su valor por defecto. Anthropic y OpenAI recomiendan tocar la temperatura primero y dejar Top-P en 1.0, o viceversa.
 
 ## Aplicaciones y automatización profesional
+
+### Prompts para generación de imágenes con IA
+
+Todo prompt efectivo tiene esta estructura:
+
+**`[Protagonista] + [Estilo visual] + [Composición e iluminación]`**
+
+---
+
+#### Las 3 partes del prompt
+
+##### Protagonista
+
+Es el sujeto principal de la imagen. Debe describirse con rasgos concretos — edad, características físicas, ropa, acción que realiza. Evita descripciones genéricas.
+
+> "Cuatro profesionales diversos, dos mujeres y dos hombres entre 30 y 40 años, vestidos de forma casual-formal, colaborando alrededor de una mesa redonda con laptops abiertos y documentos esparcidos"
+
+##### Estilo visual
+
+Es el "filtro" de la imagen — define la paleta, textura y referencia estética. Piensa en términos de fotografía, pintura o render.
+
+> "Fotografía corporativa moderna, paleta de tonos neutros con acentos en azul marino, acabado limpio y profesional"
+
+##### Composición e iluminación
+
+Define desde dónde se ve la escena y cómo está iluminada. Asume el rol de director de fotografía.
+
+> "Vista en ángulo de 45 grados a nivel de mesa, luz natural entrando por ventanas amplias a la izquierda, sombras suaves que dan profundidad a la escena"
+
+---
+
+#### Prompt final integrado
+
+> _"Cuatro profesionales diversos, dos mujeres y dos hombres entre 30 y 40 años, vestidos de forma casual-formal, colaborando alrededor de una mesa redonda con laptops abiertos y documentos esparcidos — fotografía corporativa moderna con paleta de tonos neutros y acentos en azul marino — vista en ángulo de 45 grados a nivel de mesa, luz natural entrando por ventanas amplias a la izquierda, sombras suaves que dan profundidad"_
+
+---
+
+#### Errores que invalidan el prompt
+
+- Mezclar estilos contradictorios → `"foto realista estilo caricatura"` ❌
+- Dejar sujetos vagos → `"personas trabajando"` en vez de describir quiénes, cuántos, qué hacen ❌
+- Asumir lo obvio → `"oficina moderna"` puede ser open space caótico o minimalista ordenado ❌
+- Instrucciones imposibles → `"ambiente íntimo y silencioso con música a todo volumen"` ❌
+
+---
+
+#### Plantilla reutilizable
+
+```
+"Genera una imagen de [sujeto específico con rasgos concretos],
+en estilo [referencia visual clara: fotografía realista / acuarela /
+render 3D / fotografía análoga / etc.],
+con [punto de vista de cámara] y [tipo de iluminación],
+atmósfera [adjetivo emocional: íntima / enérgica / melancólica / etc.]"
+```
+
+---
+
+#### Tip de iteración
+
+Cuando llegues al resultado esperado después de varios intentos, pregúntale al modelo:
+
+> _"¿Cuál hubiera sido el prompt ideal para lograr esta imagen desde el inicio?"_
+
+Así extraes la lógica inversa y mejoras tu siguiente prompt desde cero.
