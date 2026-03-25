@@ -894,3 +894,88 @@ Cuando llegues al resultado esperado después de varios intentos, pregúntale al
 > _"¿Cuál hubiera sido el prompt ideal para lograr esta imagen desde el inicio?"_
 
 Así extraes la lógica inversa y mejoras tu siguiente prompt desde cero.
+
+### Evaluación y validación de respuestas de LLM con criterios precisos
+
+Evaluar de forma fiable las respuestas de un LLM es clave para automatizar sin sorpresas. Los cuatro criterios clave son consistencia, precisión, relevancia y claridad.
+
+---
+
+#### Tipos de evaluación
+
+Hay dos enfoques principales:
+
+- **Evaluación propia** — con criterios definidos por el usuario
+- **LLM que evalúa a otro LLM** — validación cruzada, solo funciona si ya tienes un criterio claro de lo que esperas
+
+---
+
+#### Tarea única vs tarea recurrente
+
+Antes de evaluar, define si tu prompt resuelve una tarea única o una tarea recurrente — no es lo mismo consultar una ley una sola vez que redactar el asunto de correos semanales a clientes.
+
+|               | Tarea única                          | Tarea recurrente                                 |
+| ------------- | ------------------------------------ | ------------------------------------------------ |
+| **Enfoque**   | Validación puntual y criterio humano | Diseño del prompt, pruebas repetidas y monitoreo |
+| **Prioridad** | Respuesta correcta en ese momento    | Estabilidad y consistencia del prompt            |
+
+---
+
+#### Los 4 criterios de evaluación
+
+##### Consistencia
+
+Prueba el prompt con contenidos distintos unas diez veces y revisa si cubre todos los casos de uso. Durante la iteración un 8/10 o 9/10 puede estar bien, pero busca el 10/10 antes de automatizar.
+
+> **Ejemplo:** un prompt que genera el asunto de un correo semanal se prueba con 10 correos distintos. Si falla en 2, no está listo para automatizar.
+
+##### Precisión
+
+Crítica cuando el output tiene consecuencias reales — análisis de archivos, reportes, accionables de reuniones. Secundaria en tareas creativas como brainstorming o cuentos.
+
+> **Ejemplo:** un prompt que extrae accionables de reuniones se prueba con 10 grabaciones distintas y se valida que cada accionable extraído sea real y esté en la reunión.
+
+##### Relevancia
+
+El modelo debe enfocarse en las partes clave solicitadas y evitar divagar. Repite las pruebas diez veces y confirma que responde exactamente a lo pedido.
+
+> **Ejemplo:** si pides un resumen ejecutivo de tres puntos, el modelo no debe incluir contexto histórico ni información no solicitada.
+
+##### Claridad
+
+Verifica que el output respete el límite de caracteres, lenguaje, tono y voz definidos en el prompt. El formato y el estilo deben mantenerse igual en cada ejecución.
+
+> **Ejemplo:** si defines "tono formal, máximo 280 caracteres", valida que ninguna de las 10 pruebas supere ese límite ni use lenguaje informal.
+
+---
+
+#### Validación cruzada entre modelos
+
+Usar un LLM para validar la respuesta de otro reduce el riesgo de errores y alucinaciones.
+
+##### Flujo de ejemplo — búsqueda legal
+
+**Paso 1 — En Gemini:**
+Carga los archivos, instruye al modelo a actuar como asistente legal y responder solo con base en los documentos adjuntos. Gemini responde que no encuentra la información.
+
+**Paso 2 — En ChatGPT:**
+Sube la misma ley y reformula la pregunta evitando ambigüedad. ChatGPT confirma que sí existe normativa sobre custodia y conservación, y señala el artículo en el archivo adjunto.
+
+**Paso 3 — De vuelta en Gemini:**
+Pega la respuesta de ChatGPT y pide validar contra la ley original, incluyendo los artículos citados. Gemini confirma que la información es correcta.
+
+##### ¿Qué resuelve este enfoque?
+
+- Evita depender de términos literales — un modelo puede no captar la sutileza aunque el concepto exista en el texto
+- Permite detectar alucinaciones o referencias falsas
+- Ahorra tiempo — no necesitas leer toda la ley para verificar
+- Complementa las técnicas de prompting restrictivas, no las sustituye
+
+---
+
+#### Buenas prácticas
+
+- Crea variaciones del prompt y prueba sistemáticamente antes de automatizar
+- Revisa el prompt cada semana — los modelos cambian sin avisar aunque el nombre sea el mismo
+- Elige la herramienta según el tipo de tarea
+- Antes de automatizar pregúntate: ¿este problema realmente necesita IA?
